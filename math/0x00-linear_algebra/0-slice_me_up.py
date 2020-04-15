@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 arr = [9, 8, 2, 3, 9, 4, 1, 0, 3]
-
-arr1 =  arr[0:2]  # first two numbers
-arr2 =  arr[-5:]  # last 5
+arr1 =  arr[0:2]  # First two numbers
+arr2 =  arr[-5:]  # Last 5
 arr3 =  arr[1:6]  # 2 through 6
 print("The first two numbers of the array are: {}".format(arr1))
 print("The last five numbers of the array are: {}".format(arr2))
