@@ -20,7 +20,7 @@ This particular project is a intro to the math we are going to use in machine le
   + Inner dimensions must be eqivilant  
   + New size is equal to the outer dimensions of the original matrixes.
 
-12. What is Numpy? it is a libray in python adding support for large multi dimensional arrays.
+12. What is Numpy? - It is a libray in python adding support for large multi dimensional arrays.
 13. What is parallelization and why is it important? 
 14. What is broadcasting?
 
