@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import copy
 """
     In this modual
     there is the function
@@ -11,7 +10,14 @@ def cat_matrices2D(mat1, mat2, axis=0):
     """
         this function concatinates matrixes on a given axis
     """
-    newy = copy.deepcopy(mat1)
+    newy = []
+    z = 0
+    for i in mat1:
+        newy.append([])
+        for x in i:
+            newy[z].append(x)
+        z += 1
+
     if (axis == 0):
         for i in mat2:
             newy.append(i)
