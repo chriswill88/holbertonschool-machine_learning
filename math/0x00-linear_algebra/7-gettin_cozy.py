@@ -7,18 +7,16 @@
 
 
 def dimensions_getter(var):
+    """returns the number of dimensions"""
     i = 0
     while isinstance(var, list):
-        # print("from dim_g var is list and ", var)
         var = var[0]
         i += 1
     return i
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
-    """
-        this function concatinates matrixes on a given axis
-    """
+    """this function concatinates matrixes on a given axis"""
 
     if dimensions_getter(mat1) != dimensions_getter(mat2):
         return None
