@@ -20,8 +20,6 @@ def cat_matrices2D(mat1, mat2, axis=0):
 
     if dimensions_getter(mat1) != dimensions_getter(mat2):
         return None
-    if (dimensions_getter(mat1) != 2):
-        return None
 
     newy = []
     for i in range(len(mat1)):
