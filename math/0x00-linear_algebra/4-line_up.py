@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
     In this modual there is the
-    add_array function
-    for task 4.
+    add_array function for task 4
 """
 
 
