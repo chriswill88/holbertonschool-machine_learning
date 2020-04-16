@@ -17,18 +17,20 @@ def dimensions_getter(var):
 
 def cat_matrices2D(mat1, mat2, axis=0):
     """this function concatinates matrixes on a given axis"""
-    newy = []
-    for i in range(len(mat1)):
-        newy.append([])
-        for x in mat1[i]:
-            newy[i].append(x)
-    try:
-        if (axis == 0):
-            for i in mat2:
-                newy.append(i)
-        elif (axis == 1):
-            for i in range(len(mat2)):
-                newy[i].extend(mat2[i])
-    except Exception:
-        return None
+    newy = None
+    if (dimensions_getter(mat1) == 2 and dimensions_getter(mat2) == 2):
+        newy = []
+        for i in range(len(mat1)):
+            newy.append([])
+            for x in mat1[i]:
+                newy[i].append(x)
+        try:
+            if (axis == 0):
+                for i in mat2:
+                    newy.append(i)
+            elif (axis == 1):
+                for i in range(len(mat2)):
+                    newy[i].extend(mat2[i])
+        except Exception:
+            return None
     return newy
