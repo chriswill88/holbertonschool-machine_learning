@@ -22,11 +22,13 @@ def cat_matrices2D(mat1, mat2, axis=0):
         newy.append([])
         for x in mat1[i]:
             newy[i].append(x)
-
-    if (axis == 0):
-        for i in mat2:
-            newy.append(i)
-    elif (axis == 1):
-        for i in range(len(mat2)):
-            newy[i].extend(mat2[i])
+    try:
+        if (axis == 0):
+            for i in mat2:
+                newy.append(i)
+        elif (axis == 1):
+            for i in range(len(mat2)):
+                newy[i].extend(mat2[i])
+    except Exception:
+        return None
     return newy
