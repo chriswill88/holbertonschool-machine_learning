@@ -20,17 +20,6 @@ def dimensions_getter(var):
 def cat_matrices2D(mat1, mat2, axis=0):
     """this function concatinates matrixes on a given axis"""
 
-    shape1 = dimensions_getter(mat1)
-    shape2 = dimensions_getter(mat2)
-
-    if (len(shape1) != 2 or len(shape2) != 2):
-        return (None)
-    try:
-        if (shape1[axis] != shape2[axis]):
-            return None
-    except Exception:
-        return None
-
     new = []
     for i in range(len(mat1)):
         new.append([])
