@@ -17,7 +17,7 @@ def dimensions_getter(var):
         except IndexError:
             return lis
         i += 1
-    return (lis)
+    return lis
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
@@ -30,8 +30,12 @@ def cat_matrices2D(mat1, mat2, axis=0):
     # if (len(shape1) != 2 or len(shape2) != 2):
     #     return (None)
 
-    if (shape1[axis] == shape2[axis]):
-        return None
+    for i in range(len(shape1)):
+        if (shape1[i] != shape2[i] and i != axis):
+            return None
+
+    # if (shape1[axis] != shape2[axis]):
+    #     return None
 
     new = []
     for i in range(len(mat1)):
