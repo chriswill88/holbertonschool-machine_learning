@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""this modual hold the functions for task 8"""
 
 
 def dimensions_getter(var):
@@ -13,6 +14,7 @@ def dimensions_getter(var):
 
 
 def mat_mul(mat1, mat2):
+    """multiplies two matrices"""
     shape1 = dimensions_getter(mat1)
     shape2 = dimensions_getter(mat2)
 
