@@ -17,21 +17,21 @@ def dimensions_getter(var):
         except IndexError:
             return lis
         i += 1
-    return list(reversed(lis))
+    return (lis)
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
     """this function concatinates matrixes on a given axis"""
 
-    # shape1 = dimensions_getter(mat1)
-    # shape2 = dimensions_getter(mat2)
+    shape1 = dimensions_getter(mat1)
+    shape2 = dimensions_getter(mat2)
     # print(shape1, shape)
 
     # if (len(shape1) != 2 or len(shape2) != 2):
     #     return (None)
 
-    # if (shape1[axis] != shape2[axis]):
-    #     return None
+    if (shape1[axis] == shape2[axis]):
+        return None
 
     new = []
     for i in range(len(mat1)):
