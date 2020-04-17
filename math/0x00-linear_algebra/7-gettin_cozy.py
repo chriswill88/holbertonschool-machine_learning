@@ -9,14 +9,25 @@
 def dimensions_getter(var):
     """returns the number of dimensions"""
     i = 0
+    lis = []
     while isinstance(var, list):
+        lis.append(len(var))
         var = var[0]
         i += 1
-    return i
+    return list(reversed(lis))
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
     """this function concatinates matrixes on a given axis"""
+
+    shape1 = dimensions_getter(mat1)
+    shape2 = dimensions_getter(mat2)
+
+    try:
+        if (shape1[axis] != shape2[axis]):
+            return None
+    except IndexError:
+        return None
 
     newy = []
     for i in range(len(mat1)):
