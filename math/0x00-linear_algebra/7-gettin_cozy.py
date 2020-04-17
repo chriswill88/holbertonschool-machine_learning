@@ -28,7 +28,7 @@ def cat_matrices2D(mat1, mat2, axis=0):
     try:
         if (shape1[axis] != shape2[axis]):
             return None
-    except IndexError:
+    except Exception:
         return None
 
     new = []
