@@ -18,7 +18,7 @@ def dimensions_getter(var):
 def cat_matrices2D(mat1, mat2, axis=0):
     """this function concatinates matrixes on a given axis"""
     newy = None
-    if (dimensions_getter(mat1) == 2 and dimensions_getter(mat2) == 2):
+    if (dimensions_getter(mat1) < 1 or dimensions_getter(mat2) < 1):
         newy = []
         for i in range(len(mat1)):
             newy.append([])
