@@ -67,5 +67,5 @@ plt.ylabel("Number of Students", fontsize="x-small")
 plt.title("Project A", fontsize="x-small")
 
 plt.suptitle("All in One")
-plt.tight_layout() 
+plt.tight_layout()
 plt.show()
