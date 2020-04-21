@@ -40,7 +40,7 @@ plt.title("Men's Height vs Weight", fontsize="x-small")
 plt.subplot(323)
 plt.plot(x2, y2)  # plot relationship
 plt.xlim(right=28650, left=0)  # set the x range
-plt.title("Exponential Decay of C-14")  # title
+plt.title("Exponential Decay of C-14", fontsize="x-small")  # title
 plt.xlabel("Time (years)")  # xlabel
 plt.ylabel("Fraction Remaining")  # ylabel
 plt.yscale("log")  # scale of the yaxis
