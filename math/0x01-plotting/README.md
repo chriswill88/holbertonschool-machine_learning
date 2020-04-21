@@ -21,3 +21,5 @@ This particular project is a intro to plotting with matplot.
 Project Name | project description
 ------------ | -----------------------------------------------
 
+**special**
+To get x_11 forwarded to work on a vs code terminal to view graphics from remote on my local desktop. I set the enviromental variable for display to localhost:11.0 and it worked. export DISPLAY=localhost:11.0.
