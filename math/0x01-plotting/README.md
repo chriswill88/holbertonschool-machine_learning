@@ -3,6 +3,8 @@
 ### **Description**
 This particular project is a intro to plotting with matplot.
 
+### **Pictures**
+![multiplot](https://drive.google.com/drive/u/0/folders/1A3oZpzbgR5eiDPl61DolQby8eI2sBdOZ)
 ### **Learning Objectives:**
 1. What is a plot? - it is a graphical representation of a data set. A graph showing the relationship between two or more variables
 2. What is a scatter plot? - a type of plot using a cartesian plane to plot points of for usually two variables.
