@@ -28,7 +28,8 @@ student_grades = np.random.normal(68, 15, 50)
 # your code here
 plt.figure()
 plt.subplot(321)
-plt.plot(y0, 'r', range(0, 10))
+plt.plot(y0, 'r')
+plt.xlim(right=10, left=0)
 
 plt.subplot(322)
 plt.scatter(x1, y1, c='m')
@@ -37,10 +38,12 @@ plt.ylabel("Weight (lbs)", fontsize="x-small")
 plt.title("Men's Height vs Weight", fontsize="x-small")
 
 plt.subplot(323)
-plt.plot(x2, y2, range(0, 28650), scaley="log")  # plot relationship
-plt.title("Exponential Decay of C-14", fontsize="x-small")  # title
-plt.xlabel("Time (years)", fontsize="x-small")  # xlabel
-plt.ylabel("Fraction Remaining", fontsize="x-small")  # ylabel
+plt.plot(x2, y2)  # plot relationship
+plt.xlim(right=28650, left=0)  # set the x range
+plt.title("Exponential Decay of C-14")  # title
+plt.xlabel("Time (years)")  # xlabel
+plt.ylabel("Fraction Remaining")  # ylabel
+plt.yscale("log")  # scale of the yaxis
 
 plt.subplot(324)
 plt.plot(x3, y31, "r--", label="C-14")
@@ -52,7 +55,7 @@ plt.xlim(0, 20000)
 plt.ylim(0, 1)
 plt.legend()
 
-plt.subplot(325)
+plt.subplot(313)
 plt.hist(student_grades, edgecolor='black', range=(0, 100), rwidth=10)
 
 plt.xlim(0, 100, 10)
@@ -64,6 +67,5 @@ plt.ylabel("Number of Students", fontsize="x-small")
 plt.title("Project A", fontsize="x-small")
 
 plt.suptitle("All in One")
-
-plt.tight_layout()
+plt.tight_layout() 
 plt.show()
