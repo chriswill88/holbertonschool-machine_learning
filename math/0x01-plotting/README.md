@@ -4,13 +4,13 @@
 This particular project is a intro to plotting with matplot.
 
 ### **Pictures**
-![multiplot](https://drive.google.com/uc?export=view&id=1tY-PhVLY7Dmx0YQkp5boDPyuMSVQ7lER)
+![multiplot](https://files.slack.com/files-pri/T0ENXA7A8-F0128AEP7A9/screenshot_from_2020-04-21_17-06-21.png)
 
 
-![Iris_Dataset_3D_graph](https://drive.google.com/uc?export=view&id=1rRI2yfV-tFY2Eb-ZCK3Va2T_2d80xnM4)
+![Iris_Dataset_3D_graph](https://files.slack.com/files-pri/T0ENXA7A8-F012ZGY7CGG/screenshot_from_2020-04-21_17-05-48.png)
 
 
-![cool_graph_topographic](https://drive.google.com/uc?export=view&id=1iINvCKAZy68USXaCvXxj3gV7123NPZ2s)
+![cool_graph_topographic](https://files.slack.com/files-pri/T0ENXA7A8-F012FSK675J/screenshot_from_2020-04-21_17-04-36.png)
 
 ### **Learning Objectives:**
 1. What is a plot? - it is a graphical representation of a data set. A graph showing the relationship between two or more variables
