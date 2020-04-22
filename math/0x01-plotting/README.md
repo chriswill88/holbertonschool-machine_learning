@@ -5,7 +5,11 @@ This particular project is a intro to plotting with matplot.
 
 ### **Pictures**
 ![multiplot](https://drive.google.com/uc?export=view&id=1tY-PhVLY7Dmx0YQkp5boDPyuMSVQ7lER)
+
+
 ![Iris_Dataset_3D_graph](https://drive.google.com/uc?export=view&id=1rRI2yfV-tFY2Eb-ZCK3Va2T_2d80xnM4)
+
+
 ![cool_graph_topographic](https://drive.google.com/uc?export=view&id=1iINvCKAZy68USXaCvXxj3gV7123NPZ2s)
 
 ### **Learning Objectives:**
