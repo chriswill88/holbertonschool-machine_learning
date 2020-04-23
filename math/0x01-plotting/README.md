@@ -4,13 +4,13 @@
 This particular project is a intro to plotting with matplot.
 
 ### **Pictures**
-![multiplot](https://files.slack.com/files-pri/T0ENXA7A8-F0128AEP7A9/screenshot_from_2020-04-21_17-06-21.png)
+![multiplot](https://i.imgur.com/gBeicvO.png)
 
 
-![Iris_Dataset_3D_graph](https://files.slack.com/files-pri/T0ENXA7A8-F012ZGY7CGG/screenshot_from_2020-04-21_17-05-48.png)
+![Iris_Dataset_3D_graph](https://i.imgur.com/9fSmcBU.png)
 
 
-![cool_graph_topographic](https://files.slack.com/files-pri/T0ENXA7A8-F012FSK675J/screenshot_from_2020-04-21_17-04-36.png)
+![cool_graph_topographic](https://i.imgur.com/fBcqOmF.png)
 
 ### **Learning Objectives:**
 1. What is a plot? - it is a graphical representation of a data set. A graph showing the relationship between two or more variables
@@ -30,5 +30,8 @@ This particular project is a intro to plotting with matplot.
 Project Name | project description
 ------------ | -----------------------------------------------
 
-**special**
+**(Special)**  
 To get x_11 forwarded to work on a vs code terminal to view graphics from remote on my local desktop. I set the enviromental variable for display to localhost:11.0 and it worked. export DISPLAY=localhost:11.0.
+
+**UPDATE**
+11.0 may change, to check what it may be open in terminal and echo $DISPLAY.

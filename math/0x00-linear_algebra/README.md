@@ -15,10 +15,10 @@ This particular project is a intro to the math we are going to use in machine le
 9. How do you concatenate vectors/matrices? - It's done by ...
 10. What is the dot product? - multiplying corresponding vectors and adding there products together gives you a scalar constant. <img src="https://betterexplained.com/wp-content/plugins/wp-latexrender/pictures/7093a2c642c17b4be8c2765fdc3d223f.png/">
 11. What is matrix multiplication? - It is multiplying matrixes together.  
-  Things To Remember:
-  + Matrix dont have to be the same size  
-  + Inner dimensions must be eqivilant  
-  + New size is equal to the outer dimensions of the original matrixes.
+  Things To Remember:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  a. Matrix dont have to be the same size  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  b. Inner dimensions must be eqivilant  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  c. New size is equal to the outer dimensions of the original matrixes.
 
 12. What is Numpy? - It is a libray in python adding support for large multi dimensional arrays.
 13. What is parallelization and why is it important? 
