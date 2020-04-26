@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import sys
 """this modual holds the function for task 9"""
-sys.setrecursionlimit(1501)
 
 
 def summation_i_squared(n):
@@ -10,4 +8,4 @@ def summation_i_squared(n):
         return None
     if (n < 2):
         return 1
-    return((n * n) + summation_i_squared(n-1))
+    return((n * n) + summation_i_squared(n - 1))
