@@ -9,7 +9,7 @@ def poly_derivative(poly):
         return None
 
     if len(poly) == 1:
-        return 0
+        return [0]
 
     for i in range(len(poly)):
         if i > 0:
