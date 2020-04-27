@@ -11,6 +11,9 @@ def poly_integral(poly, C=0):
 
     lis = [C]
 
+    if len(poly) == 1:
+        return lis
+
     for i in range(len(poly)):
         if i > 0:
             if not poly[i] % (i + 1):
