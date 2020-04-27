@@ -17,8 +17,7 @@ def poly_integral(poly, C=0):
                 new = int(poly[i]/(i + 1))
             else:
                 new = poly[i]/(i + 1)
-            if new != 1:
-                lis.append(new)
+            lis.append(new)
         else:
             lis.append(poly[i])
     return lis
