@@ -5,7 +5,7 @@
 def poly_derivative(poly):
     """figures out the new coefficients for derivatives"""
     lis = []
-    if not isinstance(poly, list):
+    if not isinstance(poly, list) or len(poly) == 0:
         return None
 
     if len(poly) == 1:
