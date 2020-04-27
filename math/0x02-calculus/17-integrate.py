@@ -10,8 +10,9 @@ def poly_integral(poly, C=0):
         return None
 
     lis = [C]
+
     if len(poly) == 1:
-        return [C]
+        return lis
 
     for i in range(len(poly)):
         if i > 0:
