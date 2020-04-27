@@ -6,7 +6,7 @@ def poly_integral(poly, C=0):
     """returns the new coeffiecients for an integral"""
     if not isinstance(poly, list) or len(poly) == 0:
         return None
-    if not isinstance(C, (int)):
+    if not isinstance(C, int):
         return None
 
     lis = [C]
