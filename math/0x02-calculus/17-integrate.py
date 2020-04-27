@@ -12,15 +12,12 @@ def poly_integral(poly, C=0):
     lis = [C]
 
     if len(poly) == 1:
-        return lis
+        return [C]
 
     for i in range(len(poly)):
-        if i > 0:
-            if not poly[i] % (i + 1):
-                new = int(poly[i]/(i + 1))
-            else:
-                new = poly[i]/(i + 1)
-            lis.append(new)
+        if (poly[i] % (i + 1)) == 0:
+            new = int(poly[i]/(i + 1))
         else:
-            lis.append(poly[i])
+            new = poly[i]/(i + 1)
+        lis.append(new)
     return lis
