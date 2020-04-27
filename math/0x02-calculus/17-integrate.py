@@ -9,8 +9,10 @@ def poly_integral(poly, C=0):
     if not isinstance(C, int):
         return None
 
-    lis = [C]
+    if poly == [0]:
+        return [C]
 
+    lis = [C]
     for i in range(len(poly)):
         if (poly[i] % (i + 1)) == 0:
             new = int(poly[i]/(i + 1))
