@@ -4,11 +4,20 @@
 
 def poly_integral(poly, C=0):
     """returns the new coeffiecients for an integral"""
+    if not isinstance(poly, list):
+        return None
+    if not isinstance(C, (int, float)):
+        return None
+
     lis = [C]
 
     for i in range(len(poly)):
         if i > 0:
-            lis.append(poly[i]/(i + 1))
+            if not poly[i] % (i + 1):
+                new = int(poly[i]/(i + 1))
+            else:
+                new = poly[i]/(i + 1)
+            lis.append(new)
         else:
             lis.append(poly[i])
     return lis
