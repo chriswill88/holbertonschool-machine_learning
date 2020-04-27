@@ -8,4 +8,3 @@ def summation_i_squared(n):
         return None
     summ = list(map((lambda x: x * x), range(n + 1)))
     return sum(summ)
- 
