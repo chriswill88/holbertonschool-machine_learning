@@ -9,7 +9,7 @@ This repo is created to hold and display my progress with learning machine learn
 Project Name | project description
 ------------ | -----------------------------------------------
 [**Math**](math) | This repo is create to display the coding math I learned to become effective at machine learning.
-[Linear Algebra](math/0x00-linear_algebra) | This particular directory will show projects that use Linear Algebra and numpy.
-[Plotting](math/0x01-linear_algebra) | This particular project is a intro to plotting with matplot.
-[Probability](math/0x03-probability) | This project is an intro to probability
-
+[**Linear Algebra**](math/0x00-linear_algebra) | This particular directory will show projects that use Linear Algebra and numpy.
+[**Plotting**](math/0x01-plotting) | This particular project is a intro to plotting with matplot.
+[**Calculus**](math/0x02-calculus) | This project is an intro into calculus.
+[**Probability**](math/0x03-probability) | This project is an intro to probability.
