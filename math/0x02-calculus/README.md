@@ -58,7 +58,7 @@ Reciprocal Rule | 1/f | −f’/f2
 (as "Composition of Functions")	| f º g | (f’ º g) × g’
 Chain Rule (using ’ ) | f(g(x)) | f’(g(x))g’(x)
 
-taken from [mathisfun.com](https://www.mathsisfun.com/calculus/derivatives-rules.html)
+*~ Taken from [mathisfun.com](https://www.mathsisfun.com/calculus/derivatives-rules.html)*
 
 
 8. What is a partial derivative?  
