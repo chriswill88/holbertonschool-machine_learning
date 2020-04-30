@@ -29,7 +29,7 @@ class Poisson:
             Calculates the Probability Mass Function
             for the successes (k) given.
         """
-        int(k)
+        k = int(k)
         lamb = self.lambtha
         d = self.data
         factorial = 1
