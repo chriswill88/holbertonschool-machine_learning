@@ -35,3 +35,13 @@ class Poisson:
         for i in range(1, k + 1):
             fact *= i
         return (l**k * 2.7182818285**(l * -1))/(fact)
+
+    def cdf(self, k):
+        """
+            Calculates the value of the CDF
+            for a given number of “successes”.
+        """
+        k = int(k)
+        if k < 0:
+            return 0
+        return k/1
