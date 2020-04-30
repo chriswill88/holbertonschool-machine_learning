@@ -29,15 +29,9 @@ class Poisson:
             Calculates the Probability Mass Function
             for the successes (k) given.
         """
-        k = int(k)
-        lamb = self.lambtha
-        d = self.data
-        factorial = 1
+        k, fact, l, d = int(k), 1, self.lambtha, self.data
         if k < 0:
             return 0
-        if isinstance(d, list):
-            if len(d) < k:
-                return 0
         for i in range(1, k + 1):
-            factorial *= i
-        return (lamb**k * 2.7182818285**(lamb * -1))/(factorial)
+            fact *= i
+        return (l**k * 2.7182818285**(l * -1))/(fact)
