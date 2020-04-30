@@ -32,6 +32,8 @@ class Poisson:
         int(k)
         lamb = self.lambtha
         factorial = 1
+        if k < 0:
+            return 0
         for i in range(1, k + 1):
             factorial *= i
         return (lamb**k * 2.7182818285**(lamb * -1))/(factorial)
