@@ -11,7 +11,7 @@ class Exponential:
         π = 3.1415926536
     """
     def __init__(self, data=None, lambtha=1.):
-        if lambtha < 1:
+        if lambtha < 0:
             raise ValueError("lambtha must be a positive value")
         self.lambtha = float(lambtha)
         if data is None:
