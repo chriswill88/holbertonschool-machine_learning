@@ -29,19 +29,28 @@ class Poisson:
             Calculates the Probability Mass Function
             for the successes (k) given.
         """
-        k, fact, l, d = int(k), 1, self.lambtha, self.data
+        k, fact, lamb, d = int(k), 1, self.lambtha, self.data
         if k < 0:
             return 0
         for i in range(1, k + 1):
             fact *= i
-        return (l**k * 2.7182818285**(l * -1))/(fact)
+        return (lamb**k * 2.7182818285**(lamb * -1))/(fact)
 
     def cdf(self, k):
         """
             Calculates the value of the CDF
             for a given number of “successes”.
         """
+        lamb = self.lambtha
+        e = 2.7182818285
         k = int(k)
+        cdf = 0
         if k < 0:
             return 0
-        return k/1
+
+        for i in range(k + 1):
+            fact = 1
+            for x in range(1, i + 1):
+                fact *= x
+            cdf += ((e**(-1 * lamb)) * lamb**(i))/fact
+        return cdf
