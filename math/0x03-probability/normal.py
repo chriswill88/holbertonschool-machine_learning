@@ -12,7 +12,7 @@ class Normal:
     """
     def __init__(self, data=None, mean=0., stddev=1.):
         if not data:
-            if stddev < 0:
+            if stddev < 1:
                 raise ValueError("stddev must be a positive value")
             self.mean = float(mean)
             self.stddev = float(stddev)
@@ -21,6 +21,7 @@ class Normal:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
+
             self.mean = sum(data)/len(data)
             variance = 0
             for i in data:
