@@ -19,7 +19,7 @@ class Normal:
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-            if len(data) < 2:
+            if len(data) < 3:
                 raise ValueError("data must contain multiple values")
 
             self.mean = float(sum(data)/len(data))
