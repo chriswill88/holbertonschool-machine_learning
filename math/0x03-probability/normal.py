@@ -28,3 +28,25 @@ class Normal:
                 variance += (i - self.mean)**2
             variance = variance/len(data)
             self.stddev = float(variance**.5)
+
+    def z_score(self, x):
+        """Calculates the z-score of a given x-value"""
+        return (x - self.mean)/self.stddev
+
+    def x_value(self, z):
+        """Calculates the x-value of a given z-score"""
+        return (self.stddev * z) + self.mean
+
+    def pdf(self, x):
+        """Calculates the value of the PDF for a given x-value"""
+        s = self.stddev
+        m = self.mean
+        pi = 3.1415926536
+        e = 2.7182818285
+
+        first = 1/(s*(2*pi)**.5)
+
+        second = e**(-.5*((x - m) / s)**2)
+
+        return first * second
+        # return (1/(m * (2 * pi)**.5)) * e**(-.5*(((x - m) / s)**2))
