@@ -11,7 +11,7 @@ class Normal:
         π = 3.1415926536
     """
     def __init__(self, data=None, mean=0., stddev=1.):
-        if not data:
+        if data is None:
             if stddev < 1:
                 raise ValueError("stddev must be a positive value")
             self.mean = float(mean)
@@ -19,7 +19,7 @@ class Normal:
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-            if len(data) < 3:
+            if len(data) < 2:
                 raise ValueError("data must contain multiple values")
 
             self.mean = float(sum(data)/len(data))
