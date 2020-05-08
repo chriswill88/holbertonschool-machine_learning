@@ -1,5 +1,5 @@
-    #!/usr/bin/env python3
-"""This modual holds the class created for task 0"""
+#!/usr/bin/env python3
+"""This modual holds the class created for task 1"""
 import numpy as np
 
 
