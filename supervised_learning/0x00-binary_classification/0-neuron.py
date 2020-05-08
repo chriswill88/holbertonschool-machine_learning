@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
+"""This modual holds the class created for task 0"""
 import numpy as np
-"""
-    this modual holds the class created for task 0
-"""
 
 
 class Neuron:
