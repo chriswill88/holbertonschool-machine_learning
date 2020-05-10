@@ -30,6 +30,10 @@ class Neuron:
         return self.__A
 
     def forward_prop(self, X):
+        """
+        This function calculates the forward propogation
+        and updates the private attibute A
+        """
         # X numpy array size = (nx - , m - )
         Z = np.dot(self.W, X) + self.b
         # Z = the (weight*activation)+bias for all data in the set
