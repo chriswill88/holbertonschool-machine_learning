@@ -55,4 +55,7 @@ class Neuron:
         """Evalueates neurons predictions"""
         m = Y.size
         self.forward_prop(X)
+        np.where(Y >= .5, Y, 1)
+        np.where(Y < .5, Y, 0)
+
         return X, self.cost(Y, self.__A)
