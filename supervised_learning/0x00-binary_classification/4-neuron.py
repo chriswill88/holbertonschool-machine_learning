@@ -53,9 +53,12 @@ class Neuron:
 
     def evaluate(self, X, Y):
         """Evalueates neurons predictions"""
-        m = Y.size
-        self.forward_prop(X)
-        np.where(Y >= .5, Y, 1)
-        np.where(Y < .5, Y, 0)
+        m = Y.shape[1]
+        # Y = np.where(Y >= .5, X, x=1, y=0)
+        # print(np.dot(Y, X.T))
+        predict = self.forward_prop(X)
 
-        return X, self.cost(Y, self.__A)
+        predict = np.where(predict >= .5, predict, 1)
+        predict = np.where(predict < .5, predict, 0)
+
+        return predict, self.cost(Y, self.__A)
