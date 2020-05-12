@@ -67,8 +67,8 @@ class Neuron:
         b = self.__b
 
         Dz = A - Y
-        Dw = (1/m) * (X.T * Dz.T)
+        Dw = Dz @ X.T
         Db = (1/m) * np.sum(Dz)
 
-        self.__W = W - alpha * Dw
+        self.__W = W - (alpha * Dw)
         self.__b = b - alpha * Db
