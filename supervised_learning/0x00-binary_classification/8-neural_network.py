@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""this modual contains the class NeuralNetwork"""
 import numpy as np
 
 
