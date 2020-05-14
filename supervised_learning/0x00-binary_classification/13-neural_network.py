@@ -91,7 +91,7 @@ class NeuralNetwork:
         DZ2 = A2-Y
         DW2 = (DZ2@A1.T)/m
         DB2 = np.sum(DZ2, axis=1, keepdims=True)/m
-        DZ1 = (W2.T@DZ2)*(A2*(1-A2))
+        DZ1 = (W2.T@DZ2)*(A1*(1-A1))
         DW1 = (DZ1@X.T)/m
         DB1 = np.sum(DZ1, axis=1, keepdims=True)/m
 
