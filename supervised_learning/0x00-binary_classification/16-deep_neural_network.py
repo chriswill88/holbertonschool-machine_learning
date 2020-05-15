@@ -17,6 +17,7 @@ class DeepNeuralNetwork:
 
         print("layers ->", layers)
         print("nx ->", nx)
+        n = np.random.rand
 
         self.L = len(layers)  # the number of layers
         self.cache = {}  # to hold all intermediary values of the network.
@@ -24,5 +25,5 @@ class DeepNeuralNetwork:
         for l in range(self.L):
             lay = layers
             il = nx if (l < 1) else lay[l-1]
-            self.weights["W{}".format(l+1)] = np.random.rand(lay[l], il)*np.sqrt(2/il)
+            self.weights["W{}".format(l+1)] = n(lay[l], il)*np.sqrt(2/il)
             self.weights["b{}".format(l+1)] = np.zeros((lay[l], 1))
