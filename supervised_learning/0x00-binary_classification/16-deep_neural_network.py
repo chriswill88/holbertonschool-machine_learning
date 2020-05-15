@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""this modual contains the class DeepNeuralNetwork"""
 import numpy as np
 
 
