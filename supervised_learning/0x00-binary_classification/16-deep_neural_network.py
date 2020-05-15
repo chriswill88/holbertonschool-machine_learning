@@ -10,17 +10,15 @@ class DeepNeuralNetwork:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
-        if not isinstance(layers, list) or layers is None:
+        if not isinstance(layers, list):
             raise TypeError("layers must be a list of positive integers")
-        if len(layers) == 0:
-            raise TypeError("layers must be a positive integer")
+        if len(layers) == 0 or min(layers) < 1:
+            raise TypeError("layers must be a list of positive integers")
         self.L = len(layers)  # the number of layers
         self.cache = {}  # to hold all intermediary values of the network.
         self.weights = {}  # holds all weights and bias
         n = np.random.randn
         for l in range(self.L):
-            if layers[l] < 0:
-                raise TypeError("layers must be a positive integer")
             lay = layers
             il = nx if (l < 1) else lay[l-1]
             self.weights["W{}".format(l+1)] = n(lay[l], il)*np.sqrt(2/il)
