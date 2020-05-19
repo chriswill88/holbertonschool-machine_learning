@@ -6,7 +6,7 @@ import numpy as np
 def one_hot_encode(Y, classes):
     """converts a numeric label vector into a one-hot matrix"""
     m = len(Y)
-    if isinstance(classes, int):
+    if not isinstance(classes, int):
         return None
     if classes < np.amax(Y):
         return None
