@@ -144,6 +144,8 @@ class DeepNeuralNetwork:
     @staticmethod
     def load(filename):
         """loads pickeled instance"""
+        if not filename or filename[-4:] != ".pkl":
+            return None
         try:
             with open(filename, 'rb') as file:
                 return(pickle.load(file))
