@@ -2,6 +2,7 @@
 """this modual contains the class DeepNeuralNetwork"""
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 
 class DeepNeuralNetwork:
@@ -114,7 +115,7 @@ class DeepNeuralNetwork:
         cost = []
         for i in range(iterations + 1):
             NN, C = self.forward_prop(X)
-            if step == 0 or i % step == 0:
+            if step == 0 or i % step == 0 or i == iterations:
                 if verbose:
                     print("Cost after {} iterations: {}".format(i, c(Y, NN)))
                 if graph:
@@ -132,3 +133,19 @@ class DeepNeuralNetwork:
             plt.show()
 
         return self.evaluate(X, Y)
+
+    def save(self, filename):
+        """pickles instances and saves them to a file"""
+        if filename[-4:] != ".pkl":
+            filename += ".pkl"
+        with open(filename, 'wb') as file:
+            pickle.dump(self, file)
+
+    @staticmethod
+    def load(filename):
+        """loads pickeled instance"""
+        try:
+            with open(filename, 'rb') as file:
+                return(pickle.load(file))
+        except Exception:
+            return None

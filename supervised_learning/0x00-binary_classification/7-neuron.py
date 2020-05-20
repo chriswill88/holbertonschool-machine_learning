@@ -93,12 +93,11 @@ class Neuron:
                 raise TypeError("step must be an integer")
             if step < 0 or step > iterations:
                 raise ValueError("step must be positive and <= iterations")
-        if graph:
-            it = []
-            cost = []
+        it = []
+        cost = []
         for i in range(iterations + 1):
             A = self.forward_prop(X)
-            if i % step == 0:
+            if step == 0 or i % step == 0:
                 if verbose:
                     print("Cost after {} iterations: {}".format(i, c(Y, A)))
                 if graph:
