@@ -138,16 +138,14 @@ class DeepNeuralNetwork:
         """pickles instances and saves them to a file"""
         if filename[-4:] != ".pkl":
             filename += ".pkl"
-        with open(filename, 'wb') as file:
-            pickle.dump(self, file)
+        with open(filename, 'wb') as file1:
+            pickle.dump(self, file1)
 
     @staticmethod
     def load(filename):
         """loads pickeled instance"""
-        if not filename or filename[-4:] != ".pkl":
-            return None
         try:
-            with open(filename, 'rb') as file:
-                return(pickle.load(file))
+            with open(filename, 'rb') as file1:
+                return(pickle.load(file1))
         except FileNotFoundError:  # Define the exceptions
             return None
