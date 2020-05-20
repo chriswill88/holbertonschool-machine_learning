@@ -121,7 +121,7 @@ class DeepNeuralNetwork:
                 if graph:
                     it.append(i)
                     cost.append(self.cost(Y, NN))
-            if i < iterations:
+            if i < iterations:  # +1 iteration bug fix
                 self.gradient_descent(Y, C, alpha)
 
         it = np.array(it)
