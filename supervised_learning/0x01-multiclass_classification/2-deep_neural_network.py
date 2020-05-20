@@ -2,7 +2,6 @@
 """this modual contains the class DeepNeuralNetwork"""
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 import pickle
 
 
@@ -100,7 +99,7 @@ class DeepNeuralNetwork:
         c = self.cost
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
-        if iterations < 1:
+        if iterations <= 0:
             raise ValueError("iterations must be a positive integer")
         if not isinstance(alpha, float):
             raise TypeError("alpha must be a float")
@@ -122,7 +121,8 @@ class DeepNeuralNetwork:
                 if graph:
                     it.append(i)
                     cost.append(self.cost(Y, NN))
-            self.gradient_descent(Y, C, alpha)
+            if i < iterations:
+                self.gradient_descent(Y, C, alpha)
 
         it = np.array(it)
         cost = np.array(cost)
@@ -139,13 +139,14 @@ class DeepNeuralNetwork:
         """pickles instances and saves them to a file"""
         if filename[-4:] != ".pkl":
             filename += ".pkl"
-        with open(filename, 'wb') as file1:
-            pickle.dump(self, file1)
+        with open(filename, 'wb') as file:
+            pickle.dump(self, file)
 
+    @staticmethod
     def load(filename):
         """loads pickeled instance"""
-        if os.path.exists(filename):
-            with open(filename, 'rb') as file1:
-                return(pickle.load(file1))
-        else:
+        try:
+            with open(filename, 'rb') as file:
+                return(pickle.load(file))
+        except FileNotFoundError:  # Define the exceptions
             return None
