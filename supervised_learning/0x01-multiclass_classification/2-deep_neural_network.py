@@ -147,5 +147,5 @@ class DeepNeuralNetwork:
         try:
             with open(filename, 'rb') as file:
                 return(pickle.load(file))
-        except Exception:
+        except FileNotFoundError:  # Define the exceptions
             return None
