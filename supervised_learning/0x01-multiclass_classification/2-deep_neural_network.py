@@ -2,6 +2,7 @@
 """this modual contains the class DeepNeuralNetwork"""
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 import pickle
 
 
@@ -141,10 +142,10 @@ class DeepNeuralNetwork:
         with open(filename, 'wb') as file1:
             pickle.dump(self, file1)
 
-    def load(self, filename):
+    def load(filename):
         """loads pickeled instance"""
-        try:
+        if os.path.exists(filename):
             with open(filename, 'rb') as file1:
                 return(pickle.load(file1))
-        except FileNotFoundError:  # Define the exceptions
+        else:
             return None
