@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import tensorflow as tf
 """modual for task 1"""
+import tensorflow as tf
 
 
 def create_layer(prev, n, activation):
@@ -16,8 +16,7 @@ def create_layer(prev, n, activation):
     sess = tf.Session()
     weight = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
 
-    x = tf.placeholder(dtype=tf.float32, shape=prev.shape)
     linear_model = tf.layers.Dense(
         units=n, activation=act, name='layer', kernel_initializer=weight)
-    y = linear_model(x)
+    y = linear_model(prev)
     return y
