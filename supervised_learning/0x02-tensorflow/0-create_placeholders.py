@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """task 0 module"""
 import tensorflow as tf
-import numpy as np
 
 
 def create_placeholders(nx, classes):
