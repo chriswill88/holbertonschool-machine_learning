@@ -9,5 +9,6 @@ def calculate_accuracy(y, y_pred):
     y_pred is a tensor containing networks predictions
     returns: tensor containing decimal accuracy of the prediction
     """
-    loss = tf.losses.mean_squared_error(labels=y, predictions=y_pred)
-    return loss
+    mean = tf.math.reduce_mean
+    accuracy = mean(y_pred - y)
+    return accuracy
