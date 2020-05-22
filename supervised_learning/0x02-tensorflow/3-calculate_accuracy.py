@@ -10,5 +10,12 @@ def calculate_accuracy(y, y_pred):
     returns: tensor containing decimal accuracy of the prediction
     """
     mean = tf.math.reduce_mean
-    accuracy = mean(y_pred - y)
-    return accuracy
+
+    max_y = tf.argmax(y, axis=1)
+    max_yp = tf.argmax(y_pred, axis=1)
+
+    eq = tf.equal(max_y, max_yp)
+
+    avg = mean(tf.cast(eq, tf.float32))
+
+    return avg
