@@ -9,7 +9,10 @@ def evaluate(X, Y, save_path):
     sp = save_path
     with tf.Session() as sess:
         sess = saver.restore(sess, sp)
+        print("sess -> ", sess)
         prediction = sess.run(predict, feed_dict={inputdata: X_valid, one_hot: Y_valid})
+        print("prediction -> ", prediction)
         accuracy = sess.run(accuracy, feed_dict={inputdata: X_valid, one_hot: Y_valid})
+        print("accuracy -> ", accuracy)
         loss = sess.run(cost, feed_dict={inputdata: X_valid, one_hot: Y_valid})
-        print("sess -> ", sess, "\npredict -> ", prediction, "\n accuracy -> ", accuracy,"\nloss -> ", loss)
+        print("loss -> ", loss)
