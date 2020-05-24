@@ -49,9 +49,9 @@ def train(
     tf.add_to_collection(name="accuracy", value=accuracy)
     tf.add_to_collection(name="train_op", value=train)
 
-    for i in range(iterations):
+    for i in range(iterations + 1):
         sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
-        if i % 100 == 0 or i == iterations + 1:
+        if i % 100 == 0 or i == iterations:
             print("After {} iterations:".format(i))
             print("\tTraining Cost: {}".format(
                 sess.run(
