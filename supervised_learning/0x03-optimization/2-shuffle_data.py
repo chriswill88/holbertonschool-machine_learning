@@ -5,7 +5,8 @@ import numpy as np
 
 def shuffle_data(X, Y):
     """shuffles two sets of data the same way"""
-    x = np.random.permutation(X)
-    np.random.seed(0)
-    y = np.random.permutation(Y)
-    return x, y
+    r_s = np.random.get_state()
+    SX = np.random.permutation(X)
+    np.random.set_state(r_s)
+    SY = np.random.permutation(Y)
+    return SX, SY
