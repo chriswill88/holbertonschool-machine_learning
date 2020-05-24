@@ -51,7 +51,7 @@ def train(
     for i in range(iterations):
         sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
         print("i = {}\n".format(i))
-        if i % iterations == 0 or i == iterations - 1:
+        if i % 100 == 0 or i == iterations - 1:
             print("\tTraining Cost: {}".format(
                 sess.run(
                     cost,
