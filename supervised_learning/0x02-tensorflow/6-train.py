@@ -70,4 +70,4 @@ def train(
                     accuracy,
                     feed_dict={inputdata: X_valid, one_hot: Y_valid})))
         Sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
-    return saver.save(sess=Sess, sp)
+    return saver.save(sess=Sess, save_path=sp)
