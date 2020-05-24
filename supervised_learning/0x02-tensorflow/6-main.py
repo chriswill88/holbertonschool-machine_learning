@@ -20,9 +20,6 @@ if __name__ == '__main__':
     X_train = X_train_3D.reshape((X_train_3D.shape[0], -1))
     Y_train_oh = one_hot(Y_train, 10)
 
-    print("x_train -> ", X_train)
-    print("y_train", Y_train)
-
     X_valid_3D = lib['X_valid']
     Y_valid = lib['Y_valid']
     X_valid = X_valid_3D.reshape((X_valid_3D.shape[0], -1))
