@@ -38,9 +38,9 @@ def train(
     train = create_train_op(cost, alpha)
     ini = tf.global_variables_initializer()
 
-    saver = tf.train.Saver
-    Sess = tf.Session()
-    Sess.run(ini)
+    saver = tf.train.Saver()
+    sess = tf.Session()
+    sess.run(ini)
 
     tf.add_to_collection(name="x", value=inputdata)
     tf.add_to_collection(name="y", value=one_hot)
@@ -50,24 +50,24 @@ def train(
     tf.add_to_collection(name="train_op", value=train)
 
     for i in range(iterations):
-        Sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
+        sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
         print("i = {}\n".format(i))
         if i % 100 == 0 or i == iterations - 1:
             print("\tTraining Cost: {}".format(
-                Sess.run(
+                sess.run(
                     cost,
                     feed_dict={inputdata: X_train, one_hot: Y_train})))
             print("\tTraining Accuracy: {}".format(
-                Sess.run(
+                sess.run(
                     accuracy,
                     feed_dict={inputdata: X_train, one_hot: Y_train})))
             print("\tValidation Cost: {}".format(
-                Sess.run(
+                sess.run(
                     cost,
                     feed_dict={inputdata: X_valid, one_hot: Y_valid})))
             print("\tValidation Accuracy: {}".format(
-                Sess.run(
+                sess.run(
                     accuracy,
                     feed_dict={inputdata: X_valid, one_hot: Y_valid})))
-        Sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
-    return saver.save(Sess, sp)
+        sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
+    return saver.save(sess, sp)
