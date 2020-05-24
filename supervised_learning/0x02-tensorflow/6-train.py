@@ -51,7 +51,7 @@ def train(
 
         # if i % iterations == 0 or i == iterations - 1:
         print("i = {}\n", i)
-        print("\tTraining Cost: {}".format(cost))
-        print("\tTraining Accuracy: {}".format(accuracy))
-        print("\tValidation Cost: {}".format(cost))
-        print("\tValidation Accuracy: {}".format(accuracy))
+        print("\tTraining Cost: {}".format(sess.run(cost)))
+        print("\tTraining Accuracy: {}".format(sess.run(accuracy)))
+        print("\tValidation Cost: {}".format(sess.run(cost)))
+        print("\tValidation Accuracy: {}".format(sess.run(accuracy)))
