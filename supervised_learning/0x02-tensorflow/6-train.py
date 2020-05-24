@@ -47,11 +47,11 @@ def train(
     sess.run(ini)
 
     for i in range(iterations):
-        print(sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train}))
+        # print(sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train}))
 
-        if i % iterations == 0 or i == iterations - 1:
-            print("i = {}\n", i)
-            print("\tTraining Cost: {}".format(cost))
-            print("\tTraining Accuracy: {}".format(accuracy))
-            print("\tValidation Cost: {}".format(cost))
-            print("\tValidation Accuracy: {}".format(accuracy))
+        # if i % iterations == 0 or i == iterations - 1:
+        print("i = {}\n", i)
+        print("\tTraining Cost: {}".format(cost))
+        print("\tTraining Accuracy: {}".format(accuracy))
+        print("\tValidation Cost: {}".format(cost))
+        print("\tValidation Accuracy: {}".format(accuracy))
