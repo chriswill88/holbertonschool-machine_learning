@@ -25,6 +25,7 @@ def train(
     iterations is the number of iterations to train over
     save_path designates where to save the model
     """
+    sp = save_path
     nx = X_train.shape[1]
     classes = Y_train.shape[1]
     vnx, vclass = X_valid.shape
@@ -69,4 +70,4 @@ def train(
                     accuracy,
                     feed_dict={inputdata: X_valid, one_hot: Y_valid})))
         sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
-    return saver.save(sess, save_path)
+    return saver.save(sess, sp)
