@@ -8,7 +8,7 @@ def evaluate(X, Y, save_path):
     saver = tf.train.Saver
     sp = save_path
     with tf.Session() as sess:
-        sess = saver.restore(sess, sp)
+        sess = saver.restore(sess, save_path=sp)
         print("sess -> ", sess)
         accuracy = tf.get_collection("accuracy")[0]
         loss = tf.get_collection("loss")[0]
