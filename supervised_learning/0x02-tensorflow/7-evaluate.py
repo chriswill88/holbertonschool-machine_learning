@@ -10,14 +10,11 @@ def evaluate(X, Y, save_path):
         saver = tf.train.import_meta_graph(save_path + ".meta")
         ses = saver.restore(sess=ses, save_path=sp)
         print("ses -> ", ses)
-        accuracy = tf.get_collection("accuracy")[0]
+        acc = tf.get_collection("accuracy")[0]
         loss = tf.get_collection("loss")[0]
         pred = tf.get_collection("y_pred")[0]
-
-        acc = ses.run(accuracy, feed_dict={"x": X, "y": Y})
-        los = ses.run(loss, feed_dict={"x": X, "y": Y})
 
         print("prediction -> ", pred)
         print("acc -> ", acc)
         print("los -> ", loss)
-        return pred, acc, los
+        return pred, acc, loss
