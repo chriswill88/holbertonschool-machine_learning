@@ -16,7 +16,7 @@ def evaluate(X, Y, save_path):
         loss = tf.get_collection("loss")[0]
         pred = tf.get_collection("y_pred")[0]
 
-        ses.run(pred, feed_dict={x: X, y: Y})
+        pred = ses.run(pred, feed_dict={x: X, y: Y})
 
         print("prediction -> ", pred)
         print("acc -> ", acc)
