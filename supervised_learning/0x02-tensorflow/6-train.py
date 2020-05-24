@@ -51,7 +51,7 @@ def train(
 
     for i in range(iterations):
         sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
-        if i % 100 == 0 or i == iterations - 1:
+        if i % 100 == 0 or i == iterations:
             print("After {} iterations:".format(i))
             print("\tTraining Cost: {}".format(
                 sess.run(
@@ -69,6 +69,6 @@ def train(
                 sess.run(
                     accuracy,
                     feed_dict={inputdata: X_valid, one_hot: Y_valid})))
-        if i != iterations - 1:
+        if i != iterations:
             sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
     return saver.save(sess, sp)
