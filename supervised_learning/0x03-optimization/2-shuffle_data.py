@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""this modual holds the function for task 2"""
 import numpy as np
 
 
