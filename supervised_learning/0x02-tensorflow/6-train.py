@@ -47,7 +47,7 @@ def train(
     sess.run(ini)
 
     for i in range(iterations):
-        sess.run(train, accuracy, cost, feed_dict={inputdata: X_train, one_hot: Y_train})
+        sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
 
         # if i % iterations == 0 or i == iterations - 1:
         print("i = {}\n", i)
