@@ -5,7 +5,7 @@ import tensorflow as tf
 
 def evaluate(X, Y, save_path):
     """ evaluates the output of a nerual network"""
-    rest = tf.train.Saver.restore()
+    rest = tf.train.Saver.restore
     with tf.Session() as sess:
         sess = rest(sess, save_path)
         prediction = sess.run(predict, feed_dict={inputdata: X_valid, one_hot: Y_valid})
