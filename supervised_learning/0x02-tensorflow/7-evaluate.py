@@ -16,5 +16,5 @@ def evaluate(X, Y, save_path):
 
         print("prediction -> ", pred)
         print("acc -> ", acc)
-        print("los -> ", loss)
+        print("los -> {}\n\n\n".format(loss))
         return pred, acc, loss
