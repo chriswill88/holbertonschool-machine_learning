@@ -48,10 +48,10 @@ def train(
 
     for i in range(iterations):
         sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
-
         # if i % iterations == 0 or i == iterations - 1:
         print("i = {}\n".format(i))
         print("\tTraining Cost: {}".format(sess.run(cost, feed_dict={inputdata: X_train, one_hot: Y_train})))
         print("\tTraining Accuracy: {}".format(sess.run(accuracy, feed_dict={inputdata: X_train, one_hot: Y_train})))
         print("\tValidation Cost: {}".format(sess.run(cost, feed_dict={inputdata: X_train, one_hot: Y_train})))
         print("\tValidation Accuracy: {}".format(sess.run(accuracy, feed_dict={inputdata: X_train, one_hot: Y_train})))
+        sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
