@@ -7,7 +7,7 @@ def evaluate(X, Y, save_path):
     """ evaluates the output of a nerual network"""
     sp = save_path
     with tf.Session() as ses:
-        saver = tf.train.Saver()
+        saver = tf.train.import_meta_graph(save_path + ".meta")
         ses = saver.restore(sess=ses, save_path=sp)
         print("ses -> ", ses)
         print("saver -> ", saver)
