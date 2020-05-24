@@ -30,16 +30,16 @@ def train(
     vnx, vclass = X_valid.shape
 
     inputdata, one_hot = create_placeholders(nx, classes)
-    print(inputdata, one_hot)
+    # print(inputdata, one_hot)
     predict = forward_prop(inputdata, layer_sizes, activations)
-    print(predict)
+    # print(predict)
     cost = calculate_loss(one_hot, predict)
-    print(cost)
+    # print(cost)
 
     accuracy = calculate_accuracy(one_hot, predict)
     train = create_train_op(cost, alpha)
 
-    print("input -> ", inputdata, "\n predict -> ", predict, "\n acc -> ", accuracy, "\n cost -> ", cost, "\n Train -> ", train)
+    # print("input -> ", inputdata, "\n predict -> ", predict, "\n acc -> ", accuracy, "\n cost -> ", cost, "\n Train -> ", train)
     ini = tf.global_variables_initializer()
 
     saver = tf.train.Saver
