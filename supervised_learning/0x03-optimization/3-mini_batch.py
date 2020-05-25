@@ -59,7 +59,7 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
 
-            for x in range(till_epoch):  # use vectorizing
+            for step in range(till_epoch):  # use vectorizing
                 if step != 0 and step % 100 == 0:
                     acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
                     cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
@@ -72,11 +72,8 @@ def train_mini_batch(
                     end = X_train[:, start:].shape[1]
                 else:
                     end = start + batch_size  # dont forget
-                inp = X_train[start:end, :]
-                ypt = Y_train[start:end, :]
+                inp = X_train[:, start:end]
+                ypt = Y_train[:, start:end]
 
-                print(inp)
-                print(ypt)
                 ses.run(train, feed_dict={x: inp, y: ypt})
-                step += 1
         return saver.save(ses, sp)
