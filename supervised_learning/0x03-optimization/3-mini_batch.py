@@ -52,7 +52,14 @@ def train_mini_batch(
         for i in range(epochs):
             step = 0
             for step in range(till_epoch + 1):
+                start = step * batch_size
+                if batch_size > X_train[start:, :].shape[0]:
+                    end = X_train[start:, :].shape[0]
+                else:
+                    end = start + batch_size
 
+                inp = X_train[start:end, :]
+                ypt = Y_train[start:end, :]
                 # if step != 0 and step % 100 == 0:
                 acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
                 cost = ses.run(
@@ -61,13 +68,6 @@ def train_mini_batch(
                 print("\t\tCost: {}".format(cost))
                 print("\t\tAccuracy: {}".format(acc))
 
-                start = step * batch_size
-                if batch_size > X_train[start:, :].shape[0]:
-                    end = X_train[start:, :].shape[0]
-                else:
-                    end = start + batch_size
-                inp = X_train[start:end, :]
-                ypt = Y_train[start:end, :]
                 ses.run(train, feed_dict={x: inp, y: ypt})
             acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
             Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
