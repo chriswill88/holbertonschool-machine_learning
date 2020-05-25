@@ -20,7 +20,6 @@ def evaluate(X, Y, save_path):
         train = tf.get_collection("train_op")[0]
 
         pred = ses.run(pred, feed_dict={x: X, y: Y})
-        ses.run(train, feed_dict={x: X, y: Y})
         acc = ses.run(acc, feed_dict={x: X, y: Y})
         loss = ses.run(loss, feed_dict={x: X, y: Y})
 
