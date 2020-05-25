@@ -69,5 +69,6 @@ def train(
                 sess.run(
                     accuracy,
                     feed_dict={x: X_valid, y: Y_valid})))
+        if i < iterations:
             sess.run(train, feed_dict={x: X_train, y: Y_train})
     return saver.save(sess, sp)
