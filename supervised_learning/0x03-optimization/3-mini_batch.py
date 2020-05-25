@@ -37,7 +37,6 @@ def train_mini_batch(
         y = tf.get_collection("y")[0]
         accu = tf.get_collection("accuracy")[0]
         loss = tf.get_collection("loss")[0]
-        pred = tf.get_collection("y_pred")[0]
         train = tf.get_collection("train_op")[0]
 
         for i in range(epochs + 1):
@@ -53,21 +52,21 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
 
-            for step in range(till_epoch):
-                if step != 0 and step % 100 == 0:
-                    acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
-                    cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
-                    print("\tStep {}:".format(step))
-                    print("\t\tCost: {}".format(cost))
-                    print("\t\tAccuracy: {}".format(acc))
+            if i < epochs:
+                for step in range(till_epoch):
+                    if step != 0 and step % 100 == 0:
+                        acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
+                        cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
+                        print("\tStep {}:".format(step))
+                        print("\t\tCost: {}".format(cost))
+                        print("\t\tAccuracy: {}".format(acc))
 
-                start = step * batch_size
-                if batch_size > X_train[start:, :].shape[0]:
-                    end = X_train[start:, :].shape[0]
-                else:
-                    end = start + batch_size
-                inp = X_train[start:end, :]
-                ypt = Y_train[start:end, :]
-                ses.run(pred, feed_dict={x: X_train, y: Y_train})
-                ses.run(train, feed_dict={x: inp, y: ypt})
+                    start = step * batch_size
+                    if batch_size > X_train[start:, :].shape[0]:
+                        end = X_train[start:, :].shape[0]
+                    else:
+                        end = start + batch_size
+                    inp = X_train[start:end, :]
+                    ypt = Y_train[start:end, :]
+                    ses.run(train, feed_dict={x: inp, y: ypt})
         return saver.save(ses, sp)
