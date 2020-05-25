@@ -52,7 +52,7 @@ def train_mini_batch(
         for i in range(epochs):
             X_train, Y_train = shuffle_data(X_train, Y_train)
             step = 0
-            for step in range(till_epoch):
+            for step in range(till_epoch + 1):
                 if step != 0 and step % 100 == 0:
                     acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
                     cost = ses.run(
