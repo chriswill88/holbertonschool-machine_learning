@@ -29,11 +29,12 @@ def train_mini_batch(
     bs = batch_size
 
     with tf.Session() as ses:
+        print("in the ses")
         saver = tf.train.import_meta_graph(lp + ".meta")
         saver.restore(sess=ses, save_path=lp)
         graph = tf.get_default_graph()
-        print(saver)
-        print(ses)
+        print("saver -> ", saver)
+        print("ses -> ", ses)
 
         x = tf.get_collection("x")[0]
         y = tf.get_collection("y")[0]
