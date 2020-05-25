@@ -75,6 +75,8 @@ def train_mini_batch(
                 inp = X_train[:, start:end]
                 ypt = Y_train[:, start:end]
 
+                print(inp)
+                print(ypt)
                 ses.run(train, feed_dict={x: inp, y: ypt})
                 step += 1
         return saver.save(ses, sp)
