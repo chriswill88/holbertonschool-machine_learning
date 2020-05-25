@@ -51,6 +51,8 @@ def train_mini_batch(
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
+            if i == 2:
+                break
 
             if i < epochs:
                 for step in range(till_epoch):
@@ -61,7 +63,7 @@ def train_mini_batch(
                         end = start + batch_size
                     inp = X_train[start:end, :]
                     ypt = Y_train[start:end, :]
-                    print("start {}\nend {}\narray {}".format(start, end, inp))
+                    # print("start {}\nend {}\narray {}".format(start, end, inp))
 
                     if step != 0 and step % 100 == 0:
                         acc = ses.run(accu, feed_dict={x: inp, y: ypt})
