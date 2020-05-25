@@ -6,12 +6,12 @@ import tensorflow as tf
 def evaluate(X, Y, save_path):
     """ evaluates the output of a nerual network"""
     sp = save_path
-    init_op = tf.global_variables_initializer()
-    saver = tf.train.Saver()
 
     with tf.Session() as ses:
+        saver = tf.train.import_meta_graph(sp + ".meta")
         ses = saver.restore(sess=ses, save_path=sp)
-        ses.run(init_op)
+        graph = tf.get_default_graph()
+        
         print("ses -> ", ses)
         print("saver -> ", saver)
         x = tf.get_collection("x")[0]
