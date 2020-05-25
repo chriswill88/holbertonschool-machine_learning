@@ -48,6 +48,7 @@ def train_mini_batch(
         for i in range(epochs):
             X_train, Y_train = shuffle_data(X_train, Y_train)
             step = 0
+            ses.run(pred, feed_dict={x: X_train, y: Y_train})
             acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
             Vacc = ses.run(acc, feed_dict={x: X_valid, y: Y_valid})
             cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
