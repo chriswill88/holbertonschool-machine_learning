@@ -51,7 +51,6 @@ def train_mini_batch(
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
-            print("start {}\nend {}\narray {}".format(start, end, inp))
 
             if i == 2:
                 break
