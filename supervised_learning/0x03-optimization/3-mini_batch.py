@@ -70,7 +70,8 @@ def train_mini_batch(
                 start = step * batch_size
                 if batch_size > X_train[:, start:].shape[1]:
                     end = X_train[:, start:].shape[1]
-
+                else:
+                    end = start + batch_size
                 inp = X_train[:, start:end]
                 ypt = Y_train[:, start:end]
 
