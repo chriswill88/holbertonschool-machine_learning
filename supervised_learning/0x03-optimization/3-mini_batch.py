@@ -39,46 +39,35 @@ def train_mini_batch(
         loss = tf.get_collection("loss")[0]
         train = tf.get_collection("train_op")[0]
 
-        acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
-        Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
-        cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
-        Vcost = ses.run(loss, feed_dict={x: X_valid, y: Y_valid})
-        print("After {} epochs:".format(0))
-        print("\tTraining Cost: {}".format(cost))
-        print("\tTraining Accuracy: {}".format(acc))
-        print("\tValidation Cost: {}".format(Vcost))
-        print("\tValidation Accuracy: {}".format(Vacc))
-
-        for i in range(epochs):
-            step = 0
+        for i in range(epochs + 1):
             X_train, Y_train = shuffle_data(X_train, Y_train)
-
-            for step in range(till_epoch + 1):
-                start = step * batch_size
-                if batch_size > X_train[start:, :].shape[0]:
-                    end = X_train[start:, :].shape[0]
-                else:
-                    end = start + batch_size
-
-                inp = X_train[start:end, :]
-                ypt = Y_train[start:end, :]
-                # if step != 0 and step % 100 == 0:
-                acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
-                cost = ses.run(
-                    loss, feed_dict={x: X_train, y: Y_train})
-                print("\tStep {}:".format(step))
-                print("\t\tCost: {}".format(cost))
-                print("\t\tAccuracy: {}".format(acc))
-
-                ses.run(train, feed_dict={x: inp, y: ypt})
+            step = 0
             acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
             Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
             cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
             Vcost = ses.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            print("After {} epochs:".format(i + 1))
+            print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(cost))
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
 
+            if i < epochs:
+                for step in range(till_epoch):
+                    if step != 0 and step % 100 == 0:
+                        start = step * batch_size
+                        if batch_size > X_train[start:, :].shape[0]:
+                            end = X_train[start:, :].shape[0]
+                        else:
+                            end = start + batch_size
+                        inp = X_train[start:end, :]
+                        ypt = Y_train[start:end, :]
+                        acc = ses.run(accu, feed_dict={x: inp, y: ypt})
+                        cost = ses.run(
+                            loss, feed_dict={x: inp, y: ypt})
+                        print("\tStep {}:".format(step))
+                        print("\t\tCost: {}".format(cost))
+                        print("\t\tAccuracy: {}".format(acc))
+
+                    ses.run(train, feed_dict={x: inp, y: ypt})
         return saver.save(ses, sp)
