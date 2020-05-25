@@ -68,12 +68,12 @@ def train_mini_batch(
                     print("\t\tAccuracy: {}".format(acc))
 
                 start = step * batch_size
-                if batch_size > X_train[:, start:].shape[1]:
-                    end = X_train[:, start:].shape[1]
+                if batch_size > X_train[start:, :].shape[0]:
+                    end = X_train[start:, :].shape[0]
                 else:
                     end = start + batch_size  # dont forget
-                inp = X_train[:, start:end]
-                ypt = Y_train[:, start:end]
+                inp = X_train[start:end, :]
+                ypt = Y_train[start:end, :]
 
                 ses.run(train, feed_dict={x: inp, y: ypt})
         return saver.save(ses, sp)
