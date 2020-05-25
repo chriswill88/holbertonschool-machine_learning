@@ -24,7 +24,7 @@ def train_mini_batch(
     """
     lp, sp = load_path, save_path
     m, ipF = X_train.shape
-    till_epoch = int(ipF / batch_size) + (ipF % batch_size > 0)
+    till_epoch = int(m / batch_size) + (m % batch_size > 0)
     step = 0
     bs = batch_size
 
