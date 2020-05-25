@@ -32,6 +32,8 @@ def train_mini_batch(
         saver = tf.train.import_meta_graph(lp + ".meta")
         saver.restore(sess=ses, save_path=lp)
         graph = tf.get_default_graph()
+        print(saver)
+        print(ses)
 
         x = tf.get_collection("x")[0]
         y = tf.get_collection("y")[0]
@@ -39,6 +41,8 @@ def train_mini_batch(
         loss = tf.get_collection("loss")[0]
         pred = tf.get_collection("y_pred")[0]
         train = tf.get_collection("train_op")[0]
+
+        print(x, y, accu, loss)
 
     for i in range(epochs):
         X_train, Y_train = shuffle_data(X_train, Y_train)
