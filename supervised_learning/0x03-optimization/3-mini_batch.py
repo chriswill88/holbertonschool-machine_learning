@@ -43,7 +43,7 @@ def train_mini_batch(
         Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
         cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
         Vcost = ses.run(loss, feed_dict={x: X_valid, y: Y_valid})
-        print("After {} epochs:".format(i))
+        print("After {} epochs:".format(0))
         print("\tTraining Cost: {}".format(cost))
         print("\tTraining Accuracy: {}".format(acc))
         print("\tValidation Cost: {}".format(Vcost))
