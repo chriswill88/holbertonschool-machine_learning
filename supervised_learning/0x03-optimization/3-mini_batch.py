@@ -52,9 +52,6 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
 
-            if i == 1:
-                break
-
             if i < epochs:
                 for step in range(till_epoch):
                     start = step * batch_size
