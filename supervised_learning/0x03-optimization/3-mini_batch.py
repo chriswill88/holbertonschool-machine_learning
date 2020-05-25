@@ -56,7 +56,7 @@ def train_mini_batch(
                 break
 
             if i < epochs:
-                for step in range(till_epoch + 1):
+                for step in range(till_epoch):
                     start = step * batch_size
                     if batch_size > X_train[start:, :].shape[0]:
                         end = start + X_train[start:, :].shape[0]
