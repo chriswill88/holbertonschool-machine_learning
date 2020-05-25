@@ -52,7 +52,7 @@ def train_mini_batch(
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
 
-            if i == 2:
+            if i == 1:
                 break
 
             if i < epochs:
