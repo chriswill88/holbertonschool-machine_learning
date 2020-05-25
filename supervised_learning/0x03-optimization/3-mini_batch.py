@@ -51,6 +51,8 @@ def train_mini_batch(
 
         for i in range(epochs):
             step = 0
+            X_train, Y_train = shuffle_data(X_train, Y_train)
+
             for step in range(till_epoch + 1):
                 start = step * batch_size
                 if batch_size > X_train[start:, :].shape[0]:
@@ -78,6 +80,5 @@ def train_mini_batch(
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
-            X_train, Y_train = shuffle_data(X_train, Y_train)
 
         return saver.save(ses, sp)
