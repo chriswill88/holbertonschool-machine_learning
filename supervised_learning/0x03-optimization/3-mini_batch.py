@@ -53,13 +53,13 @@ def train_mini_batch(
             X_train, Y_train = shuffle_data(X_train, Y_train)
             step = 0
             for step in range(till_epoch + 1):
-                if step != 0 and step % 100 == 0:
-                    acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
-                    cost = ses.run(
-                        loss, feed_dict={x: X_train, y: Y_train})
-                    print("\tStep {}:".format(step))
-                    print("\t\tCost: {}".format(cost))
-                    print("\t\tAccuracy: {}".format(acc))
+                # if step != 0 and step % 100 == 0:
+                acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
+                cost = ses.run(
+                    loss, feed_dict={x: X_train, y: Y_train})
+                print("\tStep {}:".format(step))
+                print("\t\tCost: {}".format(cost))
+                print("\t\tAccuracy: {}".format(acc))
 
                 start = step * batch_size
                 if batch_size > X_train[start:, :].shape[0]:
