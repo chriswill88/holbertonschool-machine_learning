@@ -72,8 +72,8 @@ def train_mini_batch(
                     end = X_train[:, start:].shape[1]
                 else:
                     end = start + batch_size  # dont forget
-                inp = X_train[:, start:end]
-                ypt = Y_train[:, start:end]
+                inp = X_train[start:end, :]
+                ypt = Y_train[start:end, :]
 
                 print(inp)
                 print(ypt)
