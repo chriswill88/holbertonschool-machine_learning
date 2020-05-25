@@ -55,7 +55,6 @@ def train_mini_batch(
 
             for step in range(till_epoch):
                 if step != 0 and step % 100 == 0:
-                    ses.run(pred, feed_dict={x: X_train, y: Y_train})
                     acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
                     cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
                     print("\tStep {}:".format(step))
@@ -69,6 +68,6 @@ def train_mini_batch(
                     end = start + batch_size
                 inp = X_train[start:end, :]
                 ypt = Y_train[start:end, :]
-
+                ses.run(pred, feed_dict={x: X_train, y: Y_train})
                 ses.run(train, feed_dict={x: inp, y: ypt})
         return saver.save(ses, sp)
