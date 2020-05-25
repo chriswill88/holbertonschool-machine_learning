@@ -30,11 +30,11 @@ def train(
     classes = Y_train.shape[1]
     vnx, vclass = X_valid.shape
 
-    inputdata, one_hot = create_placeholders(nx, classes)
-    predict = forward_prop(inputdata, layer_sizes, activations)
-    cost = calculate_loss(one_hot, predict)
+    x, y = create_placeholders(nx, classes)
+    predict = forward_prop(x, layer_sizes, activations)
+    cost = calculate_loss(y, predict)
 
-    accuracy = calculate_accuracy(one_hot, predict)
+    accuracy = calculate_accuracy(y, predict)
     train = create_train_op(cost, alpha)
     ini = tf.global_variables_initializer()
 
@@ -42,33 +42,32 @@ def train(
     sess = tf.Session()
     sess.run(ini)
 
-    tf.add_to_collection(name="x", value=inputdata)
-    tf.add_to_collection(name="y", value=one_hot)
+    tf.add_to_collection(name="x", value=x)
+    tf.add_to_collection(name="y", value=y)
     tf.add_to_collection(name="y_pred", value=predict)
     tf.add_to_collection(name="loss", value=cost)
     tf.add_to_collection(name="accuracy", value=accuracy)
     tf.add_to_collection(name="train_op", value=train)
 
     for i in range(iterations + 1):
-        sess.run(predict, feed_dict={inputdata: X_train, one_hot: Y_train})
+        sess.run(predict, feed_dict={x: X_train, y: Y_train})
         if i % 100 == 0 or i == iterations:
             print("After {} iterations:".format(i))
             print("\tTraining Cost: {}".format(
                 sess.run(
                     cost,
-                    feed_dict={inputdata: X_train, one_hot: Y_train})))
+                    feed_dict={x: X_train, y: Y_train})))
             print("\tTraining Accuracy: {}".format(
                 sess.run(
                     accuracy,
-                    feed_dict={inputdata: X_train, one_hot: Y_train})))
+                    feed_dict={x: X_train, y: Y_train})))
             print("\tValidation Cost: {}".format(
                 sess.run(
                     cost,
-                    feed_dict={inputdata: X_valid, one_hot: Y_valid})))
+                    feed_dict={x: X_valid, y: Y_valid})))
             print("\tValidation Accuracy: {}".format(
                 sess.run(
                     accuracy,
-                    feed_dict={inputdata: X_valid, one_hot: Y_valid})))
-        if i < iterations:
-            sess.run(train, feed_dict={inputdata: X_train, one_hot: Y_train})
+                    feed_dict={x: X_valid, y: Y_valid})))
+            sess.run(train, feed_dict={x: X_train, y: Y_train})
     return saver.save(sess, sp)
