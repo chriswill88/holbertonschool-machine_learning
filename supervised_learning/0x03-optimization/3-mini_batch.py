@@ -27,13 +27,12 @@ def train_mini_batch(
     till_epoch = int(ipF / batch_size) + (ipF % batch_size > 0)
     step = 0
     bs = batch_size
-    saver = tf.train.Saver()
 
     with tf.Session() as ses:
         saver = tf.train.import_meta_graph(lp + ".meta")
         saver.restore(sess=ses, save_path=lp)
         graph = tf.get_default_graph()
-        
+
         x = tf.get_collection("x")[0]
         y = tf.get_collection("y")[0]
         accu = tf.get_collection("accuracy")[0]
