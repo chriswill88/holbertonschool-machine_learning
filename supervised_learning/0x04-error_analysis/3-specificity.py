@@ -6,12 +6,26 @@ import numpy as np
 def specificity(confusion):
     """calculates the specificity for each class in the matrix"""
     classes = len(confusion)
-    total = 0
+    truth = 0
     per = np.zeros((classes,))
-    total = sum(sum(confusion))
+    tru_confusion = np.zeros((2, 2))
 
+    total = np.sum(confusion)
+    truth = np.sum(np.diag(confusion))
+
+    # print(confusion)
+    # print(np.diag(confusion))
     for i in range(len(confusion)):
-        fp = sum(confusion[:, i]) - confusion[i][i]
-        tn = total - confusion[i][i]
-        per[i] = tn/(fp + tn)
+        tp = confusion[i][i]
+        tn = truth - tp
+        fp = np.sum(confusion[:, i]) - tp
+        fn = np.sum(confusion[i]) - tp
+
+        tru_confusion[0][0] = tp
+        tru_confusion[1][0] = fp
+        tru_confusion[0][1] = fn
+        tru_confusion[1][1] = tn
+
+        per[i] = tn/(tn + fp)
+
     return per
