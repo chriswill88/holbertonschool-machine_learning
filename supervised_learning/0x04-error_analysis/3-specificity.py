@@ -8,23 +8,19 @@ def specificity(confusion):
     classes = len(confusion)
     truth = 0
     per = np.zeros((classes,))
-    tru_confusion = np.zeros((2, 2))
+    # tru_confusion = np.zeros((2, 2))
 
     total = np.sum(confusion)
-    truth = np.sum(np.diag(confusion))
-
-    # print(confusion)
-    # print(np.diag(confusion))
     for i in range(len(confusion)):
         tp = confusion[i][i]
-        tn = truth
         fp = np.sum(confusion[:, i]) - tp
         fn = np.sum(confusion[i]) - tp
+        tn = total - tp - fp - fn
 
-        tru_confusion[0][0] = tp
-        tru_confusion[1][0] = fp
-        tru_confusion[0][1] = fn
-        tru_confusion[1][1] = tn
+        # tru_confusion[0][0] = tp
+        # tru_confusion[1][0] = fp
+        # tru_confusion[0][1] = fn
+        # tru_confusion[1][1] = tn
 
         per[i] = tn/(tn + fp)
 
