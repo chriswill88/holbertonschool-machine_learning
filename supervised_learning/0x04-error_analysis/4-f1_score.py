@@ -10,19 +10,12 @@ def f1_score(confusion):
     per = np.zeros((classes,))
     rec = np.zeros((classes,))
 
-    # tru_confusion = np.zeros((2, 2))
-
     total = np.sum(confusion)
     for i in range(len(confusion)):
         tp = confusion[i][i]
         fp = np.sum(confusion[:, i]) - tp
         fn = np.sum(confusion[i]) - tp
         tn = total - tp - fp - fn
-
-        # tru_confusion[0][0] = tp
-        # tru_confusion[1][0] = fp
-        # tru_confusion[0][1] = fn
-        # tru_confusion[1][1] = tn
 
         per[i] = tp / (tp + fp)
         rec[i] = tp/(tp + fn)
