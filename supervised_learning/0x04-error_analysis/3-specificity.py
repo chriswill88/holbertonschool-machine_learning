@@ -17,7 +17,7 @@ def specificity(confusion):
     # print(np.diag(confusion))
     for i in range(len(confusion)):
         tp = confusion[i][i]
-        tn = truth - tp
+        tn = truth
         fp = np.sum(confusion[:, i]) - tp
         fn = np.sum(confusion[i]) - tp
 
