@@ -61,11 +61,11 @@ def train_mini_batch(
                         end = start + batch_size
                     inp = X_shuf[start:end, :]
                     ypt = Y_shuf[start:end, :]
-                    if step != 0 and (step + 1) % 100 == 0:
+                    if step != 0 and (step) % 100 == 0:
                         acc = ses.run(accu, feed_dict={x: inp, y: ypt})
                         cost = ses.run(
                             loss, feed_dict={x: inp, y: ypt})
-                        print("\tStep {}:".format(step + 1))
+                        print("\tStep {}:".format(step))
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
                     ses.run(train, feed_dict={x: inp, y: ypt})
