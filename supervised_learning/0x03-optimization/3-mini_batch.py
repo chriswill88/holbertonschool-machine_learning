@@ -65,6 +65,7 @@ def train_mini_batch(
                         acc = ses.run(accu, feed_dict={x: inp, y: ypt})
                         cost = ses.run(
                             loss, feed_dict={x: inp, y: ypt})
+                        print("\tStep {}:".format(step))
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
 
