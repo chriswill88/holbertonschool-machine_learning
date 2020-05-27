@@ -40,11 +40,11 @@ def train_mini_batch(
         train = tf.get_collection("train_op")[0]
 
         for i in range(epochs + 1):
-            X_train, Y_train = shuffle_data(X_train, Y_train)
+            X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
             step = 0
-            acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
+            acc = ses.run(accu, feed_dict={x: X_shuf, y: Y_shuf})
             Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
-            cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
+            cost = ses.run(loss, feed_dict={x: X_shuf, y: Y_shuf})
             Vcost = ses.run(loss, feed_dict={x: X_valid, y: Y_valid})
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(cost))
@@ -70,4 +70,5 @@ def train_mini_batch(
                         print("\t\tAccuracy: {}".format(acc))
 
                     ses.run(train, feed_dict={x: inp, y: ypt})
+
         return saver.save(ses, sp)
