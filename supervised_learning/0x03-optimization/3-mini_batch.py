@@ -27,6 +27,7 @@ def train_mini_batch(
     till_epoch = int(m / batch_size) + (m % batch_size > 0)
     step = 0
     bs = batch_size
+    X_shuf, Y_shuf = X_train, Y_train
 
     with tf.Session() as ses:
         saver = tf.train.import_meta_graph(lp + ".meta")
@@ -50,7 +51,7 @@ def train_mini_batch(
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
-            X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
+            
             if i < epochs:
                 for step in range(till_epoch):
                     start = step * batch_size
@@ -68,4 +69,5 @@ def train_mini_batch(
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
                     ses.run(train, feed_dict={x: inp, y: ypt})
+                    X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
         return saver.save(ses, sp)
