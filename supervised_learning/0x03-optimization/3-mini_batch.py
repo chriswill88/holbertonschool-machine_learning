@@ -51,14 +51,15 @@ def train_mini_batch(
             print("\tTraining Accuracy: {}".format(acc))
             print("\tValidation Cost: {}".format(Vcost))
             print("\tValidation Accuracy: {}".format(Vacc))
-            
             if i < epochs:
+                X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
                 for step in range(till_epoch):
                     start = step * batch_size
                     if batch_size > X_shuf[start:, :].shape[0]:
                         end = start + X_shuf[start:, :].shape[0]
                     else:
                         end = start + batch_size
+                    print("start: ", start, "end: ", end)
                     inp = X_shuf[start:end, :]
                     ypt = Y_shuf[start:end, :]
                     # if step != 0 and (step + 1) % 100 == 0:
@@ -69,5 +70,4 @@ def train_mini_batch(
                     print("\t\tCost: {}".format(cost))
                     print("\t\tAccuracy: {}".format(acc))
                     ses.run(train, feed_dict={x: inp, y: ypt})
-            X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
         return saver.save(ses, sp)
