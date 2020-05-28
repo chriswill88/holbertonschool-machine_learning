@@ -42,9 +42,9 @@ def train_mini_batch(
 
         for i in range(epochs + 1):
             step = 0
-            acc = ses.run(accu, feed_dict={x: X_train, y: Y_train})
+            acc = ses.run(accu, feed_dict={x: X_shuf, y: Y_shuf})
             Vacc = ses.run(accu, feed_dict={x: X_valid, y: Y_valid})
-            cost = ses.run(loss, feed_dict={x: X_train, y: Y_train})
+            cost = ses.run(loss, feed_dict={x: X_shuf, y: Y_shuf})
             Vcost = ses.run(loss, feed_dict={x: X_valid, y: Y_valid})
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(cost))
