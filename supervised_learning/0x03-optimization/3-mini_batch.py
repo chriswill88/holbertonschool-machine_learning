@@ -59,15 +59,15 @@ def train_mini_batch(
                         end = start + X_shuf[start:, :].shape[0]
                     else:
                         end = start + batch_size
-                    print("start: ", start, "end: ", end)
+                    print("start: ", start, "end:", end)
                     inp = X_shuf[start:end, :]
                     ypt = Y_shuf[start:end, :]
-                    # if step != 0 and (step + 1) % 100 == 0:
-                    acc = ses.run(accu, feed_dict={x: inp, y: ypt})
-                    cost = ses.run(
-                        loss, feed_dict={x: inp, y: ypt})
-                    print("\tStep {}:".format(step + 1))
-                    print("\t\tCost: {}".format(cost))
-                    print("\t\tAccuracy: {}".format(acc))
+                    if step != 0 and (step + 1) % 100 == 0:
+                        acc = ses.run(accu, feed_dict={x: inp, y: ypt})
+                        cost = ses.run(
+                            loss, feed_dict={x: inp, y: ypt})
+                        print("\tStep {}:".format(step + 1))
+                        print("\t\tCost: {}".format(cost))
+                        print("\t\tAccuracy: {}".format(acc))
                     ses.run(train, feed_dict={x: inp, y: ypt})
         return saver.save(ses, sp)
