@@ -31,7 +31,7 @@ def train_mini_batch(
 
     with tf.Session() as ses:
         saver = tf.train.import_meta_graph(lp + ".meta")
-        saver.restore(sess=ses, save_path=lp)
+        saver.restore(ses, lp)
         graph = tf.get_default_graph()
 
         x = tf.get_collection("x")[0]
