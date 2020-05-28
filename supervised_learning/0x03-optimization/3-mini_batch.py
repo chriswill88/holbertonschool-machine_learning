@@ -71,6 +71,6 @@ def train_mini_batch(
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
                     ses.run(train, feed_dict={x: inp, y: ypt})
-                    X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
+            X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
 
         return saver.save(ses, sp)
