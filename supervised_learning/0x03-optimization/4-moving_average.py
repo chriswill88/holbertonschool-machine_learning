@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 """this function is for task 4"""
+import numpy as np
 
 
 def moving_average(data, beta):
@@ -8,7 +8,7 @@ def moving_average(data, beta):
     moveave = np.zeros(len(data))
     prev = data[0]
     for i in range(len(data)):
-        Vt = beta * prev + (1 - beta) * data[i]
+        Vt = (beta * prev) + ((1 - beta) * data[i])
         prev = Vt
         moveave[i] = Vt
     return moveave
