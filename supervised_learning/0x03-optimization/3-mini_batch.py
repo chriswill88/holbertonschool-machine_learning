@@ -61,6 +61,7 @@ def train_mini_batch(
                         end = start + batch_size
                     inp = X_shuf[start:end, :]
                     ypt = Y_shuf[start:end, :]
+                    ses.run(train, feed_dict={x: inp, y: ypt})
                     if step != 0 and (step + 1) % 100 == 0:
                         acc = ses.run(accu, feed_dict={x: inp, y: ypt})
                         cost = ses.run(
@@ -68,7 +69,5 @@ def train_mini_batch(
                         print("\tStep {}:".format(step + 1))
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
-                    print(start, end)
-                    ses.run(train, feed_dict={x: inp, y: ypt})
             X_shuf, Y_shuf = shuffle_data(X_train, Y_train)
         return saver.save(ses, sp)
