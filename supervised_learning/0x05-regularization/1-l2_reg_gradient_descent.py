@@ -11,7 +11,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """
     m = Y.shape[1]
     A = cache["A{}".format(L)]
-    da = -1 * (Y/A)+(1-Y)/(1-A)
+    da = -1 * (Y * np.log(A) + (1 - Y) * np.log(1 - A))
     for l in reversed(range(L)):
         w = weights["W{}".format(l + 1)]
         b = weights["b{}".format(l + 1)]
