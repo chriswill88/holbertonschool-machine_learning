@@ -19,7 +19,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         A = cache["A{}".format(l + 1)]
         PreA = cache["A{}".format(l)]
 
-        DW = (DZ @ PreA.T)/m + (lambtha/m*w)
+        DW = (DZ @ PreA.T)/m + (lambtha/m) * w
         DB = np.sum(DZ, axis=1, keepdims=True)/m + (lambtha/m*w)
         da = w.T @ DZ
         DZ = da * (A*(1-A))
