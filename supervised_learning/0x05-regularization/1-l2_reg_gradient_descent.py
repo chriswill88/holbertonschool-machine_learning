@@ -22,7 +22,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         DW = (DZ @ PreA.T)/m + (lambtha/m*w)
         DB = np.sum(DZ, axis=1, keepdims=True)/m + (lambtha/m*w)
         da = w.T @ DZ
-        DZ = da @ (A*(1-A))
+        DZ = da * (A*(1-A))
 
         w -= (alpha * DW)
         b -= (alpha * DB)
