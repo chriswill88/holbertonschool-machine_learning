@@ -45,8 +45,19 @@ class Normal:
         e = 2.7182818285
 
         first = 1/(s*(2*pi)**.5)
-
         second = e**(-.5*((x - m) / s)**2)
-
         return first * second
         # return (1/(m * (2 * pi)**.5)) * e**(-.5*(((x - m) / s)**2))
+
+    def cdf(self, x):
+        """Calculates the value of the CDF for a given x-value"""
+        mean = self.mean
+        std = self.stddev
+        variance = std**2
+
+        pi = 3.1415926536
+        xv = (x - mean)/(std * 2**(.5))
+        erf = 2/(pi**.5) * (xv - (xv**3)/3 + (xv**5)/10 - (xv**7)/42 + (xv**9)/216)
+        c = (1/2) * (1 + erf)
+
+        return c
