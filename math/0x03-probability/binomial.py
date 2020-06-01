@@ -8,7 +8,7 @@ class Binomial:
         if data is None:
             if n <= 0:
                 raise ValueError("n must be a positive value")
-            if 0 >= p >= 1:
+            if 0 >= p and p >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
             self.n = int(n)
             self.p = float(p)
@@ -29,4 +29,4 @@ class Binomial:
 
             mean = sum(data)/len(data)
             self.n = int(len(data)/2)
-            self.p = mean/self.n
+            self.p = float(mean/self.n)
