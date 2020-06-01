@@ -26,6 +26,7 @@ class Binomial:
                     win.append(data[i])
                     wins += 1
                 i += 2
-            mean = sum(win)/len(win)
+
+            mean = sum(data)/len(data)
             self.n = len(data)/2
-            self.p = mean/len(win)
+            self.p = mean/self.n
