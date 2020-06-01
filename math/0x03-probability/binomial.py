@@ -28,5 +28,5 @@ class Binomial:
                 i += 2
 
             mean = sum(data)/len(data)
-            self.n = len(data)/2
+            self.n = int(len(data)/2)
             self.p = mean/self.n
