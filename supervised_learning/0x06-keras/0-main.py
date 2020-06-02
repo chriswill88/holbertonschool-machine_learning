@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-import warnings
-with warnings.catch_warnings():  
-    warnings.filterwarnings("ignore",category=FutureWarning)
-    import tensorflow as tf
-    from tensorflow import keras
 
 build_model = __import__('0-sequential').build_model
 
