@@ -17,15 +17,6 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) <= 2:
                 raise ValueError("data must contain multiple values")
-            win = []
-            i, wins, loss = 0, 0, 0
-            while i < len(data):
-                if data[i] > data[i + 1]:
-                    loss += 1
-                else:
-                    win.append(data[i])
-                    wins += 1
-                i += 2
 
             mean = sum(data)/len(data)
             self.n = int(len(data)/2)
