@@ -25,7 +25,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     ip = K.layers.Dense(
         layers[0],
         activation=activations[0],
-        input_shape=(None, nx),
+        input_shape=(nx, ),
         kernel_regularizer=L2
         )
     model.add(ip)
