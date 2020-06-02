@@ -18,9 +18,6 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     # creating regulizer variable - applies to every layer
     L2 = K.regularizers.l2(lambtha)
 
-    # creating Dropout for layer
-    Dp = K.layers.Dropout(1 - keep_prob)
-
     # adding first layer with input shape
     ip = K.layers.Dense(
         layers[0],
@@ -30,16 +27,18 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
         )
     model.add(ip)
 
-    for i in range(len(layers) - 1):
+    i = 1
+    while i < len(layers):
         # dropout goes after first layer
         # and before other layers are added
-        model.add(Dp)
+        model.add(K.layers.Dropout(1 - keep_prob))
 
         # adding depth to neural network - adding layers
         model.add(K.layers.Dense(
-            layers[i + 1],
-            activation=activations[i + 1],
+            layers[i],
+            activation=activations[i],
             kernel_regularizer=L2
         ))
+        i += 1
 
     return model
