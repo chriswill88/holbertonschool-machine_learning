@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
+"""This modual contiains a function that uses keras"""
 import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
     """
     nx is the number of input features to the network
-    layers is a list containing the number of nodes in each layer of the network
-    activations is a list containing the activation functions used for each layer of the network
+    layers - list containing the number of nodes in each layer of the network
+    activations - the activation functions used for each layer of the network
     lambtha is the L2 regularization parameter
     keep_prob is the probability that a node will be kept for dropout
     """
+
+    # initializing the model - first step
     model = K.Sequential()
+
     # creating regulizer variable - applies to every layer
     L2 = K.regularizers.l2(lambtha)
 
@@ -30,6 +34,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
         # dropout goes after first layer
         # and before other layers are added
         model.add(Dp)
+
         # adding depth to neural network - adding layers
         model.add(K.layers.Dense(
             layers[i + 1],
