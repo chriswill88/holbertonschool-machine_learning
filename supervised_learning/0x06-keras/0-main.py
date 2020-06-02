@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+import warnings
+with warnings.catch_warnings():  
+    warnings.filterwarnings("ignore",category=FutureWarning)
+    import tensorflow as tf
+    from tensorflow import keras
+    from tensorflow.keras.preprocessing.text import Tokenizer
 
 build_model = __import__('0-sequential').build_model
 
