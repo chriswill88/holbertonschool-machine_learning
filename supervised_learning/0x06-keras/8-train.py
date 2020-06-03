@@ -38,8 +38,8 @@ def train_model(
         callbacks.append(
             K.callbacks.ModelCheckpoint(
                 filepath,
-                moitor='val_loss',
                 save_best_only=True,
+                monitor='val_loss',
                 mode='min'
             )
         )
