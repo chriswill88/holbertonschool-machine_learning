@@ -49,9 +49,10 @@ def train_model(
     if save_best:
         callbacks.append(
             K.callbacks.ModelCheckpoint(
-                filepath,
+                filepath=filepath,
                 moitor='val_loss',
-                save_best_only=True
+                save_best_only=True,
+                mode='min'
             )
         )
 
