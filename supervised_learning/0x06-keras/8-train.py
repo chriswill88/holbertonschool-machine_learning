@@ -34,18 +34,6 @@ def train_model(
         """
         return alpha / (1 + decay_rate * epoch)
 
-    if learning_rate_decay and len(validation_data) > 0:
-        callbacks.append(
-            K.callbacks.LearningRateScheduler(time_decay, verbose=1)
-            )
-
-    if early_stopping and len(validation_data) > 0:
-        callbacks.append(
-            K.callbacks.EarlyStopping(
-                patience=patience
-            )
-        )
-
     if save_best:
         callbacks.append(
             K.callbacks.ModelCheckpoint(
@@ -55,6 +43,20 @@ def train_model(
                 mode='min'
             )
         )
+
+    if learning_rate_decay and validation_data:
+        callbacks.append(
+            K.callbacks.LearningRateScheduler(time_decay, verbose=1)
+            )
+
+    if early_stopping and validation_data:
+        callbacks.append(
+            K.callbacks.EarlyStopping(
+                patience=patience
+            )
+        )
+
+
 
     return network.fit(
         data, labels,
