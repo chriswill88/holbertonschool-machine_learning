@@ -56,8 +56,6 @@ def train_model(
             )
         )
 
-
-
     return network.fit(
         data, labels,
         batch_size=batch_size, epochs=epochs,
