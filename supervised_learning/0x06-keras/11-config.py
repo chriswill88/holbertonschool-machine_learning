@@ -15,4 +15,4 @@ def load_config(filename):
     """load_model - load a model json"""
     with open(filename, 'r') as files:
         modeljson = files.read()
-        return K.models_from_json(modeljson)
+        return json.loads(modeljson)
