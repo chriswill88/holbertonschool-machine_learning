@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """this modual contains two function save/load models"""
 import tensorflow.keras as K
-import json
 
 
 def save_config(network, filename):
@@ -15,4 +14,4 @@ def load_config(filename):
     """load_model - load a model json"""
     with open(filename, 'r') as files:
         modeljson = files.read()
-        return json.loads(modeljson)
+        return K.models_from_json(modeljson)
