@@ -44,12 +44,12 @@ def train_model(
             )
         )
 
-    if learning_rate_decay and validation_data:
+    if validation_data and learning_rate_decay:
         callbacks.append(
             K.callbacks.LearningRateScheduler(time_decay, verbose=1)
             )
 
-    if early_stopping and validation_data:
+    if validation_data and early_stopping:
         callbacks.append(
             K.callbacks.EarlyStopping(
                 patience=patience
