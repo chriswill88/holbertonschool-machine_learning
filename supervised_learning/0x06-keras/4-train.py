@@ -2,6 +2,7 @@
 """
 this function trains a model using minibatch gradient decent
 """
+import tensorflow.keras as K
 
 
 def train_model(
