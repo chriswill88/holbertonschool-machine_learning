@@ -12,8 +12,8 @@ def convolve_grayscale_valid(images, kernel):
 
     for row in range(n):
         for col in range(n):
-            if col+3 < n and row+3 < n:
-                part = images[:, row:row+3, col:col+3]
+            if col+f < n and row+f < n:
+                part = images[:, row:row+f, col:col+f]
                 suma = np.sum(kernel * part, axis=(1, 2))
                 new[:, row, col] = suma
     return new
