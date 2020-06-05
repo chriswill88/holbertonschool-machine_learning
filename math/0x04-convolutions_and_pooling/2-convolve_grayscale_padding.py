@@ -13,11 +13,13 @@ def convolve_grayscale_padding(images, kernel, padding):
     ph = padding[0]
     pw = padding[1]
 
+    hi = h - 2*ph - kh + 1
+    wi = w - 2*pw - kh + 1
     new = np.zeros((m, h, w))
     images = np.pad(images, ((0, 0), (ph, ph), (pw, pw)), 'constant')
 
-    for row in range(h):
-        for col in range(w):
+    for row in range(hi):
+        for col in range(wi):
             part = images[:, row:row+kh, col:col+kw]
             suma = np.sum(kernel * part, axis=(1, 2))
             new[:, row, col] = suma
