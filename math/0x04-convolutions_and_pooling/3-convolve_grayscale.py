@@ -41,7 +41,7 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
         for col in range(0, mw, sw):
             part = images[:, row:row+kh, col:col+kw]
             suma = np.sum(kernel * part, axis=(1, 2))
-            new[:, r2, c] = suma
+            new[:, r, c] = suma
             c += 1
         r += 1
     return new
