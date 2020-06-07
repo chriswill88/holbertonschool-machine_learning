@@ -13,7 +13,7 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     kw = kernel.shape[1]
 
     sh = stride[0]
-    sw = stride[0]
+    sw = stride[1]
 
     if isinstance(padding, tuple):
         print("custom")
