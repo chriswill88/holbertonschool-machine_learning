@@ -40,9 +40,9 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     w = images.shape[2]
     c = images.shape[3]
 
-    kh = kernels.shape[0]
-    kw = kernels.shape[1]
-    nc = kernels.shape[2]
+    kh = kernels.shape[1]
+    kw = kernels.shape[2]
+    nc = kernels.shape[3]
 
     sh = stride[0]
     sw = stride[1]
