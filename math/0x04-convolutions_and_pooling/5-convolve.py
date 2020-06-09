@@ -73,7 +73,7 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     for row in range(hi):
         for col in range(wi):
             for k in range(nc):
-                part = newimage[:, row * sh:(row*sh) + kh, col * sw:(col*sw) + kw]
+                part = newimage[:, row*sh:(row*sh)+kh, col*sw:(col*sw)+kw]
                 suma = np.sum(kernels[:, :, :, k] * part, axis=(1, 2, 3))
                 new[:, row, col, k] += suma
 
