@@ -112,10 +112,9 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     sh, sw = stride
 
     # Convolving
-    convolute = convolve(A_prev, W, padding, stride)
+    z = convolve(A_prev, W, padding, stride)
 
     # Forward Propogation
-    z = convolute + b
-    a = activation(z)
+    a = activation(z + b)
 
     return (a)
