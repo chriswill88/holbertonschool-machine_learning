@@ -49,11 +49,10 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
         pw = padding[1]
 
     elif padding is 'same':
-        ph = int(((h - 1) * sh + kh - h)/2) + 1
-        pw = int(((w - 1) * sw + kw - w)/2) + 1
+        ph = int(np.ceil((h - 1) * sh + kh - h)/2)
+        pw = int(np.ceil((w - 1) * sw + kw - w)/2)
 
     elif padding == 'valid':
-        print("same")
         ph, pw = 0, 0
 
     # getting the size of the output
