@@ -53,12 +53,12 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
         ph = int(np.ceil((h_new - 1) * sh + kh - h_new)/2)
         pw = int(np.ceil((w_new - 1) * sw + kw - w_new)/2)
 
+    # applying padding
+    A_prev = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant')
+
     # initializing the output
     da = np.zeros(A_prev.shape)
     dW = np.zeros(W.shape)
-
-    # applying padding
-    A_prev = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant')
 
     # doing covolutions
     for i in range(m):
@@ -79,5 +79,5 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
 
     # getting derivative of b is taking the sum of dZ
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
-    # da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
+    da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
     return da, dW, db
