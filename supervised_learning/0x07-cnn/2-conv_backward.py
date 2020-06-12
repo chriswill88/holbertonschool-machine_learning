@@ -79,5 +79,5 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
 
     # getting derivative of b is taking the sum of dZ
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
-    da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
+    # da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
     return da, dW, db
