@@ -57,7 +57,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     A_prev = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant')
 
     # initializing the output
-    da = np.zeros(A_prev.shape)
+    dA_prev = np.zeros(A_prev.shape)
     dW = np.zeros(W.shape)
 
     # doing covolutions
@@ -70,7 +70,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                     W_cust = W[:, :, :, k]
                     # to get the derivative of A we have to multiply the value
                     # of dZ to the channel of W
-                    da[i, r*sh:r*sh+kh, c*sw:c*sw+kw, :] += dZ_cust*W_cust
+                    dA_prev[i, r*sh:r*sh+kh, c*sw:c*sw+kw, :] += dZ_cust*W_cust
 
                     # To get the derivative of W we have to multiply to
                     # value of dz by value a_prev accross all channels
@@ -81,5 +81,5 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
 
     # remove padding
-    da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
-    return da, dW, db
+    dA_prev = dA_prev[:, ph:dA_prev.shape[1]-ph, pw:dA_prev.shape[2]-pw, :]
+    return dA_prev, dW, db
