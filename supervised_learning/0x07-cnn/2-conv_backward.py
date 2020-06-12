@@ -49,7 +49,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     # setting padding
     ph, pw = 0, 0
 
-    if padding is 'same':
+    if padding == 'same':
         ph = int(np.ceil((h_prev - 1) * sh + kh - h_prev)/2)
         pw = int(np.ceil((w_prev - 1) * sw + kw - w_prev)/2)
 
@@ -79,5 +79,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
 
     # getting derivative of b is taking the sum of dZ
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
+
+    # remove padding
     da = da[:, ph:da.shape[1]-ph, pw:da.shape[2]-pw, :]
     return da, dW, db
