@@ -82,4 +82,5 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
 
     # remove padding
     dA_prev = dA_prev[:, ph:dA_prev.shape[1]-ph, pw:dA_prev.shape[2]-pw, :]
+
     return dA_prev, dW, db
