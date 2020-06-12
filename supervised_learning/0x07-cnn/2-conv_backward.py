@@ -75,7 +75,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
 
                     # To get the derivative of W we have to multiply to
                     # value of dz by value a_prev accross all channels
-                    dW[:, :, :, k] += A_prev[i, r*sh:r*sh+kh, c*sw:c*sw+kw, :]\
+                    dW[:, :, :, k] += a_p[i, r*sh:r*sh+kh, c*sw:c*sw+kw, :]\
                         * dZ_cust
 
     # getting derivative of b is taking the sum of dZ
