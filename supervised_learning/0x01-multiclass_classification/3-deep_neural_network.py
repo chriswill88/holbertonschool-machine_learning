@@ -64,12 +64,11 @@ class DeepNeuralNetwork:
         print("Y is ", Y)
         print("A is ", A)
 
-        print("sum of a per axis is 1?", np.sum(A, axis=1))
+        print("sum of a per axis is 1?", np.sum(A, axis=0))
 
         loss = -1 * np.sum(Y * np.exp(A))
         print("the loss from the cost function is ->", loss)
 
-        cost = (1/m) * np.sum(loss)
         print("the cost is ->", cost)
 
         return cost
