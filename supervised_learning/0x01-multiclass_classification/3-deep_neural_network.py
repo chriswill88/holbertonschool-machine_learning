@@ -55,7 +55,7 @@ class DeepNeuralNetwork:
                 # print("last")
                 t = np.exp(Z)
                 # print("t is ", t, " sum of t is ", np.sum(t))
-                NN = C["A{}".format(layer + 1)] = t/np.sum(t)
+                NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0, keepdims=True)
             else:
                 # print("not last")
                 NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
@@ -85,10 +85,10 @@ class DeepNeuralNetwork:
         # print("before: NN \n", NN, "\nvs Y", Y)
         maxind = np.max(NN)
 
-        # print("maxind is", maxind)
+        print("maxind is", maxind)
         NN = np.where(NN == maxind, 1, 0)
 
-        # print("after: NN \n", NN, "\nvs Y", Y)
+        print("after: NN \n", NN, "\nvs Y", Y)
 
         return NN, self.cost(Y, Ns)
 
