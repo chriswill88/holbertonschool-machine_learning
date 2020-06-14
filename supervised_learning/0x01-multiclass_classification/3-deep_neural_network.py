@@ -61,16 +61,27 @@ class DeepNeuralNetwork:
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
         m = Y.shape[1]
+
         loss = -1 * np.sum(Y * np.exp(A))
+        print("the loss from the cost function is ->", loss)
+
         cost = (1/m) * np.sum(loss)
+        print("the cost is ->", cost)
+
         return cost
 
     def evaluate(self, X, Y):
         """Evalueates neurons predictions"""
         NN, C = self.forward_prop(X)
         Ns = NN
+        print("before: NN \n", NN, "\nvs Y", Y)
         maxind = np.amax(NN)
-        NN = np.where(NN[maxind], 0, 1)
+
+        print("maxind is", maxind)
+        NN = np.where(NN == NN[maxind], 0, NN[maxind])
+
+        print("after: NN \n", NN, "\nvs Y", Y)
+
         return NN, self.cost(Y, Ns)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
