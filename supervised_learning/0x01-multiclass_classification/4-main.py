@@ -47,7 +47,7 @@ for i in range(100):
     plt.title(A3[i])
     plt.axis('off')
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 print('\nTanh activaiton:')
 
@@ -77,4 +77,4 @@ for i in range(100):
     plt.title(A4[i])
     plt.axis('off')
 plt.tight_layout()
-plt.show()
+# plt.show()
