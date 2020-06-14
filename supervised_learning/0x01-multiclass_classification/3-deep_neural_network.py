@@ -71,7 +71,7 @@ class DeepNeuralNetwork:
         NN, C = self.forward_prop(X)
         Ns = NN
 
-        maxind = np.max(NN)
+        maxind = np.max(NN, axis=0)
         print("before NN[0]", NN[0])
         print("Max is:", maxind)
         print("Before NN:", NN)
