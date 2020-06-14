@@ -78,6 +78,7 @@ class DeepNeuralNetwork:
         NN = np.where(NN == maxind, 1, 0)
         print("after NN[0]", NN[0])
         print("After NN", NN)
+        print("y is", Y)
         return NN, self.cost(Y, Ns)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
