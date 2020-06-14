@@ -54,7 +54,7 @@ class DeepNeuralNetwork:
             if layer == L - 1:
                 # print("last")
                 t = np.exp(Z)
-                # print("t is ", t, " sum of t is ", np.sum(t))
+                print("t is \n", t, "\nsum of t is\n", np.sum(t), "\n sum across axis 0", np.sum(t, axis=0, keepdims=True))
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0, keepdims=True)
             else:
                 # print("not last")
