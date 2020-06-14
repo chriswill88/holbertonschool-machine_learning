@@ -52,12 +52,12 @@ class DeepNeuralNetwork:
             temp = X if layer == 0 else C["A{}".format(layer)]
             Z = w @ temp + b
             if layer == L - 1:
-                print("last")
+                # print("last")
                 t = np.exp(Z)
-                print("t is ", t, " sum of t is ", np.sum(t))
+                # print("t is ", t, " sum of t is ", np.sum(t))
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t)
             else:
-                print("not last")
+                # print("not last")
                 NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
 
         return NN, C
@@ -65,16 +65,16 @@ class DeepNeuralNetwork:
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
         m = Y.shape[1]
-        print("Y is ", Y)
-        print("A is ", A)
+        # print("Y is ", Y)
+        # print("A is ", A)
 
-        print("sum of a per axis is 1?", np.sum(A, axis=0))
+        # print("sum of a per axis is 1?", np.sum(A, axis=0))
 
         loss = -1 * np.sum(Y * np.log(A))
-        print("the loss from the cost function is ->", loss)
+        # print("the loss from the cost function is ->", loss)
 
         cost = (1/m) * np.sum(loss)
-        print("the cost is ->", cost)
+        # print("the cost is ->", cost)
 
         return cost
 
@@ -82,13 +82,13 @@ class DeepNeuralNetwork:
         """Evalueates neurons predictions"""
         NN, C = self.forward_prop(X)
         Ns = NN
-        print("before: NN \n", NN, "\nvs Y", Y)
+        # print("before: NN \n", NN, "\nvs Y", Y)
         maxind = np.max(NN)
 
-        print("maxind is", maxind)
+        # print("maxind is", maxind)
         NN = np.where(NN == maxind, 1, 0)
 
-        print("after: NN \n", NN, "\nvs Y", Y)
+        # print("after: NN \n", NN, "\nvs Y", Y)
 
         return NN, self.cost(Y, Ns)
 
