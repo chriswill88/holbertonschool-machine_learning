@@ -70,10 +70,13 @@ class DeepNeuralNetwork:
         """Evalueates neurons predictions"""
         NN, C = self.forward_prop(X)
         Ns = NN
+
         maxind = np.max(NN)
+        print("before NN[0]", NN[0])
         print("Max is:", maxind)
         print("Before NN:", NN)
-        NN = np.where(NN == maxind, 0, 1)
+        NN = np.where(NN == maxind, 1, 0)
+        print("after NN[0]", NN[0])
         print("After NN", NN)
         return NN, self.cost(Y, Ns)
 
