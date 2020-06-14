@@ -53,7 +53,7 @@ class DeepNeuralNetwork:
             Z = w @ temp + b
             if layer == L - 1:
                 t = np.exp(Z)
-                NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0)
+                NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0, keepdims=True)
             else:
                 NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
 
