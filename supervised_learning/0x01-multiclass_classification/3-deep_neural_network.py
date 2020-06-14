@@ -52,12 +52,9 @@ class DeepNeuralNetwork:
             temp = X if layer == 0 else C["A{}".format(layer)]
             Z = w @ temp + b
             if layer == L - 1:
-                # print("last")
                 t = np.exp(Z)
-                print("t is \n", t, "\nsum of t is\n", np.sum(t), "\n sum across axis 0", np.sum(t, axis=0, keepdims=True))
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0)
             else:
-                # print("not last")
                 NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
 
         return NN, C
@@ -65,31 +62,16 @@ class DeepNeuralNetwork:
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
         m = Y.shape[1]
-        # print("Y is ", Y)
-        # print("A is ", A)
-
-        # print("sum of a per axis is 1?", np.sum(A, axis=0))
-
         loss = -1 * np.sum(Y * np.log(A))
-        # print("the loss from the cost function is ->", loss)
-
         cost = (1/m) * np.sum(loss)
-        # print("the cost is ->", cost)
-
         return cost
 
     def evaluate(self, X, Y):
         """Evalueates neurons predictions"""
         NN, C = self.forward_prop(X)
         Ns = NN
-        # print("before: NN \n", NN, "\nvs Y", Y)
         maxind = np.max(NN)
-
-        print("maxind is", maxind)
         NN = np.where(NN == maxind, 1, 0)
-
-        print("after: NN \n", NN, "\nvs Y", Y)
-
         return NN, self.cost(Y, Ns)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
