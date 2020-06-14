@@ -43,6 +43,7 @@ class DeepNeuralNetwork:
         W = self.__weights
         L = self.__L
         C = self.__cache
+        A = 0
         C["A0"] = X
 
         for layer in range(L):
@@ -51,9 +52,12 @@ class DeepNeuralNetwork:
             temp = X if layer == 0 else C["A{}".format(layer)]
             Z = w @ temp + b
             if layer == L - 1:
+                print("last")
                 t = np.exp(Z)
+                print("t is ", t, " sum of t is ", np.sum(t))
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t)
             else:
+                print("not last")
                 NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
 
         return NN, C
@@ -66,7 +70,7 @@ class DeepNeuralNetwork:
 
         print("sum of a per axis is 1?", np.sum(A, axis=0))
 
-        loss = -1 * np.sum(Y * np.exp(A))
+        loss = -1 * np.sum(Y * np.log(A))
         print("the loss from the cost function is ->", loss)
 
         cost = (1/m) * np.sum(loss)
@@ -79,10 +83,10 @@ class DeepNeuralNetwork:
         NN, C = self.forward_prop(X)
         Ns = NN
         print("before: NN \n", NN, "\nvs Y", Y)
-        maxind = np.amax(NN)
+        maxind = np.max(NN)
 
         print("maxind is", maxind)
-        NN = np.where(NN == NN[maxind], 0, NN[maxind])
+        NN = np.where(NN == maxind, 1, 0)
 
         print("after: NN \n", NN, "\nvs Y", Y)
 
