@@ -69,6 +69,7 @@ class DeepNeuralNetwork:
         loss = -1 * np.sum(Y * np.exp(A))
         print("the loss from the cost function is ->", loss)
 
+        cost = (1/m) * np.sum(loss)
         print("the cost is ->", cost)
 
         return cost
