@@ -71,7 +71,7 @@ class DeepNeuralNetwork:
         NN, C = self.forward_prop(X)
         Ns = NN
         maxind = np.max(NN)
-        NN = np.where(NN == maxind, 1, 0)
+        NN = np.where(NN == maxind, 0, 1)
         return NN, self.cost(Y, Ns)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
