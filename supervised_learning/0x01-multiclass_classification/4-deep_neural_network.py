@@ -66,8 +66,7 @@ class DeepNeuralNetwork:
                 if self.__activation[layer] == 'sig':
                     NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
                 else:
-                    NN = C["A{}".format(layer + 1)] = (np.exp(Z) - np.exp(-Z))\
-                        / (np.exp(Z) + np.exp(-Z))
+                    NN = C["A{}".format(layer + 1)] = 1 - np.tanh(Z)**2
         return NN, C
 
     def cost(self, Y, A):
