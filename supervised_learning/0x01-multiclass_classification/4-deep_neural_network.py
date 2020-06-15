@@ -139,7 +139,6 @@ class DeepNeuralNetwork:
                     cost.append(self.cost(Y, NN))
             self.gradient_descent(Y, C, alpha)
 
-
         it = np.array(it)
         cost = np.array(cost)
         if graph:
