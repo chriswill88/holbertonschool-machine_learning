@@ -28,7 +28,6 @@ class DeepNeuralNetwork:
         if activation not in ['sig', 'tanh']:
             raise ValueError("activation must be 'sig' or 'tanh'")
         self.__activation = activation
-        print("activation ->", activation)
 
     @property
     def activation(self):
