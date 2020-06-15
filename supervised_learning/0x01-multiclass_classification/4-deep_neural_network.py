@@ -63,9 +63,9 @@ class DeepNeuralNetwork:
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0)
             else:
                 if self.__activation == 'tanh':
+                    print("t")
                     NN = C["A{}".format(layer + 1)] = np.tanh(Z)
                 else:
-                    print("t")
                     NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
         return NN, C
 
