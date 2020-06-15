@@ -8,7 +8,7 @@ Deep4 = __import__('4-deep_neural_network').DeepNeuralNetwork
 one_hot_encode = __import__('0-one_hot_encode').one_hot_encode
 one_hot_decode = __import__('1-one_hot_decode').one_hot_decode
 
-lib= np.load('../data/MNIST.npz')
+lib = np.load('../data/MNIST.npz')
 X_train_3D = lib['X_train']
 Y_train = lib['Y_train']
 X_valid_3D = lib['X_valid']
@@ -40,13 +40,13 @@ accuracy3 = np.sum(Y_test == A3) / Y_test.shape[0] * 100
 print("Test cost:", cost3)
 print("Test accuracy: {}%".format(accuracy3))
 
-fig = plt.figure(figsize=(10, 10))
-for i in range(100):
-    fig.add_subplot(10, 10, i + 1)
-    plt.imshow(X_test_3D[i])
-    plt.title(A3[i])
-    plt.axis('off')
-plt.tight_layout()
+# fig = plt.figure(figsize=(10, 10))
+# for i in range(100):
+#     fig.add_subplot(10, 10, i + 1)
+#     plt.imshow(X_test_3D[i])
+#     plt.title(A3[i])
+#     plt.axis('off')
+# plt.tight_layout()
 # plt.show()
 
 print('\nTanh activaiton:')
@@ -70,11 +70,11 @@ print("Test cost:", cost4)
 print("Test accuracy: {}%".format(accuracy4))
 deep4.save('4-output')
 
-fig = plt.figure(figsize=(10, 10))
-for i in range(100):
-    fig.add_subplot(10, 10, i + 1)
-    plt.imshow(X_test_3D[i])
-    plt.title(A4[i])
-    plt.axis('off')
-plt.tight_layout()
-# plt.show()
+# fig = plt.figure(figsize=(10, 10))
+# for i in range(100):
+#     fig.add_subplot(10, 10, i + 1)
+#     plt.imshow(X_test_3D[i])
+#     plt.title(A4[i])
+#     plt.axis('off')
+# # plt.tight_layout()
+# # plt.show()
