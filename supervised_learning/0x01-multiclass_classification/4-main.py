@@ -40,12 +40,12 @@ accuracy3 = np.sum(Y_test == A3) / Y_test.shape[0] * 100
 print("Test cost:", cost3)
 print("Test accuracy: {}%".format(accuracy3))
 
-fig = plt.figure(figsize=(10, 10))
-for i in range(100):
-    fig.add_subplot(10, 10, i + 1)
-    plt.imshow(X_test_3D[i])
-    plt.title(A3[i])
-    plt.axis('off')
+# fig = plt.figure(figsize=(10, 10))
+# for i in range(100):
+#     fig.add_subplot(10, 10, i + 1)
+#     plt.imshow(X_test_3D[i])
+#     plt.title(A3[i])
+#     plt.axis('off')
 # plt.tight_layout()
 # plt.show()
 
@@ -70,7 +70,7 @@ print("Test cost:", cost4)
 print("Test accuracy: {}%".format(accuracy4))
 deep4.save('4-output')
 
-fig = plt.figure(figsize=(10, 10))
+# fig = plt.figure(figsize=(10, 10))
 # for i in range(100):
 #     fig.add_subplot(10, 10, i + 1)
 #     plt.imshow(X_test_3D[i])
