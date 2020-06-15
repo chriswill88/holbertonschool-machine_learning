@@ -62,7 +62,7 @@ class DeepNeuralNetwork:
                 t = np.exp(Z)
                 NN = C["A{}".format(layer + 1)] = t/np.sum(t, axis=0)
             else:
-                if self.__activation[layer] == 'sig':
+                if self.__activation == 'sig':
                     NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
                 else:
                     NN = C["A{}".format(layer + 1)] = np.tanh(Z)
