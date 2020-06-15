@@ -64,9 +64,8 @@ class DeepNeuralNetwork:
             else:
                 if self.__activation == 'sig':
                     NN = C["A{}".format(layer + 1)] = 1/(1+np.exp(-1 * Z))
-
                 else:
-                    NN = C["A{}".format(layer + 1)] = np.tanh(Z)
+                    NN = C["A{}".format(layer + 1)] = np.sinh(Z)/np.cosh(Z)
 
         return NN, C
 
