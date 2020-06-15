@@ -25,9 +25,10 @@ class DeepNeuralNetwork:
             il = nx if (l < 1) else lay[l-1]
             self.__weights["W{}".format(l+1)] = n(lay[l], il)*np.sqrt(2/il)
             self.__weights["b{}".format(l+1)] = np.zeros((lay[l], 1))
-        if activation not in ['sig', 'tanh']:
+        if activation is 'sig' or 'tanh':
+            self.__activation = activation
+        else:
             raise ValueError("activation must be 'sig' or 'tanh'")
-        self.__activation = activation
 
     @property
     def activation(self):
