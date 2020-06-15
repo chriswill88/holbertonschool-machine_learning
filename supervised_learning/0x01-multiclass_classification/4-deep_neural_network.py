@@ -93,16 +93,18 @@ class DeepNeuralNetwork:
         m = Y.shape[1]
         A = C["A{}".format(L)]
         da = -1 * (Y/A)+(1-Y)/(1-A)
+        DZ = A - Y
         for l in reversed(range(L)):
             w = W["W{}".format(l + 1)]
             b = W["b{}".format(l + 1)]
             A = C["A{}".format(l + 1)]
             PreA = C["A{}".format(l)]
 
-            DZ = da * (A*(1-A))
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
             da = w.T @ DZ
+            DZ = da * (A*(1-A))
+
 
             w -= alpha * DW
             b -= alpha * DB
