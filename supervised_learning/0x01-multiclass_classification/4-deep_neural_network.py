@@ -111,7 +111,7 @@ class DeepNeuralNetwork:
 
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
-            da = W["W{}".format(lay + 1)].T @ DZ
+            da = W["W{}".format(lay + 1)].T * DZ
 
             w -= alpha * DW
             b -= alpha * DB
