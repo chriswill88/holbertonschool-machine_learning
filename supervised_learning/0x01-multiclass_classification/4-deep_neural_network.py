@@ -95,7 +95,7 @@ class DeepNeuralNetwork:
         act = self.__activation
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
-        if act == 'tahn':
+        if act == 'tanh':
             DZ = A - Y
 
         for lay in reversed(range(L)):
