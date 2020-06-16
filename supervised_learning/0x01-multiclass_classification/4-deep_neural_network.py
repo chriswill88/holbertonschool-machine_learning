@@ -104,6 +104,7 @@ class DeepNeuralNetwork:
 
             # derivative of activation
             if lay == L - 1:
+                print("last layer")
                 DZ = da
             else:
                 da = W["W{}".format(lay + 2)].T @ DZ
