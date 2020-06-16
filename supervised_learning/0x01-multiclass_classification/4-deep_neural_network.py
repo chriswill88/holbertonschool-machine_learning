@@ -87,12 +87,13 @@ class DeepNeuralNetwork:
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """Calculates the gradient decent for a deep neural network"""
-        W = self.__weights
+        W = self.__weights.copy()
         L = self.__L
         C = cache
         m = Y.shape[1]
         A = C["A{}".format(L)]
         act = self.__activation
+        print(C)
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
         for lay in reversed(range(L)):
@@ -111,8 +112,8 @@ class DeepNeuralNetwork:
             DB = np.sum(DZ, axis=1, keepdims=True)/m
             da = W["W{}".format(lay + 1)].T @ DZ
 
-            W["W{}".format(lay + 1)] -= alpha * DW
-            W["b{}".format(lay + 1)] -= alpha * DB
+            self.__weights["W{}".format(lay + 1)] -= alpha * DW
+            self.__weights["b{}".format(lay + 1)] -= alpha * DB
 
     def train(
             self, X, Y, iterations=5000,
