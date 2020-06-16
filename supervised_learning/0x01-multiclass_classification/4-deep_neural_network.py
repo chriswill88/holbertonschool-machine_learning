@@ -101,7 +101,7 @@ class DeepNeuralNetwork:
             b = W["b{}".format(lay + 1)]
             A = C["A{}".format(lay + 1)]
             PreA = C["A{}".format(lay)]
-            print("layer = {}", lay)
+            print("layer = {}".format(lay))
             # derivative of activation
             if lay == L - 1:
                 print("last layer")
