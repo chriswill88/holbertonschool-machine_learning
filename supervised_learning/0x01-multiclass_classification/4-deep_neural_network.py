@@ -99,17 +99,15 @@ class DeepNeuralNetwork:
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
             b = W["b{}".format(lay + 1)]
-            A = C["A{}".format(lay + 2)]
+            A = C["A{}".format(lay + 1)]
             PreA = C["A{}".format(lay)]
 
             # derivative of activation
-            if lay == L - 1:
-                DZ = da
+
+            if act == 'sig':
+                DZ = da * (A*(1-A))
             else:
-                if act == 'sig':
-                    DZ = da * (A*(1-A))
-                else:
-                    DZ = da * (1 - A**2)
+                DZ = da * (1 - A**2)
 
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
