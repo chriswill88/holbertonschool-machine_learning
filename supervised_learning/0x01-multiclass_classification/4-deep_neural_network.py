@@ -110,6 +110,7 @@ class DeepNeuralNetwork:
                 DZ = da * (A*(1-A))
             else:
                 if lay < L - 1:
+                    da = W["W{}".format(lay + 2)].T * DZ
                     DZ = da * (1 - A**2)
 
             DW = (DZ @ PreA.T)/m
