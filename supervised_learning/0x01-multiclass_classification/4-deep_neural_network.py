@@ -93,6 +93,7 @@ class DeepNeuralNetwork:
         m = Y.shape[1]
         A = C["A{}".format(L)]
         act = self.__activation
+
         # depending on the activation we use slightly diffrent code
         da = A - Y
 
@@ -101,10 +102,8 @@ class DeepNeuralNetwork:
             b = W["b{}".format(lay + 1)]
             A = C["A{}".format(lay + 1)]
             PreA = C["A{}".format(lay)]
-            print("layer = {}".format(lay))
             # derivative of activation
             if lay == L - 1:
-                print("last layer")
                 DZ = da
             else:
                 da = W["W{}".format(lay + 2)].T @ DZ
