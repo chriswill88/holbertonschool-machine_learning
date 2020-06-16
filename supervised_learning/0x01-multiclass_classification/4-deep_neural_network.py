@@ -105,7 +105,7 @@ class DeepNeuralNetwork:
             # derivative of activation
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
-            da = W["W{}".format(lay + 1)].T @ DZ
+            da = W["W{}".format(lay)].T @ DZ
             if act == 'sig':
                 DZ = da * (A*(1-A))
             else:
