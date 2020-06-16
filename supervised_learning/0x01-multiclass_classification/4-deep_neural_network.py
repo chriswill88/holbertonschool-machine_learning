@@ -97,7 +97,7 @@ class DeepNeuralNetwork:
         DZ = A - Y
         # da = -1 * (Y/A)+(1-Y)/(1-A)
 
-        for lay in reversed(1, range(L + 1)):
+        for lay in reversed(range(1, L + 1)):
             w = W["W{}".format(lay)]
             b = W["b{}".format(lay)]
             A = C["A{}".format(lay)]
