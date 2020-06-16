@@ -94,22 +94,22 @@ class DeepNeuralNetwork:
         A = C["A{}".format(L)]
         act = self.__activation
         # depending on the activation we use slightly diffrent code
-        DZ = A - Y
+        da = -1 * (Y/A)+(1-Y)/(1-A)
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
             b = W["b{}".format(lay + 1)]
             A = C["A{}".format(lay + 1)]
             PreA = C["A{}".format(lay)]
 
-            DW = (DZ @ PreA.T)/m
-            DB = np.sum(DZ, axis=1, keepdims=True)/m
-            da = W["W{}".format(lay + 1)].T @ DZ
-
             # derivative of activation
             if act == 'sig':
                 DZ = da * (A*(1-A))
             else:
                 DZ = da * (1 - A**2)
+
+            DW = (DZ @ PreA.T)/m
+            DB = np.sum(DZ, axis=1, keepdims=True)/m
+            da = W["W{}".format(lay + 1)].T @ DZ
 
             w -= alpha * DW
             b -= alpha * DB
