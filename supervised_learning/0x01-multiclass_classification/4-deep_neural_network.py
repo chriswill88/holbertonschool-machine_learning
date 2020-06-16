@@ -95,7 +95,6 @@ class DeepNeuralNetwork:
         act = self.__activation
 
         # depending on the activation we use slightly diffrent code
-        da = A - Y
 
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
@@ -104,7 +103,7 @@ class DeepNeuralNetwork:
             PreA = C["A{}".format(lay)]
             # derivative of activation
             if lay == L - 1:
-                DZ = da
+                DZ = A - Y
             else:
                 da = W["W{}".format(lay + 2)].T @ DZ
                 if act == 'sig':
