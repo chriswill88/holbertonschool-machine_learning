@@ -102,16 +102,18 @@ class DeepNeuralNetwork:
             b = W["b{}".format(lay)]
             A = C["A{}".format(lay)]
             PreA = C["A{}".format(lay - 1)]
-
+            da = 0
+            # derivative of activation
+            if lay == L:
+                DZ = A - Y
+            else:
+                if act == 'sig':
+                    DZ = da * (A*(1-A))
+                else:
+                    DZ = da * (1 - A**2)
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
             da = W["W{}".format(lay)].T @ DZ
-            # derivative of activation
-
-            if act == 'sig':
-                DZ = da * (A*(1-A))
-            else:
-                DZ = da * (1 - A**2)
 
             w -= alpha * DW
             b -= alpha * DB
