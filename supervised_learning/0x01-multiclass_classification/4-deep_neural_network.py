@@ -95,6 +95,8 @@ class DeepNeuralNetwork:
         act = self.__activation
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
+        if act == 'tahn':
+            DZ = A - Y
 
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
@@ -107,7 +109,8 @@ class DeepNeuralNetwork:
             if act == 'sig':
                 DZ = da * (A*(1-A))
             else:
-                DZ = da * (1 - A**2)
+                if lay < L - 1:
+                    DZ = da * (1 - A**2)
 
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
