@@ -95,7 +95,6 @@ class DeepNeuralNetwork:
         act = self.__activation
         # depending on the activation we use slightly diffrent code
         DZ = A - Y
-        da = -1 * (Y/A)+(1-Y)/(1-A)
         for l in reversed(range(L)):
             w = W["W{}".format(l + 1)]
             b = W["b{}".format(l + 1)]
