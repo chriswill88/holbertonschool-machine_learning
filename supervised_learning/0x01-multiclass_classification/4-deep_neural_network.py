@@ -111,8 +111,8 @@ class DeepNeuralNetwork:
             DB = np.sum(DZ, axis=1, keepdims=True)/m
             da = W["W{}".format(lay + 1)].T @ DZ
 
-            w -= alpha * DW
-            b -= alpha * DB
+            W["W{}".format(lay + 1)] -= alpha * DW
+            W["b{}".format(lay + 1)] -= alpha * DB
 
     def train(
             self, X, Y, iterations=5000,
