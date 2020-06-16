@@ -94,26 +94,26 @@ class DeepNeuralNetwork:
         A = C["A{}".format(L)]
         act = self.__activation
         # depending on the activation we use slightly diffrent code
-        DZ = A - Y
-        # da = -1 * (Y/A)+(1-Y)/(1-A)
+        da = -1 * (Y/A)+(1-Y)/(1-A)
 
-        for lay in reversed(range(1, L + 1)):
-            w = W["W{}".format(lay)]
-            b = W["b{}".format(lay)]
-            A = C["A{}".format(lay)]
-            PreA = C["A{}".format(lay - 1)]
-            da = 0
+        for lay in reversed(range(L)):
+            w = W["W{}".format(lay + 1)]
+            b = W["b{}".format(lay + 1)]
+            A = C["A{}".format(lay + 1)]
+            PreA = C["A{}".format(lay)]
+
             # derivative of activation
-            if lay == L:
-                DZ = A - Y
+            if lay == L - 1:
+                DZ = da
             else:
                 if act == 'sig':
                     DZ = da * (A*(1-A))
                 else:
                     DZ = da * (1 - A**2)
+
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
-            da = W["W{}".format(lay)].T @ DZ
+            da = W["W{}".format(lay + 1)].T @ DZ
 
             w -= alpha * DW
             b -= alpha * DB
@@ -142,13 +142,13 @@ class DeepNeuralNetwork:
         cost = []
         for i in range(iterations):
             NN, C = self.forward_prop(X)
-            self.gradient_descent(Y, C, alpha)
             if step == 0 or i % step == 0 or i == iterations:
                 if verbose:
                     print("Cost after {} iterations: {}".format(i, c(Y, NN)))
                 if graph:
                     it.append(i)
                     cost.append(self.cost(Y, NN))
+            self.gradient_descent(Y, C, alpha)
 
         it = np.array(it)
         cost = np.array(cost)
