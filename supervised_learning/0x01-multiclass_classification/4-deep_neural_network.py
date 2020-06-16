@@ -93,7 +93,6 @@ class DeepNeuralNetwork:
         m = Y.shape[1]
         A = C["A{}".format(L)]
         act = self.__activation
-        print(C)
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
         for lay in reversed(range(L)):
