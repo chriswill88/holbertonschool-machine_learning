@@ -96,7 +96,7 @@ class DeepNeuralNetwork:
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
         if act == 'tanh':
-            DZ = A - Y
+            DZ = da * (A*(1-A))
 
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
