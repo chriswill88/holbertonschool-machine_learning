@@ -96,7 +96,7 @@ class DeepNeuralNetwork:
         # depending on the activation we use slightly diffrent code
         da = -1 * (Y/A)+(1-Y)/(1-A)
         if act == 'tanh':
-            da = Y - A
+            DZ = Y - A
         for lay in reversed(range(L)):
             w = W["W{}".format(lay + 1)]
             b = W["b{}".format(lay + 1)]
@@ -106,12 +106,11 @@ class DeepNeuralNetwork:
             # derivative of activation
             if act == 'sig':
                 DZ = da * (A*(1-A))
-            else:
-                DZ = da * (1 - A**2)
-
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
             da = W["W{}".format(lay + 1)].T @ DZ
+            if act == 'tanh':
+                DZ = da * (1 - A**2)
 
             w -= alpha * DW
             b -= alpha * DB
