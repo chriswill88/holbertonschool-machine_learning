@@ -106,10 +106,10 @@ class DeepNeuralNetwork:
             else:
                 A = C["A{}".format(lay + 1)]
 
-            if act == 'sig':
-                DZ = da * (A*(1-A))
-            else:
-                DZ = da * (1 - A**2)
+                if act == 'sig':
+                    DZ = da * (A*(1-A))
+                else:
+                    DZ = da * (1 - A**2)
 
             DW = (DZ @ PreA.T)/m
             DB = np.sum(DZ, axis=1, keepdims=True)/m
