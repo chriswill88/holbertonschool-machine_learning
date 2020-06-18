@@ -42,7 +42,7 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
     # initializing the output
     new = np.zeros(A_prev.shape)
 
-    # doing covolutions
+    # doing pooling
     for i in range(m):
         for r in range(h_new):
             for c in range(w_new):
@@ -53,10 +53,15 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
                     # to get the derivative of A we have to multiply the value
                     # of dA to the channel of W
                     if mode == 'max':
+                        mask = np.zeros(kernel_shape)
                         ma_ap = np.max(aP_cust)
-                        ma_ap = np.where(aP_cust == ma_ap, 1, ma_ap)
+                        mask = np.where(aP_cust == ma_ap, 1, 0)
+                        new[i, r*sh: r*sh + kh, c*sw:c*sw + kw, k] += \
+                            dA_cust * mask
 
                     elif mode == 'avg':
+                        mask = np.ones(kernel_shape)
                         ma_ap = aP_cust/(kh * kw)
-                    new[i, r*sh: r*sh + kh, c*sw:c*sw + kw, k] = dA_cust*ma_ap
+                        mask *= ma_ap
+                        new[i, r*sh: r*sh + kh, c*sw:c*sw + kw, k] += mask
     return new
