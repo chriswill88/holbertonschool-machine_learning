@@ -22,5 +22,5 @@ def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
         Returns: the learning rate decay operation
     """
     itd = tf.train.inverse_time_decay(
-        alpha, global_step, decay_step, decay_rate)
-    return tf.train.GradientDescentOptimizer(itd)
+        alpha, global_step, decay_step, decay_rate, True)
+    return itd
