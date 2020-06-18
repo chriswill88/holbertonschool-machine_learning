@@ -27,7 +27,7 @@ def batch_norm(Z, gamma, beta, epsilon):
     mean = np.mean(Z, axis=0)
     var = np.var(Z, axis=0)
 
-    Znorm = (Z - mean)/(var + epsilon)
+    Znorm = (Z - mean)/(var + epsilon)**.5
     ZN = (gamma * Znorm) + beta
 
     return ZN
