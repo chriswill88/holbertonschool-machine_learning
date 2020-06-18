@@ -24,10 +24,10 @@ def batch_norm(Z, gamma, beta, epsilon):
             is a small number used to avoid division by zero
         Returns: the normalized Z matrix
     """
-    mean = np.mean(Z)
-    std = np.std(Z)
+    mean = np.mean(Z, axis=0)
+    var = np.std(Z, axis=0)
 
-    Znorm = (Z - mean)/(std + epsilon)
-    ZN = gamma * Znorm + beta
+    Znorm = (Z - mean)/(var + epsilon)**.5
+    ZN = (gamma * Znorm) + beta
 
     return ZN
