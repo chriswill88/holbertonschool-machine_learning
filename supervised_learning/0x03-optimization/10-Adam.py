@@ -5,7 +5,8 @@ import tensorflow as tf
 
 def create_Adam_op(loss, alpha, beta1, beta2, epsilon):
     """
-        creates the training operation for a neural network in tensorflow using the Adam optimization algorithm:
+        creates the training operation for a neural network in tensorflow
+        using the Adam optimization algorithm:
 
         @loss
             is the loss of the network
