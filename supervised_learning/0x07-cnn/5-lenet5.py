@@ -57,7 +57,8 @@ def lenet5(X):
 
     model = K.Model(inputs=X, output=layer)
 
-    return model.compile(
+    model.compile(
         optimizer=K.optimizers.Adam(),
         metrics=["accuracy"]
     )
+    return model
