@@ -73,28 +73,31 @@ def lenet5(x, y):
 
     # Layer 2
     conv_lay2 = tf.layers.Conv2D(
-        filters=16, kernel_size=(5, 5), activation='relu')
+        filters=16, kernel_size=(5, 5),
+        kernel_initializer=init, activation='relu')
     second_out = conv_lay2(first_pool)
     maxPool2 = tf.layers.MaxPooling2D(
         (2, 2), (2, 2))
     second_pool = maxPool2(second_out)
 
+    # flatten
+    flatten = tf.layers.Flatten()(second_pool)
+
     # Layer 3
-    FC1 = tf.layers.Dense(120, 'relu')
-    FC_out3 = FC1(second_pool)
+    FC1 = tf.layers.Dense(120, kernel_initializer=init, 'relu')
+    FC_out3 = FC1(flatten)
 
     # Layer 4
-    FC2 = tf.layers.Dense(84, 'relu')
+    FC2 = tf.layers.Dense(84, kernel_initializer=init, 'relu')
     FC_out4 = FC2(FC_out3)
 
     # Final Layer: tensor for the softmax layer
-    FCF = tf.layers.Dense(10, 'softmax')
+    FCF = tf.layers.Dense(10, kernel_initializer=init, 'softmax')
     final = FCF(FC_out4)
 
     # accuracy
     acc = calculate_accuracy(y, final)
 
-    print("accuracy tensor", acc)
     # loss
     loss = calculate_loss(y, final)
 
