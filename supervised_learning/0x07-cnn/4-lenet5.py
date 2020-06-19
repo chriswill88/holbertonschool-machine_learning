@@ -94,6 +94,7 @@ def lenet5(x, y):
     # accuracy
     acc = calculate_accuracy(y, final)
 
+    print("accuracy tensor", acc)
     # loss
     loss = calculate_loss(y, final)
 
