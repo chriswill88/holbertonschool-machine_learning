@@ -69,7 +69,7 @@ def lenet5(x, y):
     first_out = conv_lay1(x)
     maxPool1 = tf.layers.MaxPooling2D(
         (2, 2), (2, 2))
-    first_pool = maxPool1(firstout)
+    first_pool = maxPool1(first_out)
 
     # Layer 2
     conv_lay2 = tf.layers.Conv2D(
