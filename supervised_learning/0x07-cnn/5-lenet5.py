@@ -32,30 +32,30 @@ def lenet5(X):
 
     ini = K.initializers.he_normal()
 
-    l1_conv = K.layers.Conv2d(
+    layer = K.layers.Conv2d(
         6, (5, 5), padding='same',
         activation='relu', kernel_initializer=ini)(X)
 
-    l1_mp = k.layers.MaxPool2D(
-        (2, 2), (2, 2))(l1_conv)
+    layer = k.layers.MaxPool2D(
+        (2, 2), (2, 2))(layer)
 
-    l2_conv = K.layers.Conv2d(
+    layer = K.layers.Conv2d(
         16, (5, 5), padding='valid',
-        activation='relu', kernel_initializer=ini)(l1_mp)
+        activation='relu', kernel_initializer=ini)(layer)
 
-    l2_mp = K.layers.MaxPool2D(
-        (2, 2), (2, 2))(l2_conv)
+    layer = K.layers.MaxPool2D(
+        (2, 2), (2, 2))(layer)
 
-    compress = K.layers.Flatten()(l2_mp)
+    layer = K.layers.Flatten()(layer)
 
-    fc1 = K.layers.Dense(
-        120, activation='relu', kernel_initializer=ini)(compress)
-    fc2 = K.layers.Dense(
-        84, activation='relu', kernel_initializer=ini)(fc1)
-    f = K.layers.Dense(
-        10, activation='softmax', kernel_initializer=ini)(fc2)
+    layer = K.layers.Dense(
+        120, activation='relu', kernel_initializer=ini)(layer)
+    layer = K.layers.Dense(
+        84, activation='relu', kernel_initializer=ini)(layer)
+    layer = K.layers.Dense(
+        10, activation='softmax', kernel_initializer=ini)(layer)
 
-    model = K.Model(inputs=X, output=f)
+    model = K.Model(inputs=X, output=layer)
 
     return model.compile(
         optimizer=K.optimizers.Adam(),
