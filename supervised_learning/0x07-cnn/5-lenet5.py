@@ -7,7 +7,8 @@ def lenet5(X):
     """
         that builds a modified version of the LeNet-5 architecture using keras:
 
-        X is a K.Input of shape (m, 28, 28, 1) containing the input images for the network
+        X is a K.Input of shape (m, 28, 28, 1) containing the input images for
+         the network
             m is the number of images
         The model should consist of the following layers in order:
             Convolutional layer with 6 kernels of shape 5x5 with same padding
@@ -54,7 +55,7 @@ def lenet5(X):
     f = K.layers.Dense(
         10, activation='softmax', kernel_initializer=ini)(fc2)
 
-    model = K.Model(inputs=x, output=f)
+    model = K.Model(inputs=X, output=f)
 
     return model.compile(
         optimizer=K.optimizers.Adam(),
