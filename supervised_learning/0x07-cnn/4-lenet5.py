@@ -92,17 +92,20 @@ def lenet5(x, y):
     FC_out4 = FC2(FC_out3)
 
     # Final Layer: tensor for the softmax layer
-    FCF = tf.layers.Dense(10, kernel_initializer=init, activation='softmax')
+    FCF = tf.layers.Dense(10, kernel_initializer=init)
     final = FCF(FC_out4)
 
-    # accuracy
-    acc = calculate_accuracy(y, final)
-
-    # loss
+    # calc loss before doing softmax activation
     loss = calculate_loss(y, final)
+
+    # seperate from last layer
+    sm_layer = tf.nn.softmax(final)
+
+    # accuracy
+    acc = calculate_accuracy(y, sm_layer)
 
     # training operation that utilizes Adam optimization
     op = tf.train.AdamOptimizer()
     train = op.minimize(loss)
 
-    return final, train, loss, acc
+    return sm_layer, train, loss, acc
