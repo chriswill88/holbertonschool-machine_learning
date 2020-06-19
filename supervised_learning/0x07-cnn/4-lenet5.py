@@ -31,24 +31,25 @@ def lenet5(x, y):
     """
         builds a modified version of the LeNet-5 architecture using tensorflow:
 
-        x is a tf.placeholder of shape (m, 28, 28, 1) containing the input images
-        for the network
+        x is a tf.placeholder of shape (m, 28, 28, 1) containing the input
+         images for the network
             m is the number of images
 
-        y is a tf.placeholder of shape (m, 10) containing the one-hot labels for
-        the network
+        y is a tf.placeholder of shape (m, 10) containing the one-hot labels
+         for the network
 
         The model should consist of the following layers in order:
             1.Convolutional layer with 6 kernels of shape 5x5 with same padding
             2.Max pooling layer with kernels of shape 2x2 with 2x2 strides
-            3.Convolutional layer with 16 kernels of shape 5x5 with valid padding
+            3.Convolutional layer with 16 kernels of shape 5x5 with valid
+             padding
             4.Max pooling layer with kernels of shape 2x2 with 2x2 strides
             5.Fully connected layer with 120 nodes
             6.Fully connected layer with 84 nodes
             7.Fully connected softmax output layer with 10 nodes
 
-        All layers requiring initialization should initialize their kernels with
-        the he_normal initialization method:
+        All layers requiring initialization should initialize their kernels
+         with the he_normal initialization method:
         tf.contrib.layers.variance_scaling_initializer()
         All hidden layers requiring activation should use the relu activation
         function
@@ -57,7 +58,8 @@ def lenet5(x, y):
         you may NOT use tf.keras
         Returns:
             a tensor for the softmax activated output
-            a training operation that utilizes Adam optimization (with default hyperparameters)
+            a training operation that utilizes Adam optimization
+             (with default hyperparameters)
             a tensor for the loss of the network
             a tensor for the accuracy of the network
     """
