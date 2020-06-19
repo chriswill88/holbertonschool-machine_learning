@@ -33,27 +33,27 @@ def lenet5(X):
     ini = K.initializers.he_normal()
 
     layer = K.layers.Conv2d(
-        6, (5, 5), padding='same',
+        filters=6, kernel_size=(5, 5), padding='same',
         activation='relu', kernel_initializer=ini)(X)
 
     layer = k.layers.MaxPool2D(
-        (2, 2), (2, 2))(layer)
+        pool_size=(2, 2), strides=(2, 2))(layer)
 
     layer = K.layers.Conv2d(
-        16, (5, 5), padding='valid',
+        filters=16, kernel_size=(5, 5), padding='valid',
         activation='relu', kernel_initializer=ini)(layer)
 
     layer = K.layers.MaxPool2D(
-        (2, 2), (2, 2))(layer)
+        pool_size=(2, 2), strides=(2, 2))(layer)
 
     layer = K.layers.Flatten()(layer)
 
     layer = K.layers.Dense(
-        120, activation='relu', kernel_initializer=ini)(layer)
+        units=120, activation='relu', kernel_initializer=ini)(layer)
     layer = K.layers.Dense(
-        84, activation='relu', kernel_initializer=ini)(layer)
+        units=84, activation='relu', kernel_initializer=ini)(layer)
     layer = K.layers.Dense(
-        10, activation='softmax', kernel_initializer=ini)(layer)
+        units=10, activation='softmax', kernel_initializer=ini)(layer)
 
     model = K.Model(inputs=X, outputs=layer)
 
@@ -62,4 +62,5 @@ def lenet5(X):
         loss='categorical_crossentropy',
         metrics=["accuracy"]
     )
+
     return model
