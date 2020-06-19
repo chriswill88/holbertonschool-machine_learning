@@ -34,7 +34,7 @@ def lenet5(X):
 
     l1_conv = K.layers.Conv2d(
         6, (5, 5), padding='same',
-        activation='relu', kernel_initializer=ini)(x)
+        activation='relu', kernel_initializer=ini)(X)
 
     l1_mp = k.layers.MaxPool2D(
         (2, 2), (2, 2))(l1_conv)
