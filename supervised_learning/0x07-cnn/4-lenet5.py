@@ -84,15 +84,15 @@ def lenet5(x, y):
     flatten = tf.layers.Flatten()(second_pool)
 
     # Layer 3
-    FC1 = tf.layers.Dense(120, kernel_initializer=init, 'relu')
+    FC1 = tf.layers.Dense(120, kernel_initializer=init, activation='relu')
     FC_out3 = FC1(flatten)
 
     # Layer 4
-    FC2 = tf.layers.Dense(84, kernel_initializer=init, 'relu')
+    FC2 = tf.layers.Dense(84, kernel_initializer=init, activation='relu')
     FC_out4 = FC2(FC_out3)
 
     # Final Layer: tensor for the softmax layer
-    FCF = tf.layers.Dense(10, kernel_initializer=init, 'softmax')
+    FCF = tf.layers.Dense(10, kernel_initializer=init, activation='softmax')
     final = FCF(FC_out4)
 
     # accuracy
