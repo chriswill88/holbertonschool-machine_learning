@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """This function is used for task 5"""
-import tensorflow as tf
+import tensorflow.keras as K
 
 
 def lenet5(X):
@@ -28,36 +28,33 @@ def lenet5(X):
         Returns: a K.Model compiled to use Adam optimization
          (with default hyperparameters) and accuracy metrics
     """
-    K = tf.keras
-    model = K.Sequential()
+
     ini = K.initializers.he_normal()
 
     l1_conv = K.layers.Conv2d(
         6, (5, 5), padding='same',
-        activation='relu', kernel_initializer=ini)
+        activation='relu', kernel_initializer=ini)(x)
 
     l1_mp = k.layers.MaxPool2D(
-        (2, 2), (2, 2))
+        (2, 2), (2, 2))(l1_conv)
 
     l2_conv = K.layers.Conv2d(
         16, (5, 5), padding='valid',
-        activation='relu', kernel_initializer=ini)
+        activation='relu', kernel_initializer=ini)(l1_mp)
 
     l2_mp = K.layers.MaxPool2D(
-        (2, 2), (2, 2))
+        (2, 2), (2, 2))(l2_conv)
 
-    compress = K.layers.Flatten()
+    compress = K.layers.Flatten()(l2_mp)
 
     fc1 = K.layers.Dense(
-        120, activation='relu', kernel_initializer=ini)
+        120, activation='relu', kernel_initializer=ini)(compress)
     fc2 = K.layers.Dense(
-        84, activation='relu', kernel_initializer=ini)
+        84, activation='relu', kernel_initializer=ini)(fc1)
     f = K.layers.Dense(
-        10, activation='softmax', kernel_initializer=ini)
+        10, activation='softmax', kernel_initializer=ini)(fc2)
 
-    model.add(
-        l1_conv, l1_mp, l2_conv, l2_mp, compress,
-        fc1, fc2, f)
+    model = K.Model(inputs=x, output=f)
 
     return model.compile(
         optimizer=K.optimizers.Adam(),
