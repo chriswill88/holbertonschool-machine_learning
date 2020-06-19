@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """This function is used for task 5"""
+import tensorflow as tf
 import tensorflow.keras as K
 
 
