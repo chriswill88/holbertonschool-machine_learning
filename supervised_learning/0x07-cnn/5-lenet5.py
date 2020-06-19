@@ -55,7 +55,7 @@ def lenet5(X):
     layer = K.layers.Dense(
         10, activation='softmax', kernel_initializer=ini)(layer)
 
-    model = K.Model(inputs=X, output=layer)
+    model = K.Model(inputs=X, outputs=layer)
 
     model.compile(
         optimizer=K.optimizers.Adam(),
