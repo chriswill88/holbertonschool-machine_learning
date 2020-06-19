@@ -5,7 +5,8 @@ import tensorflow.keras as K
 
 def inception_block(A_prev, filters):
     """
-    builds an inception block as described in Going Deeper with Convolutions (2014):
+    builds an inception block as described in Going Deeper with Convolutions
+     (2014):
 
         @A_prev
             is the output from the previous layer
@@ -25,8 +26,8 @@ def inception_block(A_prev, filters):
          linear activation (ReLU)
         Returns: the concatenated output of the inception block
     """
-    F1, F3R, F3,F5R, F5, FPP = filters
-    
+    F1, F3R, F3, F5R, F5, FPP = filters
+
     E1 = K.layers.Conv2D(
         F1, (1, 1), activation='relu',
         )(A_prev)
@@ -45,8 +46,8 @@ def inception_block(A_prev, filters):
         F5, (5, 5),  activation='relu', padding="same"
         )(L3)
 
-    L4 = K.layers.MaxPool2D((3, 3), (1, 1), padding='same'
-        )(A_prev)
+    L4 = K.layers.MaxPool2D(
+        (3, 3), (1, 1), padding='same')(A_prev)
     E4 = K.layers.Conv2D(
         FPP, (1, 1), activation='relu',
         )(L4)
