@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """This function is used for task 5"""
 import tensorflow as tf
-import tensorflow.keras as K
 
 
 def lenet5(X):
@@ -29,7 +28,7 @@ def lenet5(X):
         Returns: a K.Model compiled to use Adam optimization
          (with default hyperparameters) and accuracy metrics
     """
-
+    K = tf.keras
     model = K.Sequential()
     ini = K.initializers.he_normal()
 
