@@ -44,7 +44,6 @@ def inception_network():
     for i in range(2):
         ep = inception_block(ep, take[i])
 
-
     # MP
     ep = K.layers.MaxPool2D(
         (3, 3), (2, 2), "same")(ep)
@@ -56,7 +55,7 @@ def inception_network():
         take2 = [128, 128, 256, 24, 64, 64]
         take3 = [112, 144, 288, 32, 64, 64]
         take4 = [256, 160, 320, 32, 128, 128]
-        take = [take0, take1, take2 , take3, take4]
+        take = [take0, take1, take2, take3, take4]
         ep = inception_block(ep, take[i])
 
     # Mp
