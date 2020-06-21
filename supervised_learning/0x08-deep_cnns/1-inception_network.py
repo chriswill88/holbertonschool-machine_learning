@@ -12,7 +12,7 @@ def inception_network():
         You can assume the input data will have shape (224, 224, 3)
         All convolutions inside and outside the inception block should
          use a rectified linear activation (ReLU)
-        Use inception_block = __import__('0-inception_block').inception_block
+        Use inception_block from task 0
         Returns: the keras model
     """
     take = [64, 96, 128, 16, 32, 32]
