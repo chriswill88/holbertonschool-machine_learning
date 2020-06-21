@@ -16,7 +16,7 @@ def inception_network():
         Returns: the keras model
     """
     take = [64, 96, 128, 16, 32, 32]
-    in_b = inception_block
+
     inputs = K.Input((224, 224, 3))
 
     # Convolution
@@ -40,7 +40,7 @@ def inception_network():
 
     # Inception 2X
     for i in range(2):
-        ep = in_b(ep, take)
+        ep = inception_block(ep, take)
 
     # MP
     ep = K.layers.MaxPool2D(
@@ -48,7 +48,7 @@ def inception_network():
 
     # Inc 5X
     for i in range(5):
-        ep = in_b(ep, take)
+        ep = inception_block(ep, take)
 
     # Mp
     ep = K.layers.MaxPool2D(
@@ -56,7 +56,7 @@ def inception_network():
 
     # Inc 2X
     for i in range(2):
-        ep = in_b(ep, take)
+        ep = inception_block(ep, take)
 
     # AP
     ep = K.layers.AveragePooling2D(
