@@ -20,7 +20,7 @@ def inception_network():
 
     # Convolution
     ep = K.layers.Conv2D(
-        64, kernel_size=(7, 7), strides=(2, 2), activation='relu'
+        64, kernel_size=(7, 7), strides=(2, 2), padding='same', activation='relu'
         )(inputs)
     # Max Pool
     ep = K.layers.MaxPool2D(
