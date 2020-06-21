@@ -18,12 +18,15 @@ def resnet50():
 
         Returns: the keras model
     """
+    init = K.initializers.he_normal()
     filters = [
         [64, 64, 256], [128, 128, 512], [256, 256, 1024], [512, 512, 2048]]
 
     inp = K.Input((224, 224, 3))
 
-    op = K.layers.Conv2D(64, (7, 7), (2, 2))(inp)
+    op = K.layers.Conv2D(
+        64, (7, 7), (2, 2),
+        kernel_initializer=init)(inp)
     op = K.layers.BatchNormalization(3)(op)
     op = K.layers.Activation('relu')(op)
 
