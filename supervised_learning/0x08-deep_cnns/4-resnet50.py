@@ -25,14 +25,14 @@ def resnet50():
     inp = K.Input((224, 224, 3))
 
     op = K.layers.Conv2D(
-        64, (7, 7), (2, 2),
+        64, (7, 7), (2, 2), padding='same',
         kernel_initializer=init)(inp)
     op = K.layers.BatchNormalization(3)(op)
     op = K.layers.Activation('relu')(op)
 
-    op = K.layers.MaxPool2D((3, 3), (2, 2))(op)
+    op = K.layers.MaxPool2D((3, 3), (2, 2), padding='same')(op)
 
-    op = projection_block(op, filters[0])
+    op = projection_block(op, filters[0], 1)
     for i in range(2):
         op = identity_block(op, filters[0])
 
@@ -48,7 +48,7 @@ def resnet50():
     for i in range(2):
         op = identity_block(op, filters[3])
 
-    op = K.layers.AveragePooling2D((1, 1))(op)
+    op = K.layers.AveragePooling2D((7, 7))(op)
     op = K.layers.Dense(1000, activation='softmax')(op)
 
     model = K.Model(inp, op)
