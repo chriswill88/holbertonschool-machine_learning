@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """This modual contains the functon for task 2"""
-import numpy as np
 import tensorflow as tf
 
 
