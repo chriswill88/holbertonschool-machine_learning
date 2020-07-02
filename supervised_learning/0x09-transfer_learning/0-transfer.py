@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import tensorflow.keras as K
+"""
+    This modual contains the nureal network and the function preprocess_data
+"""
 
 
 def preprocess_data(X, Y):
@@ -28,6 +31,7 @@ def preprocess_data(X, Y):
 
 
 def vgg(inp_t):
+    """vgg creates and configure the vgg16 model"""
     i = 0
     out = K.layers.Input(inp_t)
     out = K.layers.Lambda(
