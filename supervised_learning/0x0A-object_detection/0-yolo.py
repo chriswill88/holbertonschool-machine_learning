@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
+"""this module contains the Class Yolo"""
 import tensorflow.keras as K
 import numpy as np
-
-"""this module contains the Class Yolo"""
 
 
 class Yolo:
