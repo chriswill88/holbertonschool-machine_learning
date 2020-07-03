@@ -33,7 +33,7 @@ class Yolo:
 
         with open(classes_path, "r") as op:
             for x in op:
-                self.class_names.append(x)
+                self.class_names.append(x[0:-1])
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
