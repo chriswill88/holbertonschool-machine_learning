@@ -33,7 +33,6 @@ class Yolo:
 
         with open(classes_path, "r") as op:
             for x in op:
-                print(x)
                 self.class_names.append(x)
         self.class_t = class_t
         self.nms_t = nms_t
