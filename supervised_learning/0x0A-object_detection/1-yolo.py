@@ -93,8 +93,8 @@ class Yolo:
 
             t_x = box[:, :, :, 0]
             t_y = box[:, :, :, 1]
-            t_h = box[:, :, :, 2]
-            t_w = box[:, :, :, 3]
+            t_w = box[:, :, :, 2]
+            t_h = box[:, :, :, 3]
 
             bx = self.sigmoid(t_x) + cx
             by = self.sigmoid(t_y) + cy
