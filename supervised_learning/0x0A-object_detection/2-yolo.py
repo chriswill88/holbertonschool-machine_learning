@@ -159,14 +159,15 @@ class Yolo:
                 for w in range(gw):
                     for a in range(ab):
                         for x in range(bi):
-
                             box = boxes[i][h, w, a]
                             b = bc[h, w, a, x]
                             classes = box_class_probs[i][h, w, a]
+
                             if b > .5:
                                 filtered_box.append(box)
-                                prob_class.append(np.max(classes))
+                                prob_class.append(np.argmax(classes, axis=1))
                                 box_c.append(b)
+
         box_scores = np.array(box_c)
         filtered_boxes = np.array(filtered_box)
         box_classes = np.array(prob_class)
