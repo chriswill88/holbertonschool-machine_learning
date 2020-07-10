@@ -363,4 +363,4 @@ class Yolo:
             p_b, p_bc, p_bcp = self.non_max_suppression(f_b, f_bc, f_bcp)
             predictions.append((p_b, p_bc, p_bcp))
             self.show_boxes(oimg[i], p_b, p_bc, p_bcp, file_paths[i])
-        return predictions, file_paths
+        return (predictions, file_paths)
