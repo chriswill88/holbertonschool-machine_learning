@@ -258,7 +258,6 @@ class Yolo:
         for img in image_paths:
             pho = cv2.imread(img)
             pho = np.array(pho)
-            print("l pho", pho.shape)
             images.append(pho)
         return (images, image_paths)
 
