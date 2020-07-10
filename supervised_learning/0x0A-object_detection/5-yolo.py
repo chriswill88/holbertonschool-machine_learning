@@ -263,8 +263,8 @@ class Yolo:
 
     def preprocess_images(self, images):
         """preprocesses the imagaes"""
-        iw = self.model.input.shape[1]
-        ih = self.model.input.shape[2]
+        ih = self.model.input.shape[1]
+        iw = self.model.input.shape[2]
         ni = len(images)
 
         n = np.zeros((ni, ih, iw, 3))
