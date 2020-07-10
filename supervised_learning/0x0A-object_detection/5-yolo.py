@@ -270,10 +270,10 @@ class Yolo:
         n = np.zeros((ni, ih, iw, 3))
 
         image_shapes = []
-        for i in range(len(images)):
-            image_shapes.append(images[i].shape[0:-1])
+        for i, pic in enumerate(images):
+            image_shapes.append(pic.shape[0:-1])
 
-            pic = images[i]/255
+            pic = pic / 255
             n[i] = cv2.resize(pic, (ih, iw), interpolation=cv2.INTER_CUBIC)
 
         image_shapes = np.array(image_shapes)
