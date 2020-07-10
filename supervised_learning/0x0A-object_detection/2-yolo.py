@@ -131,7 +131,7 @@ class Yolo:
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         """
-            filter boxes - filters the preprossed boxes
+            # filter boxes - filters the preprossed boxes
             boxes: a list of numpy.ndarrays of shape (grid_height, grid_width,
              anchor_boxes, 4) containing the processed boundary boxes for each
               output, respectively
@@ -162,7 +162,7 @@ class Yolo:
                         b = bc[h, w, a, 0]
                         classes = box_class_probs[i][h, w, a]
                         bs = b * np.max(classes)
-                        if bs >= .6:
+                        if bs >= self.class_t:
                             filtered_box.append(box)
                             prob_class.append(np.argmax(classes))
                             box_c.append(bs)
