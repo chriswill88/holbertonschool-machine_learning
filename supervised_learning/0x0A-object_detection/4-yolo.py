@@ -253,7 +253,8 @@ class Yolo:
     def load_images(folder_path):
         """loads inmages using cv2"""
         images = []
-        image_paths = [img for img in glob.glob("{}/*.jpg".format(folder_path))]
+        image_paths = [img for img in glob.glob(
+            "{}/*.jpg".format(folder_path))]
         for img in image_paths:
             pho = cv2.imread(img)
             pho = np.array(pho)
