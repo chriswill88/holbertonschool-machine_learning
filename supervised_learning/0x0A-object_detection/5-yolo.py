@@ -277,7 +277,6 @@ class Yolo:
             rpic = cv2.resize(pic, (ih, iw), interpolation=cv2.INTER_CUBIC)
             n[i] = rpic
 
-        print(rpic)
         image_shapes = np.array(image_shapes)
         pimages = n
         return (pimages, image_shapes)
