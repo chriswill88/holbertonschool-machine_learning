@@ -162,7 +162,7 @@ class Yolo:
                         b = bc[h, w, a, 0]
                         classes = box_class_probs[i][h, w, a]
                         bs = b * np.max(classes)
-                        if bs >= .6:
+                        if bs >= self.class_t:
                             filtered_box.append(box)
                             prob_class.append(np.argmax(classes))
                             box_c.append(bs)
@@ -172,41 +172,35 @@ class Yolo:
 
         return (filtered_boxes, box_classes, box_scores)
 
-    def nms(self, bc, scores, threshold):
+    def nms(self, boxes, scores, threshold):
         """nms - applies non max suppression"""
-        # getting corners
-        x1 = bc[:, 0]
-        y1 = bc[:, 1]
-        x2 = bc[:, 2]
-        y2 = bc[:, 3]
-
-        # getting areas from the corners
-        areas = (x2 - x1 + 1) * (y2 - y1 + 1)
+        # filter indices to max scores
         order = scores.argsort()[::-1]
 
+        x1 = boxes[:, 0]
+        y1 = boxes[:, 1]
+        x2 = boxes[:, 2]
+        y2 = boxes[:, 3]
+
+        areas = (x2 - x1 + 1) * (y2 - y1 + 1)
         keep = []
+        # iterate through indexes and do the suppression
         while order.size > 0:
             i = order[0]
             keep.append(i)
 
-            # getting the parameters calculated
-            xx1 = np.maximum(x1[i], x1[order[1:]])
-            yy1 = np.maximum(y1[i], y1[order[1:]])
-            xx2 = np.minimum(x2[i], x2[order[1:]])
-            yy2 = np.minimum(y2[i], y2[order[1:]])
+            tx1 = np.maximum(x1[i], x1[order[1:]])
+            ty1 = np.maximum(y1[i], y1[order[1:]])
+            tx2 = np.minimum(x2[i], x2[order[1:]])
+            ty2 = np.minimum(y2[i], y2[order[1:]])
 
-            w = np.maximum(0.0, xx2 - xx1 + 1)
-            h = np.maximum(0.0, yy2 - yy1 + 1)
+            w = np.maximum(0.0, tx2 - tx1 + 1)
+            h = np.maximum(0.0, ty2 - ty1 + 1)
 
             inter = w * h
-
-            # getting the iou
             IoU = inter / (areas[i] + areas[order[1:]] - inter)
 
-            # filtering the indexes
             inds = np.where(IoU <= threshold)[0]
-
-            # decrimenting
             order = order[inds + 1]
         return keep
 
@@ -232,7 +226,7 @@ class Yolo:
               respectively
         """
         keep_scores = []
-        box, cls, score = [], [], []
+        box, clas, score = [], [], []
         uniqux = np.unique(box_classes)
 
         for i in uniqux:
@@ -242,13 +236,13 @@ class Yolo:
             scores = box_scores[indice]
             classes = box_classes[indice]
 
-            keep = self.nms(boxes, self.nms_t, scores)
+            keep = self.nms(boxes, scores, self.nms_t,)
 
             box.append(boxes[keep])
-            cls.append(classes[keep])
+            clas.append(classes[keep])
             score.append(scores[keep])
 
         box = np.concatenate(box)
-        cls = np.concatenate(cls)
+        clas = np.concatenate(clas)
         score = np.concatenate(score)
-        return (box, cls, score)
+        return (box, clas, score)
