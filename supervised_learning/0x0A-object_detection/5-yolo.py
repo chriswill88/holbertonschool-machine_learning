@@ -274,7 +274,7 @@ class Yolo:
             image_shapes.append(images[i].shape[0:-1])
 
             pic = images[i]/225
-            rpic = cv2.resize(pic, (ih, iw), interpolation=cv2.INTER_CUBIC)
+            rpic = cv2.resize(pic, (ih, iw))
             n[i] = rpic
 
         image_shapes = np.array(image_shapes)
