@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """this modual contains the function for task 100"""
-import numpy as np
 
 
 def np_slice(matrix, axes={}):
