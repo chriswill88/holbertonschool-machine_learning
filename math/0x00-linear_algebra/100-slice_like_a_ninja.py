@@ -24,4 +24,5 @@ def np_slice(matrix, axes={}):
         slc = [slice(None)] * len(matrix.shape)
         slc[a] = slice(start, stop, end)
 
-    return matrix[slc]
+        matrix = matrix[slc]
+        return matrix
