@@ -7,22 +7,7 @@ def np_slice(matrix, axes={}):
     start, stop, end = None, None, None
     slc = [slice(None, None, None)] * len(matrix.shape)
 
-    ax = len(matrix)
-
     for a, slic in axes.items():
-        try:
-            start = slic[0] if 0 < ax else None
-        except IndexError:
-            pass
-        try:
-            stop = slic[1] if 1 < ax else None
-        except IndexError:
-            pass
-        try:
-            end = slic[2] if 2 < ax else None
-        except IndexError:
-            pass
-        slc[a] = slice(start, stop, end)
+        slc[a] = slice(*slic)
 
-    mat = matrix[slc]
-    return mat
+    return matrix[slc]
