@@ -10,4 +10,4 @@ def np_slice(matrix, axes={}):
     for a, slic in axes.items():
         slc[a] = slice(*slic)
 
-    return matrix[slc]
+    return matrix[slc].copy()
