@@ -4,10 +4,10 @@
 
 def np_slice(matrix, axes={}):
     """slices np arrays and returns them"""
-    start, stop, end = None, None, None
     slc = [slice(None, None, None)] * len(matrix.shape)
 
+    mat = matrix.copy
     for a, slic in axes.items():
         slc[a] = slice(*slic)
 
-    return matrix[slc].copy()
+    return mat[slc]
