@@ -5,6 +5,8 @@
 def np_slice(matrix, axes={}):
     """slices np arrays and returns them"""
     start, stop, end = None, None, None
+    slc = [slice(None, None, None)] * len(matrix.shape)
+
     ax = len(matrix)
 
     for a, slic in axes.items():
@@ -20,7 +22,6 @@ def np_slice(matrix, axes={}):
             end = slic[2] if 2 < ax else None
         except IndexError:
             pass
-        slc = [slice(None)] * len(matrix.shape)
         slc[a] = slice(start, stop, end)
 
     mat = matrix[slc]
