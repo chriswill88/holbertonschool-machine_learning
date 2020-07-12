@@ -21,7 +21,7 @@ def np_slice(matrix, axes={}):
             end = slic[2] if 2 < ax else None
         except IndexError:
             pass
-
         slc = [slice(None)] * len(matrix.shape)
         slc[a] = slice(start, stop, end)
-    return matrix[slc].copy()
+
+    return matrix[slc]
