@@ -9,7 +9,7 @@ def check(matrix):
     """
     size = len(matrix)
 
-    if not isinstance(matrix, list) or len(matrix) == 0:
+    if not isinstance(matrix, list) or size == 0:
         raise TypeError("matrix must be a list of lists")
 
     for row in matrix:
@@ -31,7 +31,6 @@ def submatrix(matrix, h, w):
             for x in range(len(i)):
                 if x != w and ind != h:
                     sub[idx].append(matrix[ind][x])
-
     return sub
 
 
@@ -66,7 +65,7 @@ def minor(matrix):
 
     # determinant
     if size == 1:
-        return 1
+        return [[1]]
     if size == 2:
         return [sub[::-1] for sub in matrix[::-1]]
     return det(matrix, size)
