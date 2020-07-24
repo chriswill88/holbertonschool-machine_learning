@@ -11,8 +11,7 @@ def check(matrix):
 
     if not isinstance(matrix, list) or len(matrix) == 0:
         raise TypeError("matrix must be a list of lists")
-    if size == 0:
-        raise ValueError("matrix must be a non-empty square matrix")
+
     for row in matrix:
         if not isinstance(row, list):
             raise TypeError("matrix must be a list of lists")
