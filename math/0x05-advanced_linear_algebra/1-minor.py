@@ -15,7 +15,7 @@ def check(matrix):
     for row in matrix:
         if not isinstance(row, list):
             raise TypeError("matrix must be a list of lists")
-        if len(row) != size and len(row) != 0:
+        if len(row) != size and size != 1 or not len(row):
             raise ValueError("matrix must be a non-empty square matrix")
     return size
 
@@ -63,6 +63,7 @@ def minor(matrix):
     """
     # check function
     size = check(matrix)
+
     # determinant
     if size == 1:
         return 1
