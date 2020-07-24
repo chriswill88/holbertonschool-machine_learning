@@ -2,24 +2,6 @@
 """This module contains the function for how to solve a determinant"""
 
 
-def check(matrix):
-    """
-    The error checker
-    returns size of square
-    """
-    size = len(matrix)
-
-    if not isinstance(matrix, list) or size == 0:
-        raise TypeError("matrix must be a list of lists")
-
-    for row in matrix:
-        if not isinstance(row, list):
-            raise TypeError("matrix must be a list of lists")
-        if len(row) != size and size != 1 or not len(row):
-            raise ValueError("matrix must be a non-empty square matrix")
-    return size
-
-
 def submatrix(matrix, h, w):
     """This function gets the submatrix"""
     sub = []
@@ -63,7 +45,16 @@ def minor(matrix):
     # check function
     if matrix == [[]]:
         return([[1]])
-    size = check(matrix)
+    size = len(matrix)
+
+    if not isinstance(matrix, list) or size == 0:
+        raise TypeError("matrix must be a list of lists")
+
+    for row in matrix:
+        if not isinstance(row, list):
+            raise TypeError("matrix must be a list of lists")
+        if len(row) != size and size != 1 or not len(row):
+            raise ValueError("matrix must be a non-empty square matrix")
 
     # determinant
     if size == 1:
