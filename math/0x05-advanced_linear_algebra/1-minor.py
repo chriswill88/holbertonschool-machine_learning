@@ -8,13 +8,16 @@ def check(matrix):
     returns size of square
     """
     size = len(matrix)
+
     if not isinstance(matrix, list) or len(matrix) == 0:
         raise TypeError("matrix must be a list of lists")
+    if size == 0:
+        raise ValueError("matrix must be a non-empty square matrix")
     for row in matrix:
         if not isinstance(row, list):
             raise TypeError("matrix must be a list of lists")
-        if len(row) != size and size != 1:
-            raise ValueError("matrix must be a square matrix")
+        if len(row) != size and size != 1 or not len(row):
+            raise ValueError("matrix must be a non-empty square matrix")
     return size
 
 
