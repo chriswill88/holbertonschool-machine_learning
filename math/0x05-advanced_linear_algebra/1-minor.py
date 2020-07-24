@@ -31,7 +31,6 @@ def submatrix(matrix, h, w):
             for x in range(len(i)):
                 if x != w and ind != h:
                     sub[idx].append(matrix[ind][x])
-
     return sub
 
 
