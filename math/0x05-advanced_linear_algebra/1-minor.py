@@ -11,8 +11,7 @@ def check(matrix):
 
     if not isinstance(matrix, list) or size == 0:
         raise TypeError("matrix must be a list of lists")
-    if size == 1 and len(matrix[0]) == 0:
-        return 1
+
     for row in matrix:
         if not isinstance(row, list):
             raise TypeError("matrix must be a list of lists")
@@ -62,6 +61,8 @@ def minor(matrix):
     Returns: the determinant of matrix
     """
     # check function
+    if matrix == [[]]:
+        return([[1]])
     size = check(matrix)
 
     # determinant
