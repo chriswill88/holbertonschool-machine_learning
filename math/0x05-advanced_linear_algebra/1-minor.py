@@ -11,7 +11,7 @@ def check(matrix):
 
     if not isinstance(matrix, list) or size == 0:
         raise TypeError("matrix must be a list of lists")
-    if size == 1 and len(matrix[0] == 0):
+    if size == 1 and len(matrix[0]) == 0:
         return 1
     for row in matrix:
         if not isinstance(row, list):
