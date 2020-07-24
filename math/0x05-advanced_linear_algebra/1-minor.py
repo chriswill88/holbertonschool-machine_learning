@@ -43,8 +43,6 @@ def minor(matrix):
     Returns: the determinant of matrix
     """
     # check function
-    if matrix == [[]]:
-        return([[1]])
     size = len(matrix)
 
     if not isinstance(matrix, list) or size == 0:
