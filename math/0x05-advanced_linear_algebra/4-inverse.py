@@ -69,7 +69,6 @@ def inverse(matrix):
     d = det(matrix, size)
     if d == 0:
         return None
-    d = 1/d
     sub = []
 
     # matrix of minors
@@ -80,7 +79,7 @@ def inverse(matrix):
         sub[0][1] *= -1
         sub[1][0] *= -1
         sub[0][1], sub[1][0] = sub[1][0], sub[0][1]
-        return [[x * 1/d for x in i] for i in sub]
+        return [[x/d for x in i] for i in sub]
 
     else:
         sub = [[det(minOfMatrix(matrix, x, i), size - 1)
@@ -98,5 +97,4 @@ def inverse(matrix):
 
     # inverse
     d = det(matrix, size)
-    d = 1/d
-    return [[i * d for i in x] for x in adj]
+    return [[i/d for i in x] for x in adj]
