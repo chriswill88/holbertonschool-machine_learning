@@ -98,4 +98,4 @@ def inverse(matrix):
     # inverse
     d = det(matrix, size)
     size = len(adj)
-    print([[adj[x][i]/d for x in range(size)] for i in range(size)])
+    return [[adj[x][i]/d for x in range(size)] for i in range(size)]
