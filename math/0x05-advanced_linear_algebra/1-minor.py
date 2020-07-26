@@ -20,8 +20,23 @@ def check(matrix):
     return size
 
 
-def submatrix(matrix, h, w):
+def submatrix(matrix, index):
     """This function gets the submatrix"""
+    sub = []
+    # print("step 1: retrieve\n", matrix)
+    matrix = matrix[1:]
+    # print("step 2: cut off top\n", matrix)
+
+    for ind, i in enumerate(matrix):
+        sub.append([])
+        for x in range(len(i)):
+            if x != index:
+                sub[ind].append(matrix[ind][x])
+    return sub
+
+
+def minOfMatrix(matrix, h, w):
+    """This function creates a list of list of minors from indices"""
     sub = []
     idx = -1
     for ind, i in enumerate(matrix):
@@ -42,7 +57,7 @@ def det(matrix, size):
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
     else:
         for i in range(size):
-            sum += mul * (matrix[0][i] * det(matrix, size - 1))
+            sum += mul * (matrix[0][i] * det(submatrix(matrix, i), size - 1))
             mul *= -1
     return sum
 
@@ -64,7 +79,7 @@ def minor(matrix):
     size = check(matrix)
     sub = []
 
-    # determinant
+    # matrix of minors
     if size == 1:
         return [[1]]
     if size == 2:
@@ -73,6 +88,6 @@ def minor(matrix):
         sub.append([])
         for i in range(size):
             total = 0
-            total += det(submatrix(matrix, x, i), size - 1)
+            total += det(minOfMatrix(matrix, x, i), size - 1)
             sub[x].append(total)
     return sub
