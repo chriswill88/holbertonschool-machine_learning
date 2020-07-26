@@ -98,7 +98,6 @@ def cofactor(matrix):
     # cofactors
     mul = 1
     for i in range(len(sub)):
-        on = 1
         for x in range(len(sub)):
             sub[i][x] *= mul
             mul *= -1
