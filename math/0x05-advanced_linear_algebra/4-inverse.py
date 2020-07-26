@@ -73,7 +73,7 @@ def inverse(matrix):
 
     # matrix of minors
     if size == 1:
-        return [[1*d]]
+        return [[1/d]]
     if size == 2:
         sub = [sub[::-1] for sub in matrix[::-1]]
         sub[0][1] *= -1
