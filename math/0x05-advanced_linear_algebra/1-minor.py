@@ -2,6 +2,24 @@
 """This module contains the function for how to solve a determinant"""
 
 
+def check(matrix):
+    """
+    The error checker
+    returns size of square
+    """
+    size = len(matrix)
+
+    if not isinstance(matrix, list) or size == 0:
+        raise TypeError("matrix must be a list of lists")
+
+    for row in matrix:
+        if not isinstance(row, list):
+            raise TypeError("matrix must be a list of lists")
+        if len(row) != size and size != 1 or not len(row):
+            raise ValueError("matrix must be a non-empty square matrix")
+    return size
+
+
 def submatrix(matrix, h, w):
     """This function gets the submatrix"""
     sub = []
@@ -18,14 +36,14 @@ def submatrix(matrix, h, w):
 
 def det(matrix, size):
     """computes the determinant"""
-    sum = []
+    sum = 0
+    mul = 1
     if size == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
     else:
-        for x in range(size):
-            sum.append([])
-            for i in range(size):
-                sum[x].append(det(submatrix(matrix, x, i), size - 1))
+        for i in range(size):
+            sum += mul * (matrix[0][i] * det(matrix, size - 1))
+            mul *= -1
     return sum
 
 
@@ -43,20 +61,18 @@ def minor(matrix):
     Returns: the determinant of matrix
     """
     # check function
-    size = len(matrix)
-
-    if not isinstance(matrix, list) or size == 0:
-        raise TypeError("matrix must be a list of lists")
-
-    for row in matrix:
-        if not isinstance(row, list):
-            raise TypeError("matrix must be a list of lists")
-        if len(row) != size and size != 1 or not len(row):
-            raise ValueError("matrix must be a non-empty square matrix")
+    size = check(matrix)
+    sub = []
 
     # determinant
     if size == 1:
         return [[1]]
     if size == 2:
         return [sub[::-1] for sub in matrix[::-1]]
-    return det(matrix, size)
+    for x in range(size):
+        sub.append([])
+        for i in range(size):
+            total = 0
+            total += det(submatrix(matrix, x, i), size - 1)
+            sub[x].append(total)
+    return sub
