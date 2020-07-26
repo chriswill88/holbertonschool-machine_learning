@@ -64,8 +64,8 @@ def det(matrix, size):
 
 def minor(matrix):
     """
-    This function solves a determinant
-    @matrix is a list of lists whose determinant should be calculated
+    This function solves a minor
+    @matrix is a list of lists whose minor should be calculated
 
     If matrix is not a list of lists, raise a TypeError with the message
      matrix must be a list of lists
@@ -73,7 +73,7 @@ def minor(matrix):
      must be a square matrix
     The list [[]] represents a 0x0 matrix
 
-    Returns: the determinant of matrix
+    Returns: the minor of matrix
     """
     # check function
     size = check(matrix)
