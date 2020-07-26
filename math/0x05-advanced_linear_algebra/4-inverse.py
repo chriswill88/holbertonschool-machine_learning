@@ -88,7 +88,8 @@ def inverse(matrix):
         sub[0][1] *= -1
         sub[1][0] *= -1
         sub[0][1], sub[1][0] = sub[1][0], sub[0][1]
-        return sub
+        return [[x * 1/det(sub, 2) for x in i] for i in sub]
+
     else:
         for x in range(size):
             sub.append([])
