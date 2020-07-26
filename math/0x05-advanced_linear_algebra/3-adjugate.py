@@ -87,6 +87,7 @@ def adjugate(matrix):
         sub = [sub[::-1] for sub in matrix[::-1]]
         sub[0][1] *= -1
         sub[1][0] *= -1
+        sub[0][1], sub[1][0] = sub[1][0], sub[0][1]
         return sub
     else:
         for x in range(size):
