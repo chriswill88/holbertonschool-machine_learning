@@ -22,38 +22,26 @@ def check(matrix):
 
 def submatrix(matrix, index):
     """This function gets the submatrix"""
-    sub = []
-    # print("step 1: retrieve\n", matrix)
+    size = len(matrix)
     matrix = matrix[1:]
-    # print("step 2: cut off top\n", matrix)
 
-    for ind, i in enumerate(matrix):
-        sub.append([])
-        for x in range(len(i)):
-            if x != index:
-                sub[ind].append(matrix[ind][x])
-    return sub
+    return [[matrix[x][i] for i in range(
+           size) if i != index] for x in range(size - 1)]
 
 
 def minOfMatrix(matrix, h, w):
     """This function creates a list of list of minors from indices"""
-    sub = []
-    idx = -1
-
-    for ind, i in enumerate(matrix):
-        if ind != h:
-            idx += 1
-            sub.append([])
-            for x in range(len(i)):
-                if x != w and ind != h:
-                    sub[idx].append(matrix[ind][x])
-    return sub
+    size = len(matrix)
+    return [[matrix[x][i] for i in range(
+            size) if i != h] for x in range(size) if x != w]
 
 
 def det(matrix, size):
     """computes the determinant"""
     sum = 0
     mul = 1
+    if size == 1:
+        return matrix[0][0]
     if size == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
     else:
@@ -78,25 +66,25 @@ def inverse(matrix):
     """
     # check function
     size = check(matrix)
+    d = det(matrix, size)
+    if d == 0:
+        return None
+    d = 1/d
     sub = []
 
     # matrix of minors
     if size == 1:
-        return [[1]]
+        return [[1*d]]
     if size == 2:
         sub = [sub[::-1] for sub in matrix[::-1]]
         sub[0][1] *= -1
         sub[1][0] *= -1
         sub[0][1], sub[1][0] = sub[1][0], sub[0][1]
-        return [[x * 1/det(sub, 2) for x in i] for i in sub]
+        return [[x * 1/d for x in i] for i in sub]
 
     else:
-        for x in range(size):
-            sub.append([])
-            for i in range(size):
-                total = 0
-                total += det(minOfMatrix(matrix, x, i), size - 1)
-                sub[x].append(total)
+        sub = [[det(minOfMatrix(matrix, x, i), size - 1)
+                for i in range(size)] for x in range(size)]
     # cofactors
     mul = 1
     for i in range(len(sub)):
@@ -105,11 +93,8 @@ def inverse(matrix):
             mul *= -1
 
     # adjugate
-    adj = []
-    for i in range(len(sub)):
-        adj.append([])
-        for x in range(len(sub)):
-            adj[i].append(sub[x][i])
+    size = len(sub)
+    adj = [[sub[x][i] for x in range(size)] for i in range(size)]
 
     # inverse
     d = det(matrix, size)
