@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 """This module contains the function for how to solve a determinant"""
+import numpy as np
 
 
 def definiteness(matrix):
@@ -24,6 +24,7 @@ def definiteness(matrix):
         "Positive definite", "Positive semi-definite",
         "Negative semi-definite", "Negative definite", "Indefinite"]
 
+    print(np.linalg.eig(matrix))
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
 
