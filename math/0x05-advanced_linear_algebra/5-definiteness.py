@@ -24,7 +24,6 @@ def definiteness(matrix):
         "Positive definite", "Positive semi-definite",
         "Negative semi-definite", "Negative definite", "Indefinite"]
 
-    print(np.linalg.eig(matrix))
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
 
@@ -33,6 +32,13 @@ def definiteness(matrix):
         return None
 
     pick = 0
+    w, v = np.linalg.eig(matrix)
+    for i in w:
+        if i < 0:
+            pick = 2
+    if pick == 0:
+        return lis[0]
+
     for i in range(size):
         mat = matrix[:i + 1, :i + 1]
         d = det(mat, i + 1)
