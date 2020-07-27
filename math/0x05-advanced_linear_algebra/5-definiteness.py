@@ -1,31 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 """This module contains the function for how to solve a determinant"""
-
-
-def submatrix(matrix, index):
-    """This function gets the submatrix"""
-    size = len(matrix)
-    matrix = matrix[1:]
-
-    return [[matrix[x][i] for i in range(
-           size) if i != index] for x in range(size - 1)]
-
-
-def det(matrix, size):
-    """computes the determinant"""
-    # print(size)
-    sum = 0
-    mul = 1
-    if size == 1:
-        return matrix[0][0]
-    if size == 2:
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
-    else:
-        for i in range(size):
-            sum += mul * (matrix[0][i] * det(submatrix(matrix, i), size - 1))
-            mul *= -1
-    return sum
+import numpy as np
 
 
 def definiteness(matrix):
@@ -71,3 +46,28 @@ def definiteness(matrix):
         else:
             pick = -1
     return lis[pick]
+
+
+def submatrix(matrix, index):
+    """This function gets the submatrix"""
+    size = len(matrix)
+    matrix = matrix[1:]
+
+    return [[matrix[x][i] for i in range(
+           size) if i != index] for x in range(size - 1)]
+
+
+def det(matrix, size):
+    """computes the determinant"""
+    # print(size)
+    sum = 0
+    mul = 1
+    if size == 1:
+        return matrix[0][0]
+    if size == 2:
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    else:
+        for i in range(size):
+            sum += mul * (matrix[0][i] * det(submatrix(matrix, i), size - 1))
+            mul *= -1
+    return sum
