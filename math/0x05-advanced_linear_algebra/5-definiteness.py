@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """This module contains the function for how to solve a determinant"""
+import numpy as np
 
 
 def submatrix(matrix, index):
