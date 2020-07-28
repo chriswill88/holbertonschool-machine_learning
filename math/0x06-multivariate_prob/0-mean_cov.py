@@ -29,5 +29,5 @@ def mean_cov(X):
     mean = np.mean(X, 0)
     X -= mean
 
-    cov = np.dot(X.T, X)/(n - 1)
+    cov = np.matmul(X.T, X)/(n - 1)
     return mean, cov
