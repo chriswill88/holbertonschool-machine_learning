@@ -17,9 +17,9 @@ def correlation(C):
     Returns a numpy.ndarray of shape (d, d) containing the correlation matrix
     """
     if not isinstance(C, np.ndarray):
-        raise TypeError("C must be a 2D numpy.ndarray")
+        raise TypeError("C must be a numpy.ndarray")
     if len(C.shape) != 2 or C.shape[0] != C.shape[1]:
-        raise ValueError("C must contain multiple data points")
+        raise ValueError("C must be a 2D square matrix")
 
     var = np.sqrt(np.diag(C))
     var = np.expand_dims(var, 0)
