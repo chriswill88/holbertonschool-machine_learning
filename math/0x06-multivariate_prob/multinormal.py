@@ -30,4 +30,4 @@ class MultiNormal:
         b = (((2 * np.pi)**self.d) * det)**(.5)
         m = (x - self.mean)
         i = np.linalg.inv(self.cov)
-        return (1/b * np.exp((-1/2) * m.T @ i @ m))[0][0]
+        return ((1/b) * np.exp((-1/2) * m.T @ i @ m))[0][0]
