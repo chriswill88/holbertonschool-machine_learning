@@ -4,6 +4,9 @@ import numpy as np
 
 
 class MultiNormal:
+    """
+    Multivariate Normal distribution
+    """
     def __init__(self, data):
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
