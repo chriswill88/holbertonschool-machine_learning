@@ -27,7 +27,7 @@ class MultiNormal:
         d = self.cov.shape[0]
 
         if len(x.shape) != 2 or x.shape != (d, 1):
-            raise ValueError("x must have the shape ({d}, 1)".format(d))
+            raise ValueError("x must have the shape ({}, 1)".format(d))
         det = np.linalg.det(self.cov)
         b = (((2 * np.pi)**d) * det)**(.5)
         m = (x - self.mean)
