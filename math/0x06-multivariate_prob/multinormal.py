@@ -10,7 +10,7 @@ class MultiNormal:
     def __init__(self, data):
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
-        self.d, n = data.shape
+        d, n = data.shape
         if n < 2:
             raise ValueError("data must contain multiple data points")
         mean = np.mean(data, 1)
@@ -24,10 +24,12 @@ class MultiNormal:
         """
         if not isinstance(x, np.ndarray):
             raise TypeError("x must be a numpy.ndarray")
-        if len(x.shape) != 2 or x.shape != (self.d, 1):
-            raise ValueError("x must have the shape ({d}, 1)".format(self.d))
+        d = self.cov.shape[0]
+
+        if len(x.shape) != 2 or x.shape != (d, 1):
+            raise ValueError("x must have the shape ({d}, 1)".format(d))
         det = np.linalg.det(self.cov)
-        b = (((2 * np.pi)**self.d) * det)**(.5)
+        b = (((2 * np.pi)**d) * det)**(.5)
         m = (x - self.mean)
         i = np.linalg.inv(self.cov)
         return ((1/b) * np.exp((-1/2) * m.T @ i @ m))[0][0]
