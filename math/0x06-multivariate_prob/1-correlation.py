@@ -22,6 +22,7 @@ def correlation(C):
         raise ValueError("C must contain multiple data points")
 
     var = np.sqrt(np.diag(C))
+    var = np.expand_dims(var, 0)
     outer_v = np.outer(var, var)
     correlation = C / outer_v
     correlation[C == 0] = 0
