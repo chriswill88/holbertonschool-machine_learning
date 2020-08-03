@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""this module contains the function used in task 1"""
+"""this module contains the function used in task 2"""
 import numpy as np
 
 
@@ -36,5 +36,7 @@ def marginal(x, n, P, Pr):
         raise ValueError("Pr must sum to 1")
     fact = np.math.factorial
     c = fact(n)/(fact(n-x)*fact(x))
-    mar = c*((P**x)*((1-P)**(n-x))) * Pr
-    return np.sum(mar)
+    likely = c*((P**x)*((1-P)**(n-x)))
+
+    marg = np.sum(likely * Pr)
+    return marg
