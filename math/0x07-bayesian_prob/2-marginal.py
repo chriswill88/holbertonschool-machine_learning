@@ -34,6 +34,7 @@ def marginal(x, n, P, Pr):
         raise ValueError("All values in Pr must be in the range [0, 1]")
     if not np.isclose(np.sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
+j
     fact = np.math.factorial
     c = fact(n)/(fact(n-x)*fact(x))
     return np.sum(c*((P**x)*((1-P)**(n-x))) * Pr)
