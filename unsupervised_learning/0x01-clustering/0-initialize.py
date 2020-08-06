@@ -8,6 +8,8 @@ def initialize(X, k):
     initialize: initializes cluster centroids for K-mean
     """
     try:
+        if k < 1:
+            return None
         n, d = X.shape
 
         mini = X.min(axis=0)
