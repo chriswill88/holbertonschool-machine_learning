@@ -7,7 +7,7 @@ def kmeans(X, k, iterations=1000):
     """
     initialize: implement Kmeans
     """
-    if iterations < 1:
+    if not isinstance(iterations, int) or iterations < 1:
         return None, None
     try:
         n, d = X.shape
