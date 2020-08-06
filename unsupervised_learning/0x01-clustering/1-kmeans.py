@@ -33,6 +33,6 @@ def recurKmean(iterations, init, X):
                 X.min(axis=0), X.max(axis=0), (1, X.shape[1]))
         centroid[c3] = new
     compare = centroid == init
-    if not compare.all() and iterations > 0:
+    if not compare.all() and iterations > 1:
         return recurKmean(iterations - 1, centroid, X)
     return centroid, kLabels
