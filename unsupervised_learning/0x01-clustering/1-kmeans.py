@@ -34,6 +34,9 @@ def kmeans(X, k, iterations=1000):
                 break
             init = centroid
             iterations -= 1
+
+        dist = np.sqrt(((X - centroid[:, np.newaxis])**2).sum(axis=2))
+        kLabels = np.argmin(dist, 0)
         return centroid, kLabels
     except Exception:
         return None, None
