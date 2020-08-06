@@ -1,4 +1,5 @@
-import scipy
+#!/usr/bin/env python3
+"""this modual contiains the function for task 0"""
 from sklearn.cluster import KMeans
 import numpy as np
 
