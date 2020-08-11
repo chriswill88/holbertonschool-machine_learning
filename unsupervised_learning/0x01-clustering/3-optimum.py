@@ -28,4 +28,4 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         d_vars = [d_vars[0] - i for i in d_vars]
         return results, d_vars
     except Exception:
-        return None None
+        return None, None
