@@ -21,6 +21,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     try:
         results = []
         d_vars = []
+        if kmin < 1 or kmin > kmax:
+            return None, None
         if kmax is None:
             kmax = X.shape[0]
 
