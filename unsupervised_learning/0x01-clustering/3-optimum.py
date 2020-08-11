@@ -18,23 +18,21 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
          iterations for K-means
         This function should analyze at least 2 different cluster sizes
     """
-    try:
-        results = []
-        d_vars = []
 
-        if kmax is None:
-            kmax = X.shape[0]
+    results = []
+    d_vars = []
 
-        if not isinstance(kmin, int) or kmin < 1:
-            return None, None
-        if not isinstance(kmax, int) or kmax < 1 or kmin >= kmax:
-            return None, None
+    if kmax is None:
+        kmax = X.shape[0]
 
-        for k in range(kmin, kmax + 1):
-            result = kmeans(X, k, iterations)
-            results.append(result)
-            d_vars.append(variance(X, result[0]))
-        d_vars = [d_vars[0] - i for i in d_vars]
-        return results, d_vars
-    except Exception:
+    if not isinstance(kmin, int) or kmin < 1:
         return None, None
+    if not isinstance(kmax, int) or kmax < 1 or kmin >= kmax:
+        return None, None
+
+    for k in range(kmin, kmax + 1):
+        result = kmeans(X, k, iterations)
+        results.append(result)
+        d_vars.append(variance(X, result[0]))
+    d_vars = [d_vars[0] - i for i in d_vars]
+    return results, d_vars
