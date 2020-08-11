@@ -5,7 +5,7 @@ kmeans = __import__('1-kmeans').kmeans
 variance = __import__('2-variance').variance
 
 
-def optimum_k(X, kmin=1, kmax=5, iterations=1000):
+def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     """
         That tests for the optimum number of clusters by variance:
 
@@ -21,6 +21,8 @@ def optimum_k(X, kmin=1, kmax=5, iterations=1000):
     try:
         results = []
         d_vars = []
+        if kmax is None:
+            kmax = X.shape[0]
 
         for k in range(kmin, kmax + 1):
             result = kmeans(X, k, iterations)
