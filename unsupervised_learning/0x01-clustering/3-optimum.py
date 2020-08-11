@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """This modual contains the function for task 3"""
+import numpy as np
 kmeans = __import__('1-kmeans').kmeans
 variance = __import__('2-variance').variance
 
