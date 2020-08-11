@@ -5,11 +5,12 @@ import numpy as np
 
 def variance(X, C):
     """calculates the total for a data set"""
+    try:
     n, d = X.shape
     k = C.shape[0]
     hold = np.zeros((k, n))
     lis = np.zeros((n))
-
+    print(X - C)
     for j in range(k):
         for i in range(n):
             var = ((X[i] - C[j])**2).sum(0)
