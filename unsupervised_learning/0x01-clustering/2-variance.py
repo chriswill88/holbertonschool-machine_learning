@@ -6,17 +6,12 @@ import numpy as np
 def variance(X, C):
     """calculates the total for a data set"""
     try:
-    n, d = X.shape
-    k = C.shape[0]
-    hold = np.zeros((k, n))
-    lis = np.zeros((n))
-    print(X - C)
-    for j in range(k):
-        for i in range(n):
-            var = ((X[i] - C[j])**2).sum(0)
-            if lis[i] == 0 or var < lis[i]:
-                lis[i] = var
+        n, d = X.shape
+        k = C.shape[0]
 
-    lis = np.amin(lis.sum())
+        lis = ((X - np.split(C, k))**2).sum(2)
+        lis = np.amin(lis, 0).sum()
 
-    return lis
+        return lis
+    except Exception:
+        return None
