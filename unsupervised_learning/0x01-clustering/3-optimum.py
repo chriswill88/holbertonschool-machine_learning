@@ -21,10 +21,14 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     try:
         results = []
         d_vars = []
-        if kmin < 1 or kmin > kmax or kmax < 1:
-            return None, None
+
         if kmax is None:
             kmax = X.shape[0]
+
+        if not isinstance(kmin, int) or kmin < 1:
+            return None, None
+        if not isinstance(kmax, int) or kmax < 1 or kmin > kmax:
+            return None, None
 
         for k in range(kmin, kmax + 1):
             result = kmeans(X, k, iterations)
