@@ -21,6 +21,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     try:
         results = []
         d_vars = []
+        if kmax is None:
+            kmax = 1
         for k in range(kmin, kmax + 1):
             result = kmeans(X, k, iterations)
             results.append(result)
