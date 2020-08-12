@@ -7,7 +7,7 @@ kmeans = __import__('1-kmeans').kmeans
 def initialize(X, k):
     """This function initializes the variables for gaussian mixture model"""
 
-    if not isinstance(X, np.ndarray) or len(X.shape()) != 2:
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None
     if not isinstance(k, int) or k < 0:
         return None, None, None
