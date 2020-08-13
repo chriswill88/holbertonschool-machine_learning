@@ -11,7 +11,7 @@ def markov_chain(P, s, t=1):
     if n1 != n2:
         return None
     if not isinstance(
-            s, np.ndarray) or len(s.shape) != 2 or s.shape[0] != (1, n1):
+            s, np.ndarray) or len(s.shape) != 2 or s.shape != (1, n1):
         return None
     if t < 0:
         return None
