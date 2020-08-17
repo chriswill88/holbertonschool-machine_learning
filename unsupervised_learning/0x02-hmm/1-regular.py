@@ -4,7 +4,9 @@ import numpy as np
 
 
 def regular(P):
-    """regular - determines steady state probability of a regular markov chain"""
+    """
+    regular: determines steady state probability of a regular markov chain
+    """
     if not isinstance(P, np.ndarray) or len(P.shape) != 2:
         return None
     if not P.all() > 0:
