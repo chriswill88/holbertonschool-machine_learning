@@ -22,7 +22,6 @@ def absorbing(P):
 
         if len(args):
             placehold[index] = 1
-            print(placehold)
         index = np.where(placehold == 0)
         if (len(index[0])):
             index = [index[0][0]]
