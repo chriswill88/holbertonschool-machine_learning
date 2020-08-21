@@ -15,14 +15,14 @@ class GaussianProcess:
         @sigma_f is the standard deviation given to the output of the
          black-box function
     """
-    def __init__(self, X_init, Y_init, L=1, sigma_f=1):
+    def __init__(self, X_init, Y_init, l=1, sigma_f=1):
         self.X = X_init
         self.Y = Y_init
-        self.L = L
+        self.l = l
         self.sigma_f = sigma_f
-        sqdist = np.sum(self.X**2, 1).reshape(-1, 1) + np.sum(
+        kernel = np.sum(self.X**2, 1).reshape(-1, 1) + np.sum(
             self.X**2, 1) - 2 * np.dot(self.X, self.X.T)
-        self.K = sigma_f**2 * np.exp(-0.5 / L**2 * sqdist)
+        self.K = sigma_f**2 * np.exp(-0.5 / l**2 * kernel)
 
     def kernel(self, X1, X2):
         """
@@ -33,4 +33,4 @@ class GaussianProcess:
         """
         kernel = np.sum(
             X1**2, 1).reshape(-1, 1) + np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
-        return self.sigma_f**2 * np.exp(-0.5 / self.L**2 * kernel)
+        return self.sigma_f**2 * np.exp(-0.5 / self.l**2 * kernel)
