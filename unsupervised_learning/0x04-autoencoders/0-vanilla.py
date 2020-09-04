@@ -17,7 +17,8 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     hiddenLen = len(hidden_layers)
     for i in range(len(hidden_layers)):
         out = input_img if i == 0 else enc
-        enc = keras.layers.Dense(hidden_layers[i - hiddenLen], activation='relu')(out)
+        enc = keras.layers.Dense(
+            hidden_layers[i - hiddenLen], activation='relu')(out)
 
     latent = keras.layers.Dense(latent_dims, activation='relu')(enc)
 
