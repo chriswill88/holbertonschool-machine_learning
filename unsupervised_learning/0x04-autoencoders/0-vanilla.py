@@ -12,7 +12,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     @hidden_layers: the hidden layers
     @latent_dims: the layer in the center
     """
-    # auto
+    # encoded
     input_img = keras.layers.Input((input_dims,))
     hiddenLen = len(hidden_layers)
     out = input_img
@@ -21,27 +21,22 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
             hidden_layers[i - hiddenLen], activation='relu')(out)
 
     latent = keras.layers.Dense(latent_dims, activation='relu')(out)
-    out = latent
+    encode = keras.models.Model(input_img, latent)
+
+    # decoded
+    dec_input = keras.layers.Input((latent_dims,))
+    out = dec_input
     i = len(hidden_layers) - 1
     while i >= 0:
         out = keras.layers.Dense(hidden_layers[i], activation='relu')(out)
         i -= 1
     decoded = keras.layers.Dense(input_dims, activation='sigmoid')(out)
-    autoencode = keras.models.Model(input_img, decoded)
+    decode = keras.models.Model(dec_input, decoded)
 
-    # encoder
-    encoder = keras.models.Model(input_img, latent)
+    # auto
+    encoder = encode(input_img)
+    decoder = decode(encoder)
+    autoencode = keras.models.Model(input_img, decoder)
 
-    # decoder
-    encoded_input = keras.layers.Input(shape=(latent_dims,))
-    out = encoded_input
-    for i in range(len(autoencode.layers)):
-        if i > hiddenLen + 1:
-            out = autoencode.layers[i](out)
-
-    decoder = keras.models.Model(encoded_input, out)
-
-    # comilation
     autoencode.compile(optimizer='adam', loss='binary_crossentropy')
-
-    return encoder, decoder, autoencode
+    return encode, decode, autoencode
