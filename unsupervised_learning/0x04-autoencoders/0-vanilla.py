@@ -15,21 +15,19 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     # auto
     input_img = keras.layers.Input((input_dims,))
     hiddenLen = len(hidden_layers)
+    out = input_img
     for i in range(len(hidden_layers)):
-        out = input_img if i == 0 else enc
-        enc = keras.layers.Dense(
+        out = keras.layers.Dense(
             hidden_layers[i - hiddenLen], activation='relu')(out)
 
-    latent = keras.layers.Dense(latent_dims, activation='relu')(enc)
-
+    latent = keras.layers.Dense(latent_dims, activation='relu')(out)
+    out = latent
     i = len(hidden_layers) - 1
     while i >= 0:
-        out = latent if i == len(hidden_layers) - 1 else dec
-        dec = keras.layers.Dense(hidden_layers[i], activation='relu')(out)
+        out = keras.layers.Dense(hidden_layers[i], activation='relu')(out)
         i -= 1
-    decoded = keras.layers.Dense(input_dims, activation='sigmoid')(dec)
+    decoded = keras.layers.Dense(input_dims, activation='sigmoid')(out)
     autoencode = keras.models.Model(input_img, decoded)
-    autoencode.summary()
 
     # encoder
     encoder = keras.models.Model(input_img, latent)
