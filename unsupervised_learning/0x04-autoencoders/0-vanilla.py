@@ -29,6 +29,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         i -= 1
     decoded = keras.layers.Dense(input_dims, activation='sigmoid')(dec)
     autoencode = keras.models.Model(input_img, decoded)
+    autoencode.summary()
 
     # encoder
     encoder = keras.models.Model(input_img, latent)
