@@ -5,25 +5,23 @@ import tensorflow.keras as keras
 
 def autoencoder(input_dims, filters, latent_dims):
     """
-    this function creates an convolutional autoencoder
+    this function creates an autoencoder
     with the various diffrent parts of the autoencoder
 
     @input_dims: the input dimensions for the autoencoder
-    @filters: the hidden conv layers
+    @filters: the hidden layers
     @latent_dims: the layer in the center
     """
     # encoded
     input_img = keras.layers.Input(shape=input_dims)
 
     hiddenLen = len(filters)
-    print("hiddenLen", hiddenLen)
     out = input_img
 
     len_list = range(hiddenLen)
     rev_list = reversed(len_list)
 
     for i in len_list:
-        print(i, filters[i])
         out = keras.layers.Conv2D(
             filters[i],
             (3, 3),
@@ -32,11 +30,12 @@ def autoencoder(input_dims, filters, latent_dims):
         )(out)
         out = keras.layers.MaxPooling2D((2, 2), padding='same')(out)
 
+    encode = keras.models.Model(input_img, out)
+
     # decoded
     dec_input = keras.layers.Input(latent_dims)
     out = dec_input
     for i in rev_list:
-        print(i, filters[i])
         if i == 0:
             out = keras.layers.Conv2D(
                 filters[i],
@@ -58,8 +57,6 @@ def autoencoder(input_dims, filters, latent_dims):
 
     decode = keras.models.Model(dec_input, decoded)
 
-    print("decode")
-    decode.summary()
     # auto
     encoder = encode(input_img)
     decoder = decode(encoder)
