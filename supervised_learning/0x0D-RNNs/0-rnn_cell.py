@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""This module contains the class RNNCell"""
 import numpy as np
 
 
