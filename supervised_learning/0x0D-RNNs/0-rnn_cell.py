@@ -13,7 +13,7 @@ class RNNCell:
     """
 
     def __init__(self, i, h, o):
-        self.Wh = np.random.randn(i + h, h)
+        self.Wh = np.random.randn(o, h)
         self.Wy = np.random.randn(h, o)
         self.bh = np.zeros((h))
         self.by = np.zeros((o))
