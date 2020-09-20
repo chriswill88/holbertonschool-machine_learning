@@ -15,20 +15,12 @@ def nparser(sentence, n):
 def ngram_bleu(references, sentence, n):
     """this function gives us the unigram bleu score"""
     total = len(sentence)
-    reflen = sorted([len(i) for i in references])
+    lref = min([len(i) for i in references])
 
     parsed_sent = nparser(sentence, n)
     # print(parsed_sent)
 
     parsed_tot = len(parsed_sent)
-
-    if total not in reflen:
-        for i in reflen:
-            lref = i
-            if total <= i:
-                break
-    else:
-        lref = total
 
     parsed_ref = []
     for i in references:
@@ -67,7 +59,7 @@ def cumulative_bleu(references, sentence, n):
     total = len(sentence)
     for i in range(n):
         score_hold.append(ngram_bleu(references, sentence, i + 1))
-    print(score_hold)
+    # print(score_hold)
     # print(np.average(score_hold))
     bp = 1 if total >= lref else np.exp(1 - (lref/total))
     # print("bp ->", bp)
