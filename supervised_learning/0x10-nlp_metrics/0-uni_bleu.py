@@ -6,7 +6,7 @@ import numpy as np
 def uni_bleu(references, sentence):
     """this function gives us the unigram bleu score"""
     total = len(sentence)
-    reflen = sorted([len(i) for i in references])
+    lref = min([len(i) for i in references])
 
     if total not in reflen:
         for i in reflen:
@@ -21,7 +21,6 @@ def uni_bleu(references, sentence):
         for x in i:
             if x not in uniq_ref:
                 uniq_ref[x] = max([l.count(x) for l in references])
-
     bp = 1 if total >= lref else np.exp(1 - (lref/total))
 
     uniq_words = {}
@@ -33,5 +32,6 @@ def uni_bleu(references, sentence):
             else:
                 uniq_words[i] = c
     find = sum(uniq_words.values())
+
 
     return (find/total) * bp
