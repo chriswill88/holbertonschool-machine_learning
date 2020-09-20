@@ -8,14 +8,6 @@ def uni_bleu(references, sentence):
     total = len(sentence)
     lref = min([len(i) for i in references])
 
-    if total not in reflen:
-        for i in reflen:
-            lref = i
-            if total <= i:
-                break
-    else:
-        lref = total
-
     uniq_ref = {}
     for i in references:
         for x in i:
@@ -32,6 +24,5 @@ def uni_bleu(references, sentence):
             else:
                 uniq_words[i] = c
     find = sum(uniq_words.values())
-
 
     return (find/total) * bp
