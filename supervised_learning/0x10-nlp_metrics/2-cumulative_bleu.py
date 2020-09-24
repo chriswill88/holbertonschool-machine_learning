@@ -71,9 +71,10 @@ def cumulative_bleu(references, sentence, n):
     precisions = []
     for i in range(1, n+1):
         precisions.append(get_precision(references, sentence, i))
+    print("p before ->", precisions)
 
     precision = geo_mean_overflow(precisions)
-    print("p ->", precisions)
+    print("p after ->", precisions)
     if c <= r:
         brevity_penalty = np.exp(1 - r / c)
     else:
