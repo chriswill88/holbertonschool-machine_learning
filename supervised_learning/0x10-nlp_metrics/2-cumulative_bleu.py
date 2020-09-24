@@ -48,7 +48,7 @@ def ngram_bleu(references, sentence, n):
     bp = 1 if total >= lref else np.exp(1 - (lref/total))
     # print("bp->", bp)
     # print(find, total)
-    return find/parsed_tot
+    return np.exp(find/parsed_tot)
 
 
 def cumulative_bleu(references, sentence, n):
@@ -57,10 +57,15 @@ def cumulative_bleu(references, sentence, n):
     bp_hold = []
     lref = min([len(i) for i in references])
     total = len(sentence)
+    print(total)
     for i in range(n):
         score_hold.append(ngram_bleu(references, sentence, i + 1))
+    
+    lig = np.log(score_hold)
+    np.exp(np.average(lig))
     # print(score_hold)
     # print(np.average(score_hold))
-    bp = 1 if total >= lref else np.exp(1 - (lref/total))
-    # print("bp ->", bp)
-    return np.average(score_hold) * bp
+    bp = 1 if total > lref else np.exp(1 - (lref/total))
+    print("bp ->", bp)
+    print(lref)
+    return np.exp(np.average(lig)) * bp
