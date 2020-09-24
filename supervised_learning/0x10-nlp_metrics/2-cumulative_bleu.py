@@ -1,85 +1,71 @@
 #!/usr/bin/env python3
-"""Calculates the unigram BLEU score for a sentence"""
+"""this module contains a function for task 2"""
 import numpy as np
 
 
-def grab_ngram(sentence, n):
-    """creates new list of strings for ngram"""
-    size = len(sentence)
-    sent_ngram = []
-    for i in range(size - n + 1):
-        sent_ngram.append("".join([sentence[j] for j in range(i, n+i)]))
-    return sent_ngram
+def nparser(sentence, n):
+    """nparser - parses sentence in to n partitions"""
+    uniq_words = []
+    for i in range(len(sentence)):
+        if i + n <= len(sentence):
+            uniq_words.append(str(sentence[i:i+n]))
+    return uniq_words
 
 
-def get_precision(references, sentence, n):
-    """Calculates the unigram BLEU score for a sentence
-    @references: list of reference translations
-        *each reference translation is a list of the words in the translation
-    @sentence: list containing the model proposed sentence
-    @n: size of the n-gram to use for evaluation
-    Return: the n-gram BLUE score
-    """
-    r = min([len(ref) for ref in references])
+def ngram_bleu(references, sentence, n):
+    """this function gives us the unigram bleu score"""
+    total = len(sentence)
+    lref = min([len(i) for i in references])
 
-    # modify strings to get ngrams
-    sentence = grab_ngram(sentence, n)
-    references = [grab_ngram(ref, n) for ref in references]
+    parsed_sent = nparser(sentence, n)
+    # print(parsed_sent)
 
-    # new c for precision
-    new_c = len(sentence)
+    parsed_tot = len(parsed_sent)
 
-    # list of word count in each reference
-    refs = [{x: ref.count(x) for x in ref} for ref in references]
-    # word count in sentence
-    word_count = {x: sentence.count(x) for x in sentence}
+    parsed_ref = []
+    for i in references:
+        parsed_ref.append(nparser(i, n))
+    # print(parsed_ref)
 
-    ref_count = {}
-    for ref in refs:
-        for key in ref.keys():
-            if key not in ref_count or ref[key] > ref_count[key]:
-                ref_count[key] = ref[key]
+    uniq_ref = {}
+    for i in parsed_ref:
+        for x in i:
+            if x not in uniq_ref:
+                uniq_ref[x] = max([l.count(x) for l in parsed_ref])
+    # print("ur", uniq_ref)
 
-    count_appear = 0
-    for word in word_count.keys():
-        if word in ref_count.keys():
-            count_appear += min(word_count[word], ref_count[word])
-
-    precision = count_appear / new_c
-
-    return precision
-
-
-def geo_mean_overflow(iterable):
-    """ Calculate the geometric mean"""
-    a = np.log(iterable)
-    return np.exp(a.sum()/len(a))
+    uniq_words = {}
+    for phrase in parsed_sent:
+        # print("phrase ->", phrase)
+        if phrase not in uniq_words and phrase in uniq_ref:
+            if parsed_sent.count(phrase) >= uniq_ref[phrase]:
+                uniq_words[phrase] = uniq_ref[phrase]
+            else:
+                uniq_words[phrase] += 1
+    find = sum(uniq_words.values())
+    # print(find)
+    # print(uniq_words)
+    bp = 1 if total >= lref else np.exp(1 - (lref/total))
+    # print("bp->", bp)
+    # print(find, total)
+    return np.exp(find/parsed_tot)
 
 
 def cumulative_bleu(references, sentence, n):
-    """Calculates the unigram BLEU score for a sentence
-    @references: list of reference translations
-        *each reference translation is a list of the words in the translation
-    @sentence: list containing the model proposed sentence
-    @n: size of the n-gram to use for evaluation
-    Return: the n-gram BLUE score
-    """
-    # calculates c and r
-    c = len(sentence)
-    r = min([len(ref) for ref in references])
+    """computes the cumulative bleu score"""
+    score_hold = []
+    bp_hold = []
+    lref = min([len(i) for i in references])
+    total = len(sentence)
+    print(total)
+    for i in range(n):
+        score_hold.append(ngram_bleu(references, sentence, i + 1))
+    print(score_hold)
+    lig = np.log(score_hold)
+    print(lig)
+    np.exp(np.average(lig))
+    # print(score_hold)
+    # print(np.average(score_hold))
+    bp = 1 if total <= lref else np.exp(1 - (lref/total))
 
-    precisions = []
-    for i in range(1, n+1):
-        precisions.append(get_precision(references, sentence, i))
-    print("p before ->", precisions)
-
-    precision = geo_mean_overflow(precisions)
-    print("p after ->", precisions)
-    if c <= r:
-        brevity_penalty = np.exp(1 - r / c)
-    else:
-        brevity_penalty = 1
-    print("bp ->", brevity_penalty)
-
-    BLEU_score = brevity_penalty * precision
-    return BLEU_score
+    return np.exp(np.average(lig)) * bp
