@@ -5,11 +5,9 @@ import numpy as np
 
 def positional_encoding(max_seq_len, dm):
     """Positional Encoding"""
-    pe = np.zeros((max_seq_len, dm))
-    for pos in range(max_seq_len):
-        for i in range(0, dm, 2):
-            pe[pos, i] = \
-                np.sin(pos / (10000 ** ((2 * i)/dm)))
-            pe[pos, i + 1] = \
-                np.cos(pos / (10000 ** ((2 * (i + 1))/dm)))
+    pe = np.arange(max_seq_len)[:, np.newaxis] / np.power(
+        10000, (2 * (np.arange(dm)//2)) / np.float32(dm)
+        )[np.newaxis, :]
+    pe[:, 0::2] = np.sin(pe[:, 0::2])
+    pe[:, 1::2] = np.cos(pe[:, 1::2])
     return pe
