@@ -1,6 +1,13 @@
+#!/usr/bin/env python3
+"""this module is created for task 0"""
+import tensorflow.compat.v2 as tf
+import tensorflow_datasets as tfds
+
+
 class Dataset:
     """Dataset - loads and preps a dataset for machine translation"""
     def __init__(self):
+        tf.compat.v1.enable_eager_execution()
         self.data_train = tfds.load(
             name='ted_hrlr_translate/pt_to_en',
             split='train', as_supervised=True)
@@ -17,7 +24,6 @@ class Dataset:
             SubwordTextEncoder.build_from_corpus(
                 (en.numpy() for pt, en in self.data_train),
                 target_vocab_size=2**15)
-
 
     def tokenize_dataset(self, data):
         """
