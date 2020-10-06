@@ -14,7 +14,8 @@ class Dataset:
             name='ted_hrlr_translate/pt_to_en',
             split='validation', as_supervised=True)
 
-        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(self.data_train)
+        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
+            self.data_train)
 
     def tokenize_dataset(self, data):
         """
