@@ -37,7 +37,15 @@ class Dataset:
         @en: tf.Tensor english sentence
         return pt_tokens, en_tokens
         """
-        pt_i = self.tokenizer_pt.encode(pt.numpy())
-        en_i = self.tokenizer_en.encode(en.numpy())
+        ptt = self.tokenizer_pt.vocab_size
+        ent = self.tokenizer_en.vocab_size
 
+        pt_i = [ptt]
+        en_i = [ent]
+
+        pt_i.extend(self.tokenizer_pt.encode(pt.numpy()))
+        en_i.extend(self.tokenizer_en.encode(en.numpy()))
+
+        pt_i.append(ptt+1)
+        en_i.append(ent+1)
         return pt_i, en_i
