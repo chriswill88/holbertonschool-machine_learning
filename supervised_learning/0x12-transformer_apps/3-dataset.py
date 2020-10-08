@@ -45,7 +45,6 @@ class Dataset:
 
         return tokenizer_pt, tokenizer_en
 
-
     def encode(self, pt, en):
         """
           encode - encodes a translation into token
@@ -55,18 +54,18 @@ class Dataset:
         """
         ptt = self.tokenizer_pt.vocab_size
         ent = self.tokenizer_en.vocab_size
-        
+
         pt_i = [ptt]
         en_i = [ent]
 
         pt_i.extend(self.tokenizer_pt.encode(pt.numpy()[:]))
         en_i.extend(self.tokenizer_en.encode(en.numpy()[:]))
-        
         pt_i.append(ptt+1)
         en_i.append(ent+1)
         return pt_i, en_i
 
     def tf_encode(self, pt, en):
+        """wrapper for encode instance method"""
         result_pt, result_en = tf.py_function(
             self.encode, [pt, en], [tf.int64, tf.int64])
         result_pt.set_shape([None])
