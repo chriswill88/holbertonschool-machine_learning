@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""this module is created for task 3"""
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 
