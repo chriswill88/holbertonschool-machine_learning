@@ -47,8 +47,7 @@ class Dataset:
         ent = self.tokenizer_en.vocab_size
 
         pt_i = [ptt]
-        en_i = [ent] 
-
+        en_i = [ent]
         pt_i.extend(self.tokenizer_pt.encode(pt.numpy()))
         en_i.extend(self.tokenizer_en.encode(en.numpy()))
 
