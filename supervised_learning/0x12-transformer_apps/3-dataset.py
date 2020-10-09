@@ -7,33 +7,34 @@ import tensorflow_datasets as tfds
 class Dataset:
     """Dataset - loads and preps a dataset for machine translation"""
     def __init__(self, batch_size, max_len):
-        self.data_train, train_info = tfds.load(
-            name='ted_hrlr_translate/pt_to_en',
-            shuffle_files=True,
-            split='train', as_supervised=True, with_info=True)
-        self.data_valid, valid_info = tfds.load(
-            name='ted_hrlr_translate/pt_to_en',
-            shuffle_files=True,
-            split='validation', as_supervised=True, with_info=True)
+        examples, info = tfds.load(
+            'ted_hrlr_translate/pt_to_en', with_info=True,
+            as_supervised=True)
+        self.data_train, self.data_valid = examples['train'],
+        examples['validation']
 
         self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
             self.data_train)
 
-        self.ml = max_len
+        def filter_max_length(x, y, max_length=max_len):
+            """filters the length"""
+            return tf.logical_and(
+                tf.size(x) <= max_length, tf.size(y) <= max_length)
 
         self.data_train = self.data_train.map(self.tf_encode)
-        self.data_train = self.data_train.filter(self.filter_max_length)
+        self.data_train = self.data_train.filter(filter_max_length)
         self.data_train = self.data_train.cache()
-        self.data_train = self.data_train.shuffle(20000).padded_batch(
-            batch_size, ([None],[None]))
+        train_size = info.splits['train'].num_examples
+        self.data_train = self.data_train.shuffle(train_size).padded_batch(
+            batch_size)
         self.data_train = self.data_train.prefetch(
             tf.data.experimental.AUTOTUNE)
 
         self.data_valid = self.data_valid.map(
             self.tf_encode)
         self.data_valid = self.data_valid.filter(
-            self.filter_max_length).padded_batch(
-                batch_size, ([None],[None]))
+            filter_max_length).padded_batch(
+                batch_size)
 
     def tokenize_dataset(self, data):
         """
@@ -76,9 +77,3 @@ class Dataset:
         result_en.set_shape([None])
 
         return result_pt, result_en
-
-    def filter_max_length(self, x, y):
-        """filters the length"""
-        max_length = self.ml
-        return tf.logical_and(
-            tf.size(x) <= max_length, tf.size(y) <= max_length)
