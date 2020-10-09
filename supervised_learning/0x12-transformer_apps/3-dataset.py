@@ -26,7 +26,7 @@ class Dataset:
         self.data_train = self.data_train.cache()
         train_size = info.splits['train'].num_examples
         self.data_train = self.data_train.shuffle(train_size).padded_batch(
-            batch_size)
+            batch_size, ([None], [None]))
         self.data_train = self.data_train.prefetch(
             tf.data.experimental.AUTOTUNE)
 
@@ -34,7 +34,7 @@ class Dataset:
             self.tf_encode)
         self.data_valid = self.data_valid.filter(
             filter_max_length).padded_batch(
-                batch_size)
+                batch_size, ([None], [None]))
 
     def tokenize_dataset(self, data):
         """
