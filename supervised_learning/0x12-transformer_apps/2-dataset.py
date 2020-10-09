@@ -62,7 +62,7 @@ class Dataset:
                 for the encode instance method
         """
         result_pt, result_en = tf.py_function(
-            encode, [pt, en], [tf.int64, tf.int64])
+            self.encode, [pt, en], [tf.int64, tf.int64])
         result_pt.set_shape([None])
         result_en.set_shape([None])
         return result_pt, result_en
