@@ -16,20 +16,20 @@ class Dataset:
             shuffle_files=True,
             split='validation', as_supervised=True, with_info=True)
 
-        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
-            self.data_train)
+        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(self.data_train)
+
         self.ml = max_len
+
         self.data_train = self.data_train.map(self.tf_encode)
         self.data_train = self.data_train.filter(self.filter_max_length)
         self.data_train = self.data_train.cache()
-        self.data_train = self.data_train.shuffle(20000).padded_batch(
-            batch_size)
+        self.data_train = self.data_train.shuffle(20000).padded_batch(batch_size, ([None],[None]))
         self.data_train = self.data_train.prefetch(
             tf.data.experimental.AUTOTUNE)
 
         self.data_valid = self.data_valid.map(self.tf_encode)
         self.data_valid = self.data_valid.filter(
-            self.filter_max_length).padded_batch(batch_size)
+            self.filter_max_length).padded_batch(batch_size, ([None],[None]))
 
     def tokenize_dataset(self, data):
         """
@@ -78,3 +78,4 @@ class Dataset:
         max_length = self.ml
         return tf.logical_and(
             tf.size(x) <= max_length, tf.size(y) <= max_length)
+
