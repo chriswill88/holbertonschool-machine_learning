@@ -42,7 +42,6 @@ class Dataset:
         @en: tf.Tensor english sentence
         return pt_tokens, en_tokens
         """
-        print(pt, en)
         ptt = self.tokenizer_pt.vocab_size
         ent = self.tokenizer_en.vocab_size
 
