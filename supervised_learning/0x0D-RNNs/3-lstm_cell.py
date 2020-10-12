@@ -1,5 +1,4 @@
-#!/usr/self.bi
-# env python3
+#!/usr/bin/env python3
 """This module contains the class GRUCell"""
 import numpy as np
 
