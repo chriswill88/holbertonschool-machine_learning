@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""This module contains the class GRUCell"""
+"""This module contains the class LSTMCell"""
 import numpy as np
 
 
