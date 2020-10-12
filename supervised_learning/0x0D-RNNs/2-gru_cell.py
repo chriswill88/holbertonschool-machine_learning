@@ -42,7 +42,7 @@ class GRUCell:
     def softmax(self, x):
         """applies softmax operation"""
         e_x = np.exp(x)
-        return e_x / e_x.sum()
+        return e_x / e_x.sum(axis=1, keepdims=True)
 
     def forward(self, h_prev, x_t):
         """forward algorithm for gru's"""
@@ -56,7 +56,7 @@ class GRUCell:
         h = np.tanh(np.matmul(con, self.Wh) + self.bh)
 
         # layer output
-        s = (1 - z) * h_prev + z * h_prev
+        s = (1 - z) * h_prev + z * h
 
         # softmax layer
         y = self.softmax(np.matmul(s, self.Wy) + self.by)
