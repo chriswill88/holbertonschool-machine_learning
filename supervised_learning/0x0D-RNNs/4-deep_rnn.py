@@ -45,4 +45,5 @@ def deep_rnn(rnn_cells, X, h_0):
                     Y = y
                 else:
                     Y = np.concatenate((Y, y))
-    return H, Y
+
+    return H, Y.reshape(time, m, Y.shape[-1])
