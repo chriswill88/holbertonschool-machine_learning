@@ -24,21 +24,26 @@ actions = env.action_space.n
 
 
 class AtariProcessor(Processor):
+    """this class prepocesses data"""
     def process_observation(self, observation):
+        """This function preprocess the state"""
         obs = observation[:, :, 0]
         prep = np.array(Image.fromarray(obs).resize((84, 84)).convert('L'))
         return prep.astype('uint8')
 
     def process_state_batch(self, batch):
+        """This function preprocesses the state of a batch"""
         return batch.astype('uint8') / 255
 
     def process_reward(self, reward):
+        """This function processes the reward"""
         return np.clip(reward, -1, 1.)
 
 # Downgrade to tensorflow 1.14 before attempting to run
 
 
 def create_q_model(actions):
+    """This function creates a convolution neural network"""
     # Network defined by the Deepmind paper
     inputs = layers.Input(shape=(4, 84, 84))
     layer0 = layers.Permute((2, 3, 1))(inputs)
@@ -70,5 +75,6 @@ dqn = DQNAgent(
 dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
 dqn.fit(env, nb_steps=1750000)
 dqn.save_weights('policy.h5', overwrite=True)
-model.save("my_model.h5")
+# model.save("my_model.h5")
+# dqn.load_weights('policy.h5')
 # dqn.test(env, nb_episodes=5, visualize=True)
