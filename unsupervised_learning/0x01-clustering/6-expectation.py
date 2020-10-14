@@ -30,8 +30,7 @@ def expectation(X, pi, m, S):
         assert k == m.shape[0] and k == S.shape[0]
     except AssertionError:
         return None, None
-    print("here")
-    if not np.isclose([np.sum(pi)], [1])[0]:
+    if not np.isclose(np.sum(pi), 1):
         return None, None
 
     p1 = np.array([pdf(X, m[i], S[i]) * pi[i] for i in range(pi.shape[0])])
