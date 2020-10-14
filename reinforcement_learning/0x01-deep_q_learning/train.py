@@ -57,7 +57,6 @@ def create_q_model(actions):
 
 
 model = create_q_model(actions)
-model.summary()
 
 memory = SequentialMemory(limit=1000000, window_length=4)
 policy = LinearAnnealedPolicy(

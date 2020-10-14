@@ -59,7 +59,6 @@ def create_q_model(actions):
 
 
 model = create_q_model(actions)
-model.summary()
 memory = SequentialMemory(limit=1000000, window_length=4)
 
 policy = GreedyQPolicy()
@@ -73,4 +72,4 @@ dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
 
 dqn.load_weights('policy.h5')
 
-dqn.test(env, nb_episodes=5, visualize=true)
+dqn.test(env, nb_episodes=5, visualize=True)
