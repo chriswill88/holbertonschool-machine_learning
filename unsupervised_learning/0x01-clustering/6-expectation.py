@@ -29,6 +29,7 @@ def expectation(X, pi, m, S):
         assert k == m.shape[0] and k == S.shape[0]
     except AssertionError:
         return None, None
+    # priors must add to equal 1
     if not np.isclose(np.sum(pi), 1):
         return None, None
 
