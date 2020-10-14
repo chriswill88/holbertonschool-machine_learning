@@ -47,7 +47,6 @@ def create_q_model(actions):
     # Network defined by the Deepmind paper
     inputs = layers.Input(shape=(4, 84, 84))
     layer0 = layers.Permute((2, 3, 1))(inputs)
-    # Convolutions on the frames on the screen
     layer1 = layers.Conv2D(32, 8, strides=4, activation="relu")(layer0)
     layer2 = layers.Conv2D(64, 4, strides=2, activation="relu")(layer1)
     layer3 = layers.Conv2D(64, 3, strides=1, activation="relu")(layer2)

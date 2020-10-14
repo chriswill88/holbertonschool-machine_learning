@@ -25,23 +25,27 @@ actions = env.action_space.n
 
 # preprocressor class
 class AtariProcessor(Processor):
+    """this class prepocesses data"""
     def process_observation(self, observation):
+        """This function preprocess the state"""
         obs = observation[:, :, 0]
         prep = np.array(Image.fromarray(obs).resize((84, 84)).convert('L'))
         return prep.astype('uint8')
 
     def process_state_batch(self, batch):
+        """This function preprocesses the state of a batch"""
         return batch.astype('uint8') / 255
 
     def process_reward(self, reward):
+        """This function processes the reward"""
         return np.clip(reward, -1, 1.)
 
 
 def create_q_model(actions):
+    """This function creates a convolution neural network"""
     # Network defined by the Deepmind paper
     inputs = layers.Input(shape=(4, 84, 84))
     layer0 = layers.Permute((2, 3, 1))(inputs)
-    # Convolutions on the frames on the screen
     layer1 = layers.Conv2D(32, 8, strides=4, activation="relu")(layer0)
     layer2 = layers.Conv2D(64, 4, strides=2, activation="relu")(layer1)
     layer3 = layers.Conv2D(64, 3, strides=1, activation="relu")(layer2)
