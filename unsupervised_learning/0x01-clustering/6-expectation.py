@@ -14,6 +14,7 @@ def expectation(X, pi, m, S):
     @S is a numpy.ndarray of shape (k, d, d) containing the covariance
      matrices for each cluster
     """
+    print("pi is", pi)
     if not isinstance(X, np.ndarray) or not isinstance(pi, np.ndarray)\
             or not isinstance(m, np.ndarray) or not isinstance(S, np.ndarray):
         return None, None
@@ -28,6 +29,9 @@ def expectation(X, pi, m, S):
         assert d == S.shape[1] and S.shape[1] == S.shape[2]
         assert k == m.shape[0] and k == S.shape[0]
     except AssertionError:
+        return None, None
+
+    if not np.isclose([np.sum(pi)], [1])[0]:
         return None, None
 
     p1 = np.array([pdf(X, m[i], S[i]) * pi[i] for i in range(pi.shape[0])])
