@@ -60,16 +60,12 @@ def create_q_model(actions):
 
 model = create_q_model(actions)
 memory = SequentialMemory(limit=1000000, window_length=4)
-
 policy = GreedyQPolicy()
-
 stateprocess = AtariProcessor()
-
 dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     policy=policy, processor=stateprocess)
 dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
-
 dqn.load_weights('policy.h5')
 
 dqn.test(env, nb_episodes=1, visualize=True)

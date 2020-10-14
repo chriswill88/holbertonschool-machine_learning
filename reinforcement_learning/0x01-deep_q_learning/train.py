@@ -39,9 +39,8 @@ class AtariProcessor(Processor):
         """This function processes the reward"""
         return np.clip(reward, -1, 1.)
 
+
 # Downgrade to tensorflow 1.14 before attempting to run
-
-
 def create_q_model(actions):
     """This function creates a convolution neural network"""
     # Network defined by the Deepmind paper
@@ -57,14 +56,11 @@ def create_q_model(actions):
 
 
 model = create_q_model(actions)
-
 memory = SequentialMemory(limit=1000000, window_length=4)
 policy = LinearAnnealedPolicy(
     EpsGreedyQPolicy(), attr='eps', value_max=1., value_min=.1,
     value_test=.05, nb_steps=1000000)
-
 stateprocess = AtariProcessor()
-
 dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     nb_steps_warmup=35, target_model_update=1e-2, policy=policy,
