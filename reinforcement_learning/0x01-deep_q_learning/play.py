@@ -5,6 +5,8 @@ that can display a game played by the agent trained by train.py:
     Your agent should use the GreedyQPolicy
 """
 import keras as K
+import numpy as np
+from PIL import Image
 
 import h5py
 import gym
@@ -15,6 +17,7 @@ from rl.memory import SequentialMemory
 from rl.policy import GreedyQPolicy
 
 from keras import layers
+from keras.optimizers import Adam
 
 
 # enviroment
@@ -66,7 +69,8 @@ stateprocess = AtariProcessor()
 dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     policy=policy, processor=stateprocess)
+dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
 
 dqn.load_weights('policy.h5')
 
-dqn.test(env, nb_episodes=5, visualize=True)
+dqn.test(env, nb_episodes=5, visualize=False)
