@@ -72,4 +72,4 @@ dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
 
 dqn.load_weights('policy.h5')
 
-dqn.test(env, nb_episodes=5, visualize=True)
+dqn.test(env, nb_episodes=1, visualize=True)
