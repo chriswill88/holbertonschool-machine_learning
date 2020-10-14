@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """this module contains the function for task 0"""
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 
 
 def generator(Z):
