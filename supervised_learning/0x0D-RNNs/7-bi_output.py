@@ -65,7 +65,7 @@ class BidirectionalCell:
         h = int(h / 2)
         Y = np.zeros((t, m, 5))
         for i in range(t):
-            soft = np.matmul(H[i - 1], self.Wy) + self.by
+            soft = np.matmul(H[t - i - 1], self.Wy) + self.by
 
             # softmax application
             y_max = np.max(soft, axis=1, keepdims=True)
