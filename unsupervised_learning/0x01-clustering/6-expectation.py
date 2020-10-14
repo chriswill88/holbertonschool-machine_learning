@@ -21,6 +21,14 @@ def expectation(X, pi, m, S):
     if len(X.shape) != 2 or len(pi.shape) != 1\
             or len(m.shape) != 2 or len(S.shape) != 3:
         return None, None
+    n, d = X.shape
+    k = pi.shape[0]
+    try:
+        assert d == m.shape[1]
+        assert d == S.shape[1] and S.shape[1] == S.shape[2]
+        assert k == m.shape[0] and k == S.shape[0]
+    except AssertionError:
+        return None, None
 
     p1 = np.array([pdf(X, m[i], S[i]) * pi[i] for i in range(pi.shape[0])])
     s_p = np.sum(p1, 0)
