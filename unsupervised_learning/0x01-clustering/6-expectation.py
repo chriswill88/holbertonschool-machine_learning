@@ -14,8 +14,10 @@ def expectation(X, pi, m, S):
     @S is a numpy.ndarray of shape (k, d, d) containing the covariance
      matrices for each cluster
     """
-    if not all([isinstance(x, np.ndarray) for x in (X, pi, m, S)]):
+    if not isinstance(X, np.ndarray) or not isinstance(pi, np.ndarray)\
+            or not isinstance(m, np.ndarray) or not isinstance(S, np.ndarray):
         return None, None
+
     if len(X.shape) != 2 or len(pi.shape) != 1\
             or len(m.shape) != 2 or len(S.shape) != 3:
         return None, None
