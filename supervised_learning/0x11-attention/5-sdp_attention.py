@@ -28,10 +28,9 @@ def sdp_attention(Q, K, V, mask=None):
 
     attn = tf.linalg.matmul(Q, K, transpose_b=True)
     attn = attn/tf.cast(dk, tf.float32)
-
     if mask is not None:
         mask *= -1e9
-        attn += mask
+        attn = attn + mask
 
     weights = tf.keras.backend.softmax(attn)
     output = tf.linalg.matmul(weights, V)
