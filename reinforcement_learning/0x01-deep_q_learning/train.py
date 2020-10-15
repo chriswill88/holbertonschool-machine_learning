@@ -11,6 +11,7 @@ import gym
 from keras import layers
 from keras.optimizers import Adam
 
+from rl.callbacks import Callback, ModelIntervalCheckpoint
 from rl.core import Processor
 from rl.policy import EpsGreedyQPolicy, LinearAnnealedPolicy
 from rl.memory import SequentialMemory
@@ -21,6 +22,35 @@ from rl.agents.dqn import DQNAgent
 env = gym.make('BreakoutNoFrameskip-v4')
 state = env.reset()
 actions = env.action_space.n
+
+
+class ModelIntervalCheck(Callback):
+    def __init__(self, filepath, interval, verbose=0, kmodel=None):
+        """
+        This callback will allow the model to be save every x steps
+        @filepath: the filepath
+        @intervals: the intervals
+        @verbose: wheather the message prints or not
+        @kmodel: the keras model used
+        """
+        self.filepath = filepath
+        self.interval = interval
+        self.verbose = verbose
+        self.kmodel = kmodel
+        self.total_steps = 0
+
+    def on_step_end(self, step, logs={}):
+        """ Save weights at interval steps during training """
+        self.total_steps += 1
+        if self.total_steps % self.interval != 0:
+            # Nothing to do.
+            return
+
+        filepath = self.filepath.format(step=self.total_steps, **logs)
+        if self.verbose > 0:
+            print('\nStep {}: saving kmodel to {}'.format(
+                self.total_steps, filepath))
+        self.kmodel.save(filepath)
 
 
 class AtariProcessor(Processor):
@@ -56,19 +86,22 @@ def create_q_model(actions):
 
 
 model = create_q_model(actions)
+callback = [ModelIntervalCheck('policy.h5', 1000, 1, model)]
 memory = SequentialMemory(limit=1000000, window_length=4)
 policy = LinearAnnealedPolicy(
     EpsGreedyQPolicy(), attr='eps', value_max=1., value_min=.1,
-    value_test=.05, nb_steps=1000000)
+    value_test=.05, nb_steps=850000)
 stateprocess = AtariProcessor()
 dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     nb_steps_warmup=35, target_model_update=1e-2, policy=policy,
     processor=stateprocess, enable_double_dqn=True)
 
-dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
-dqn.fit(env, nb_steps=1750000)
-dqn.save_weights('policy.h5', overwrite=True)
-# model.save("my_model.h5")
+dqn.compile(
+    optimizer=Adam(lr=.00025, clipnorm=1.0),
+    metrics=['mae', 'accuracy'])
+dqn.fit(env, nb_steps=1750000, callbacks=callback)
+# dqn.save_weights('policy.h5', overwrite=True)
+model.save("policy.h5")
 # dqn.load_weights('policy.h5')
 # dqn.test(env, nb_episodes=5, visualize=True)
