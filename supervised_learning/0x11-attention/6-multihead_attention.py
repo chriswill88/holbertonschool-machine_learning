@@ -8,7 +8,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
     """
         MultiHeadAttention:
             inherits from tensorflow.keras.layers.Layer to perform multi head
-             attention:
+            attention:
     """
     def __init__(self, dm, h):
         """
@@ -21,6 +21,8 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         @linear - a Dense layer with dm units, used to generate the attention
          output
         """
+        super(MultiHeadAttention, self).__init__()
+
         self.h = h
         self.dm = dm
         self.depth = int(dm / h)
