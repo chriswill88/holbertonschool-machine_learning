@@ -31,30 +31,45 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
 
-    def add_heads(self, x, batch):
-        """Reconfigures the tensors"""
-        x = tf.reshape(x, (batch, -1, self.h, self.depth))
+    def split_heads(self, x, batch_size):
+        """
+        Split the last dimension into (num_heads, depth).
+        Transpose the result such that the shape is
+         (batch_size, num_heads, seq_len, depth)
+        """
+        x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
         return tf.transpose(x, perm=[0, 2, 1, 3])
 
     def call(self, Q, K, V, mask):
         """This function call the multi head attention algorithm"""
-        batch = tf.shape(Q)[0]
+        batch_size = tf.shape(Q)[0]
 
         Q = self.Wq(Q)
+        # (batch_size, seq_len, d_model)
         K = self.Wk(K)
+        # (batch_size, seq_len, d_model)
         V = self.Wv(V)
+        # (batch_size, seq_len, d_model)
 
-        Q = self.add_heads(Q, batch)
-        K = self.add_heads(K, batch)
-        V = self.add_heads(V, batch)
+        Q = self.split_heads(Q, batch_size)
+        # (batch_size, num_heads, seq_len_q, depth)
+        K = self.split_heads(K, batch_size)
+        # (batch_size, num_heads, seq_len_k, depth)
+        V = self.split_heads(V, batch_size)
+        # (batch_size, num_heads, seq_len_v, depth)
 
-        output, weight = sdp_attention(Q, K, V, mask)
-        scaled_attention = tf.transpose(output, perm=[0, 2, 1, 3])
-        # (batch_size, seq_len_q, num_heads, depth)
-        concat_attention = tf.reshape(
-            scaled_attention, (batch, -1, self.dm))
+        # scaled_attention.shape == (batch_size, num_heads, seq_len_q, depth)
+        # attention_weights.shape == (batch_size, num_heads, seq_len_q, seq_len_k)
+        scaled_attention, attention_weights = sdp_attention(
+            Q, K, V, mask)
+
+        scaled_attention = tf.transpose(scaled_attention, perm=[0, 2, 1, 3])  # (batch_size, seq_len_q, num_heads, depth)
+
+        concat_attention = tf.reshape(scaled_attention, (
+            batch_size, -1, self.dm))
         # (batch_size, seq_len_q, d_model)
-        outputs = self.linear(concat_attention)
+
+        output = self.linear(concat_attention)
         # (batch_size, seq_len_q, d_model)
 
-        return outputs, weight
+        return output, attention_weights
