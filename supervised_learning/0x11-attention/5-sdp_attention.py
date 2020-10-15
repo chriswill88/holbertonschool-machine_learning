@@ -26,13 +26,13 @@ def sdp_attention(Q, K, V, mask=None):
     seq_len_v = K.shape[-2]
     dv = V.shape[-1]
 
-    attn = tf.linalg.matmul(Q, K, transpose_b=True)
+    attn = tf.matmul(Q, K, transpose_b=True)
     attn = attn/tf.cast(dk, tf.float32)
     if mask is not None:
         mask *= -1e9
         attn = attn + mask
 
     weights = tf.keras.backend.softmax(attn)
-    output = tf.linalg.matmul(weights, V)
+    output = tf.matmul(weights, V)
 
     return output, weights
