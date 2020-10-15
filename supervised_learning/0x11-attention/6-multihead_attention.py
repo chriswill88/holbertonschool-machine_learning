@@ -29,7 +29,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
 
-    def call(self, Q, K, V, mask):
+    def __call__(self, Q, K, V, mask):
         """This function call the multi head attention algorithm"""
         batch = Q.shape[0]
 
