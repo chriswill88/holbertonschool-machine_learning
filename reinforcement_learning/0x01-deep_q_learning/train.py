@@ -25,6 +25,9 @@ actions = env.action_space.n
 
 
 class ModelIntervalCheck(Callback):
+    """
+    ModelIntervalCheck: is a callback class
+    """
     def __init__(self, filepath, interval, verbose=0, kmodel=None):
         """
         This callback will allow the model to be save every x steps
@@ -86,6 +89,7 @@ def create_q_model(actions):
 
 
 model = create_q_model(actions)
+
 callback = [ModelIntervalCheck('policy.h5', 1000, 1, model)]
 memory = SequentialMemory(limit=1000000, window_length=4)
 policy = LinearAnnealedPolicy(
@@ -96,12 +100,8 @@ dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     nb_steps_warmup=35, target_model_update=1e-2, policy=policy,
     processor=stateprocess, enable_double_dqn=True)
-
 dqn.compile(
     optimizer=Adam(lr=.00025, clipnorm=1.0),
     metrics=['mae', 'accuracy'])
 dqn.fit(env, nb_steps=1750000, callbacks=callback)
-# dqn.save_weights('policy.h5', overwrite=True)
 model.save("policy.h5")
-# dqn.load_weights('policy.h5')
-# dqn.test(env, nb_episodes=5, visualize=True)
