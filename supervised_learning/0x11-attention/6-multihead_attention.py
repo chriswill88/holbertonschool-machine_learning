@@ -29,28 +29,28 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
 
+    def add_heads(self, x):
+        """Reconfigures the tensors"""
+        x = tf.reshape(x, (x.shape[0], -1, self.h, self.depth))
+        return tf.transpose(x, perm=[0, 2, 1, 3])
+
     def __call__(self, Q, K, V, mask):
         """This function call the multi head attention algorithm"""
         batch = Q.shape[0]
         Q = self.Wq(Q)
         K = self.Wk(K)
         V = self.Wv(V)
-        for i in range(batch):
-            for x in range(self.h):
-                output, weight = sdp_attention(Q[i], K[i], V[i], mask)
-                output = tf.expand_dims(output, axis=0)
-                weight = tf.expand_dims(weight, axis=0)
-                if x == 0:
-                    headW = weight
-                else:
-                    headW = tf.concat((headW, weight), axis=0)
-            headW = tf.expand_dims(headW, axis=0)
 
-            if i != 0:
-                weights = tf.concat((weights, headW), axis=0)
-                outputs = tf.concat((outputs, output), axis=0)
-            else:
-                weights = headW
-                outputs = output
+        Q = self.add_heads(Q)
+        K = self.add_heads(K)
+        V = self.add_heads(V)
 
-        return self.linear(outputs), weights
+        output, weight = sdp_attention(Q, K, V, mask)
+
+        scaled_attention = tf.transpose(output, perm=[0, 2, 1, 3])  # (batch_size, seq_len_q, num_heads, depth)
+
+        concat_attention = tf.reshape(
+            scaled_attention, (scaled_attention.shape[0], -1, self.dm))  # (batch_size, seq_len_q, d_model)
+        output = self.linear(concat_attention)  # (batch_size, seq_len_q, d_model)
+
+        return output, weight
