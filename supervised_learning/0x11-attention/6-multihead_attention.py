@@ -34,7 +34,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         x = tf.reshape(x, (batch, -1, self.h, self.depth))
         return tf.transpose(x, perm=[0, 2, 1, 3])
 
-    def call(self, Q, K, V, mask):
+    def __call__(self, Q, K, V, mask):
         """This function call the multi head attention algorithm"""
         batch = Q.shape[0]
         Q = self.Wq(Q)
