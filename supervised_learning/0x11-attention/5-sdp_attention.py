@@ -27,7 +27,7 @@ def sdp_attention(Q, K, V, mask=None):
     dv = V.shape[-1]
 
     attn = tf.matmul(Q, K, transpose_b=True)
-    attn = attn/tf.cast(dk, tf.float32)
+    attn = attn/tf.sqrt(tf.cast(dk, tf.float32))
     if mask is not None:
         mask *= -1e9
         attn = attn + mask
