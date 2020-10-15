@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """this module contains a function for task 4"""
-import numpy as np
 import tensorflow as tf
 
 
