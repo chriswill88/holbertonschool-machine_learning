@@ -32,7 +32,9 @@ class MultiHeadAttention(tf.keras.layers.Layer):
     def __call__(self, Q, K, V, mask):
         """This function call the multi head attention algorithm"""
         batch = Q.shape[0]
-
+        Q = self.Wq(Q)
+        K = self.Wk(K)
+        V = self.Wv(V)
         for i in range(batch):
             for x in range(self.h):
                 output, weight = sdp_attention(Q[i], K[i], V[i], mask)
@@ -50,4 +52,5 @@ class MultiHeadAttention(tf.keras.layers.Layer):
             else:
                 weights = headW
                 outputs = output
-        return outputs, weights
+
+        return self.linear(outputs), weights
