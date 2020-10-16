@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/enV python3
 """this module contains a function for task 4"""
 import tensorflow as tf
 
@@ -9,30 +9,27 @@ def sdp_attention(Q, K, V, mask=None):
         this function calculates the scaled dot product attention
         @Q: is a tensor with its last two dimensions as (..., seq_len_q, dk)
          containing the query matrix
-        @K: is a tensor with its last two dimensions as (..., seq_len_v, dk)
+        @K: is a tensor with its last two dimensions as (..., seq_len_V, dk)
          containing the key matrix
-        @V: is a tensor with its last two dimensions as (..., seq_len_v, dv)
-         containing the value matrix
+        @V: is a tensor with its last two dimensions as (..., seq_len_V, dV)
+         containing the Value matrix
         @mask: is a tensor that can be broadcast into (..., seq_len_q,
-         seq_len_v) containing the optional mask, or defaulted to None
+         seq_len_V) containing the optional mask, or defaulted to None
     Returns: output, weights
         @output a tensor with its last two dimensions as (..., seq_len_q,
-         dv) containing the scaled dot product attention
+         dV) containing the scaled dot product attention
         @weights a tensor with its last two dimensions as (..., seq_len_q,
-         seq_len_v) containing the attention weights
+         seq_len_V) containing the attention weights
 
     """
-    seq_len_q, dk = Q.shape[-2:]
-    seq_len_v = K.shape[-2]
-    dv = V.shape[-1]
+    matmul_qk = tf.matmul(Q, K, transpose_b=True)
+    # (..., seq_len_q, seq_len_k)
+    dk = tf.cast(tf.shape(K)[-1], tf.float32)
+    scaled_attention_logits = matmul_qk / tf.math.sqrt(dk)
 
-    attn = tf.matmul(Q, K, transpose_b=True)
-    attn = attn/tf.sqrt(tf.cast(dk, tf.float32))
     if mask is not None:
-        mask *= -1e9
-        attn = attn + mask
+        scaled_attention_logits += (mask * -1e9)
 
-    weights = tf.keras.backend.softmax(attn, axis=-1)
-    output = tf.matmul(weights, V)
-
-    return output, weights
+    attention_weights = tf.nn.softmax(scaled_attention_logits, axis=-1)
+    output = tf.matmul(attention_weights, V)
+    return output, attention_weights
