@@ -37,14 +37,16 @@ model.add(K.layers.Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 model.summary()
 
-model.fit(trainX, trainY, epochs=50, batch_size=64, validation_split=.2)
-model.save('forcast.h5')
+model.fit(trainX, trainY, epochs=20, batch_size=64, validation_split=.2)
+model.save('forecast.h5')
 
+# prediction
 train_pred = model.predict(trainX)
 test_pred = model.predict(testX)
 
 train_pred = data.unprocess_data(train_pred)
 test_pred = data.unprocess_data(test_pred)
+testY = data.unprocess_data(testY)
 
 for i in range(len(testY)):
     print(testY[i], "vs", test_pred[i])
