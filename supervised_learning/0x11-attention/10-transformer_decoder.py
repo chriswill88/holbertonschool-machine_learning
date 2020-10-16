@@ -26,7 +26,7 @@ class Decoder(tf.keras.layers.Layer):
 
     def call(self, x, enc_output, training, look_ahead_mask, padding_mask):
         """This function runs the decoder"""
-        seq_len = x.shape[1]
+        seq_len = tf.shape(x)[1]
         attention_weights = {}
 
         x = self.embedding(x)  # (batch_size, target_seq_len, dm)
