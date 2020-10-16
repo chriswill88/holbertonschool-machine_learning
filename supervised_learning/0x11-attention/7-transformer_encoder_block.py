@@ -23,16 +23,10 @@ class EncoderBlock(tf.keras.layers.Layer):
     def call(self, x, training, mask=None):
         """creates the Encoder block model"""
         attn_output, _ = self.mha(x, x, x, mask)
-        # (batch_size, input_seq_len, dm)
-        attn_output = self.dense_output(self.dense_hidden(attn_output))
-        # (batch_size, target_seq_len, dm)
-
         attn_output = self.dropout1(attn_output, training=training)
         out1 = self.layernorm1(x + attn_output)
-        # (batch_size, input_seq_len, dm)
 
         ffn_output = self.dense_output(self.dense_hidden(out1))
-        # (batch_size, target_seq_len, dm)
         ffn_output = self.dropout2(ffn_output, training=training)
         out2 = self.layernorm2(out1 + ffn_output)
         return out2
