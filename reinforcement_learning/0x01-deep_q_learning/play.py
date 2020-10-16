@@ -51,6 +51,6 @@ stateprocess = AtariProcessor()
 dqn = DQNAgent(
     model=model, nb_actions=actions, memory=memory,
     policy=policy, processor=stateprocess)
-dqn.compile(optimizer=Adam(lr=.0025, clipnorm=1.0), metrics=['mae'])
+dqn.compile(optimizer=Adam(lr=.00025, clipnorm=1.0), metrics=['mae'])
 
 dqn.test(env, nb_episodes=1, visualize=True)
