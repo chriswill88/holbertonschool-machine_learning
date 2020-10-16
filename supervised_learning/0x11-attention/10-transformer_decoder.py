@@ -6,6 +6,10 @@ DecoderBlock = __import__('8-transformer_decoder_block').DecoderBlock
 
 
 class Decoder(tf.keras.layers.Layer):
+    """
+    Decoder:
+        this class is a representation of the decoder class
+    """
     def __init__(
             self, N, dm, h, hidden, input_vocab, max_seq_len, drop_rate=0.1):
         super(Decoder, self).__init__()
@@ -21,7 +25,7 @@ class Decoder(tf.keras.layers.Layer):
         self.dropout = tf.keras.layers.Dropout(drop_rate)
 
     def call(self, x, enc_output, training, look_ahead_mask, padding_mask):
-
+        """This function runs the decoder"""
         seq_len = x.shape[1]
         attention_weights = {}
 
