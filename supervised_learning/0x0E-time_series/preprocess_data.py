@@ -4,7 +4,6 @@ import numpy as np
 import tensorflow as tf
 
 
-
 class PreprocessData:
     """This class contains tools that are used to preprocess the data"""
     def __init__(self, data):
