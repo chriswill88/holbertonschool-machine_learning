@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+"""this module contains the PreprocessData class"""
 import numpy as np
 import tensorflow as tf
+
 
 
 class PreprocessData:
