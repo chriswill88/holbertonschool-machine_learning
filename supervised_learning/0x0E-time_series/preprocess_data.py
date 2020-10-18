@@ -10,9 +10,9 @@ class PreprocessData:
         """
         @data is the raw dataset
         """
-        data = np.genfromtxt(
-            'coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv',
-            delimiter=',')
+        # data = np.genfromtxt(
+        #     'coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv',
+        #     delimiter=',')
         self.raw_data = data
         # print(data.shape)
         # hourly data, removeing nulls, only close column
