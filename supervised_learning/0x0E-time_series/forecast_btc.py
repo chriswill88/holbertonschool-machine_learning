@@ -32,7 +32,7 @@ train_tf = data.tf_train
 valid_tf = data.tf_valid
 test_tf = data.tf_test
 
-print("tx shape", trainX.shape)
+# print("tx shape", trainX.shape)
 # Model
 model = tf.keras.Sequential()
 model.add(tf.keras.layers.LSTM(1, input_shape=(24, 1)))
@@ -65,7 +65,7 @@ val_loss = history['val_loss']
 # test_pred = []
 # for i in range(len(testX)):
 #     test_pred.append(model.predict(testX[np.newaxis, i]))
-# \
+
 train_pred = np.squeeze(np.array(train_pred), 1)
 # print(train_pred.shape)
 test_pred = np.squeeze(np.array(test_pred), 1)

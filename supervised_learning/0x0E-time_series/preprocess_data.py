@@ -65,6 +65,10 @@ class PreprocessData:
         return (trainX, trainY), (validX, validY), (testX, testY)
 
     def moving_average(self, a, n=3):
+        """
+        this function reformates the data based on
+        moving average to fill in all nulls
+        """
         ret = np.nancumsum(a, dtype=float)
         ret[n:] = ret[n:] - ret[:-n]
         return ret[n - 1:] / n
@@ -79,6 +83,7 @@ class PreprocessData:
         return np.array(dataX), np.array(dataY)
 
     def scale_data(self, data):
+        """this function scales out the data"""
         return (data - self.mean)/self.std
 
     def unscale_data(self, data):
