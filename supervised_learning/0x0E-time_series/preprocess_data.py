@@ -6,10 +6,12 @@ import tensorflow as tf
 
 class PreprocessData:
     """This class contains tools that are used to preprocess the data"""
-    def __init__(self, data):
+    def __init__(self):
         """
         @data is the raw dataset
         """
+        data = np.genfromtxt(
+            'coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', delimiter=',')
         self.raw_data = data
         # print(data.shape)
         # hourly data, removeing nulls, only close column
