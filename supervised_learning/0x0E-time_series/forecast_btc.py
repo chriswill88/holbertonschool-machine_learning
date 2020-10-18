@@ -15,9 +15,10 @@ The datasets are formatted such that every row represents
 a 60 second time window containing:
 """
 
-# open and view csv file
-bit = np.genfromtxt(
-    'coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', delimiter=',')
+# # open and view csv file
+
+# bit = np.genfromtxt(
+#     'coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', delimiter=',')
 
 # bit = pd.read_csv('coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv')
 # bit = pd.read_csv('bitstampUSD_1-min_data_2012-01-01_to_2020-04-22.csv')
