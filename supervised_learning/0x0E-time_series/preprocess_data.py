@@ -40,8 +40,8 @@ class PreprocessData:
 
     def preprocess_data(self, sdata):
         """
-        preprocess_data-
-         this function preprocesses the dataset:
+        preprocess_data - this function preprocesses the dataset:
+        @sdata - moveing ave data
         """
         n = len(sdata)
         # parsing datasets
